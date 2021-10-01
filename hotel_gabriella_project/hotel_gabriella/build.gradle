@@ -1,0 +1,104 @@
+plugins {
+    id 'org.springframework.boot' version '2.5.4'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    //id 'com.github.node-gradle.node' version "3.1.1"
+}
+
+group = 'com.trip'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-devtools'
+
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude module: 'junit'
+    }
+
+    //--------여기서부터 JUnit5 설정 시작----------------------------------------
+    test {
+        useJUnitPlatform()
+    }
+
+    //아래 설정으로 JUnit5 기반으로 작성한 테스트 코드 실행 가능
+    testImplementation "org.junit.jupiter:junit-jupiter:5.7.2"
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
+
+
+    //JUnit4 기반 테스트 코드도 실행시키고 싶다면 아래와 같이
+    //JUnit Vintage와 JUnit 4.12이상의 라이브러리를 추가하면 된다.
+    testCompileOnly 'junit:junit:4.13.2'
+    testRuntimeOnly 'org.junit.vintage:junit-vintage-engine:5.3.1'
+
+
+    runtimeOnly 'com.h2database:h2'
+
+
+}
+
+
+//Hotel_Gabriella React Front App 연동
+
+//node {
+//    download = true
+//    version = "12.18.1"
+//    npmVersion = "6.14.5"
+//    distBaseUrl = "https://nodejs.org/dist"
+//    npmInstallCommand = "install"
+//    workDir = file("${project.projectDir}/.gradle/nodejs")
+//    npmWorkDir = file("${project.projectDir}/.gradle/npm")
+//
+//}
+
+//jar 파일 생성 설정
+
+//apply plugin: 'application'
+//mainClassName = 'com.trip.hotel_gabriella.HotelGabriellaApplication'
+
+
+//def frontendDir = "$projectDir/frontend"
+//
+
+//processResources {
+//    dependsOn "copyReactBuildFiles"
+//}
+//task installReact(type: Exec) {
+//    workingDir "$frontendDir"
+//    inputs.dir "$frontendDir"
+//    group = BasePlugin.BUILD_GROUP
+//
+//}
+//task buildReact(type: Exec) {
+//    dependsOn "installReact"
+//    workingDir "$frontendDir"
+//    inputs.dir "$frontendDir"
+//    group = BasePlugin.BUILD_GROUP
+//
+//}
+//task copyReactBuildFiles(type: Copy) {
+//    dependsOn "buildReact"
+//    from "$frontendDir/build"
+//    into "$projectDir/src/main/resources/static"
+//}
+//
+//
+

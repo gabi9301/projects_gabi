@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>여기에 룸 리스트를 넣을겁니다.</div>
+    <div th:each="room : ${allRooms}">
+        <span th:text="${room.no}"></span>
+        <span th:text="${room.floor}"></span>
+        <span th:text="${room.roomType}"></span>
+        <span th:text="${room.viewType}"></span>
+    </div>
+    <a href="/admin/register">돌아가기</a>
+
+</body>
+</html>

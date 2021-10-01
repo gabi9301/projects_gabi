@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/hotel_gabriella;
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+#  thymeleaf:
+#    prefix: classpath:/templates/  여기를 주석으로 바꿔도 상관없는 이유는 저게 디폴트라서고
+#    suffix: .html                  경로 적을 때 / 빼고 html 이름만 적어두면 됨.   ex)<a href="register">
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        #        show-sql: true
+        format_sql: true
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace
