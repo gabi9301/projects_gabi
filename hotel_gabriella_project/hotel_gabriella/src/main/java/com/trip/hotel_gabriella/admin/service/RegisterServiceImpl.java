@@ -1,7 +1,9 @@
 package com.trip.hotel_gabriella.admin.service;
 
-import com.trip.hotel_gabriella.admin.domain.Room;
+
 import com.trip.hotel_gabriella.admin.repository.RoomRepository;
+import com.trip.hotel_gabriella.common.domain.Availability;
+import com.trip.hotel_gabriella.common.domain.Room;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,9 +22,7 @@ public class RegisterServiceImpl implements RegisterService{
     }
 
     @Transactional
-    public void saveRoom(Room room){
-        roomRepository.save(room);
-    }
+    public void saveRoom(Room room){ roomRepository.save(room);}
 
     @Override
     public Room readRoom(Long id) {

@@ -1,6 +1,6 @@
 package com.trip.hotel_gabriella.admin.repository;
 
-import com.trip.hotel_gabriella.admin.domain.Room;
+import com.trip.hotel_gabriella.common.domain.Room;
 
 import java.util.List;
 

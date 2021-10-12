@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.5.4'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
+    id 'jacoco'
     //id 'com.github.node-gradle.node' version "3.1.1"
 }
 
@@ -49,11 +50,50 @@ dependencies {
     testCompileOnly 'junit:junit:4.13.2'
     testRuntimeOnly 'org.junit.vintage:junit-vintage-engine:5.3.1'
 
-
     runtimeOnly 'com.h2database:h2'
 
 
 }
+
+//--------여기서부터 Jacoco 설정 시작----------------------------------------
+
+jacoco {
+    toolVersion = '0.8.5'
+}
+
+jacocoTestReport {
+    reports {
+        html.enabled true;
+        xml.enabled false;
+        csv.enabled false;
+    }
+}
+
+jacocoTestCoverageVerification {    //JACOCO 설정은 여기만 조정하면 OK
+    violationRules {
+        rule {
+            element = 'CLASS'
+
+            limit {
+                counter = 'BRANCH'
+                value = 'COVEREDRATIO'
+                minimum = 0.90
+            }
+        }
+    }
+}
+
+task testCoverage(type: Test) {
+    group 'verification'
+    description 'Runs the unit tests with coverage'
+
+    dependsOn(':test',
+              ':jacocoTestReport',
+              ':jacocoTestCoverageVerification')
+    tasks['jacocoTestReport'].mustRunAfter(tasks['test'])
+    tasks['jacocoTestCoverageVerification'].mustRunAfter(tasks['jacocoTestReport'])
+}
+
 
 
 //Hotel_Gabriella React Front App 연동

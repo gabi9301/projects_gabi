@@ -1,7 +1,7 @@
 package com.trip.hotel_gabriella.admin.controller;
 
-import com.trip.hotel_gabriella.admin.domain.Room;
 import com.trip.hotel_gabriella.admin.service.RegisterService;
+import com.trip.hotel_gabriella.common.domain.Room;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +27,7 @@ public class RegisterController {
 
 
     @PostMapping("/admin/register.do")
-    public String registerRoom(@ModelAttribute Room room, Model model){
+    public String registerRoom(Room room, Model model){
         registerService.saveRoom(room);
         List<Room> allRooms = registerService.readAllRooms();
 

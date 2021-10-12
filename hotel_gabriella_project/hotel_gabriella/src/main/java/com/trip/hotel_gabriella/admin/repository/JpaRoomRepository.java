@@ -1,6 +1,7 @@
 package com.trip.hotel_gabriella.admin.repository;
 
-import com.trip.hotel_gabriella.admin.domain.Room;
+
+import com.trip.hotel_gabriella.common.domain.Room;
 import com.trip.hotel_gabriella.config.AppConfig;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;

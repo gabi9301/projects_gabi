@@ -1,6 +1,6 @@
 package com.trip.hotel_gabriella.admin.repository;
 
-import com.trip.hotel_gabriella.admin.domain.Room;
+import com.trip.hotel_gabriella.common.domain.Room;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 @Repository
 public class MemoryRoomRepository implements RoomRepository{
 
-    private static Map<Long,Room> storage = new HashMap<>();
+    private static Map<Long, Room> storage = new HashMap<>();
 
     private Long id = 1L;
 
