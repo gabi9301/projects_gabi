@@ -21,12 +21,20 @@ public class Reservation {
     private int capacity;
     @OneToMany(mappedBy = "reservation")
     private List<ReservationRoom> reservationRooms = new ArrayList<>();
-    @OneToMany(mappedBy = "amenity")
+    @OneToMany(mappedBy = "reservation")
     private List<ReservationAmenity> reservationAmenities = new ArrayList<>();
 
     private Boolean isMember;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
+
+    public void changeMember(Member member) {
+        if(this.member != null) {  //이미 예약자가 설정된 상태에서 바꿀 경우
+            this.member.getReservations().remove(this);
+        }
+        this.member = member;
+        member.getReservations().add(this);
+    }
 
 }

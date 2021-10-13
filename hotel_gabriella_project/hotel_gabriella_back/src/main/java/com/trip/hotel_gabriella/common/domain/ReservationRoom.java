@@ -22,4 +22,12 @@ public class ReservationRoom {
     @JoinColumn(name = "ROOM_ID")
     private Room room;
 
+    public void changeReservation(Reservation reservation) {
+        if(this.reservation != null) {
+            this.reservation.getReservationRooms().remove(this);
+        }
+        this.reservation = reservation;
+        reservation.getReservationRooms().add(this);
+    }
+
 }

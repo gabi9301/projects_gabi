@@ -23,4 +23,15 @@ public class ReservationAmenity {
 
     private int count;
 
+    public void changeReservation(Reservation reservation) {
+        if(this.reservation != null) {
+            this.reservation.getReservationAmenities().remove(this);
+        }
+        this.reservation = reservation;
+        reservation.getReservationAmenities().add(this);
+    }
+
+
+
+
 }
