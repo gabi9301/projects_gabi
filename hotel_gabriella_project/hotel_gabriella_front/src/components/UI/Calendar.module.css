@@ -1,0 +1,64 @@
+.table-wrap {
+    width: 97%;
+    height: 32vh;
+
+}
+
+.table {
+    width: 100%;
+    height: 92%;
+    text-align: center;
+    padding: 5%;
+}
+
+.td {
+
+}
+
+.td.filled_td:hover{
+    cursor: pointer;
+}
+
+.blank_td {
+
+}
+
+
+
+
+
+
+
+
+.today {
+    border: solid 2px #72c850;
+    border-radius: 0.5rem;
+}
+
+.holiday {
+    color: red;
+}
+
+.valid {
+    color:blue;
+}
+
+.invalid {
+   cursor: default !important;
+    background-color: #dedede;
+    color: white; 
+}
+
+.expired {
+    cursor: default !important;
+    background-color: #dedede;
+    color: white;
+}
+
+.selectedDates {
+    background-color: #d9f1ff;
+}
+
+.selectedDate {
+    background-color: #bfe6ff;
+}

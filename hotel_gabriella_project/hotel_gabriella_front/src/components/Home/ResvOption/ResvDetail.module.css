@@ -1,0 +1,45 @@
+.container {
+    display: flex;
+    height: max-content;
+}
+
+.first-cal, .last-cal {
+    display: flex;
+    width: 28%;
+    align-items: center;
+    vertical-align: middle;
+    border-right: 1px solid #ddd;
+    padding:12px;
+}
+
+.prev-btn ,.next-btn {
+    display: inline-block;
+    width: 6%;
+    height: 30px;
+
+    border:0;
+    background-color: transparent;
+    align-items: center;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 10px;
+    padding: 0;
+
+}
+
+.prev-btn:hover ,.next-btn:hover {
+    cursor: pointer;
+}
+
+.invalid-arrow {
+    display: none;
+}
+
+.prev-btn {
+
+}
+
+.next-btn {
+
+
+}

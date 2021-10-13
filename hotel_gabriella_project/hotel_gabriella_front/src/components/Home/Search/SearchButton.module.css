@@ -1,0 +1,8 @@
+.big-button {
+    width: 15rem;
+    height: 3rem;
+    border-radius: 1.5rem;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
