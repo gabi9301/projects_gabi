@@ -1,5 +1,6 @@
 package com.trip.hotel_gabriella.config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
@@ -8,12 +9,10 @@ import javax.persistence.PersistenceContext;
 
 @Configuration
 @ComponentScan
+@RequiredArgsConstructor
 public class PersistenceJpaConfig {
 
-    @PersistenceContext
-    private final EntityManager em;
+    //@PersistenceContext
+    //private final EntityManager em;
 
-    public PersistenceJpaConfig(EntityManager em) {
-        this.em = em;
-    }
 }

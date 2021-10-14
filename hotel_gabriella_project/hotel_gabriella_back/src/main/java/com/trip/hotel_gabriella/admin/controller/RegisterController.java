@@ -2,6 +2,7 @@ package com.trip.hotel_gabriella.admin.controller;
 
 import com.trip.hotel_gabriella.admin.service.RegisterService;
 import com.trip.hotel_gabriella.common.domain.Room;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,14 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class RegisterController {
 
     private final RegisterService registerService;
-
-    public RegisterController(RegisterService registerService) {
-        this.registerService = registerService;
-    }
-
 
     @GetMapping("/admin/register")
     public String registerPage(){

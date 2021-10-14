@@ -113,23 +113,23 @@ const ResvDetail = (props) => {
   return;
   }
 
-  const [availableRooms, setAvailableRooms] = useState("0");
+  // const [availableRooms, setAvailableRooms] = useState("0");
 
-        useEffect(()=>{
+  //       useEffect(()=>{
 
-          const requestOptions = {
-            method: 'POST',
-            headers: {'Content-Type' : 'application/json'},
-            body: JSON.stringify({title: 'React post request'})
-          };
+  //         const requestOptions = {
+  //           method: 'POST',
+  //           headers: {'Content-Type' : 'application/json'},
+  //           body: JSON.stringify({title: 'React post request'})
+  //         };
 
 
-          fetch("/availableRooms", requestOptions)
-            .then((response) => response.json())
-            .then((availableRooms) =>
-              setAvailableRooms(availableRooms)
-            );
-        },[]);
+  //         fetch("/availableRooms", requestOptions)
+  //           .then((response) => response.json())
+  //           .then((availableRooms) =>
+  //             setAvailableRooms(availableRooms)
+  //           );
+  //       },[]);
 
 
 
@@ -165,7 +165,7 @@ const ResvDetail = (props) => {
           </button>
         </div>
         <div>
-          <span>사용가능한 객실 수: {availableRooms}개</span>
+          <span>선택가능한 객실 2개</span>
         </div>
       </div>
     );

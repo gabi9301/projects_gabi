@@ -7,19 +7,19 @@ import javax.persistence.*;
 
 @Getter @Setter
 @Entity
-@Table(name = "RESERVATION_ROOM")
+@Table(name = "reservation_room")
 public class ReservationRoom {
 
     @Id @GeneratedValue
-    @Column(name = "RESERVATION_ROOM_ID")
+    @Column(name = "reservation_room_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "RESERVATION_ID")
+    @JoinColumn(name = "reservation_id")
     private Reservation reservation;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ROOM_ID")
+    @JoinColumn(name = "room_id")
     private Room room;
 
     public void changeReservation(Reservation reservation) {

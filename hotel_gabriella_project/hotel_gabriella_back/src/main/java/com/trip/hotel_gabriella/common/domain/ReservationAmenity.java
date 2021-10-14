@@ -7,18 +7,18 @@ import javax.persistence.*;
 
 @Getter @Setter
 @Entity
-@Table(name = "RESERVATION_AMENITY")
+@Table(name = "reservation_amenity")
 public class ReservationAmenity {
     @Id @GeneratedValue
-    @Column(name = "RESERVATION_AMENITY_ID")
+    @Column(name = "reservation_amenity_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "RESERVATION_ID")
+    @JoinColumn(name = "reservation_id")
     private Reservation reservation;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "AMENITY_ID")
+    @JoinColumn(name = "amenity_id")
     private Amenity amenity;
 
     private int count;

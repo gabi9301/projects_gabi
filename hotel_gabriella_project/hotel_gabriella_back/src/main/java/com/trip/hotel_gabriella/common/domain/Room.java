@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Entity
 public class Room {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ROOM_ID")
+    @Column(name = "room_id")
     private Long id;
 
     private int no;

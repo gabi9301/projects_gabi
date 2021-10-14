@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 public class Reservation {
     @Id @GeneratedValue
-    @Column(name = "RESERVATION_ID")
+    @Column(name = "reservation_id")
     private Long id;
     private LocalDateTime checkIn;
     private LocalDateTime checkOut;
