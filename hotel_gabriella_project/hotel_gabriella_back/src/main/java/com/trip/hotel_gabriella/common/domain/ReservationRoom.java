@@ -5,7 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Getter @Setter
+@Getter
 @Entity
 @Table(name = "reservation_room")
 public class ReservationRoom {

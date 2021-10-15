@@ -1,13 +1,15 @@
 package com.trip.hotel_gabriella.common.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
 
-@Getter @Setter
+@Getter
+@Builder
+@AllArgsConstructor //@Builder는 all-args 생성자 필수
+@NoArgsConstructor  //@Entity 는 public or protected 인 no-args 생성자 필수
 @DynamicInsert
 @Entity
 public class Room {
@@ -25,13 +27,5 @@ public class Room {
     private Availability availability;
     private int capacity;
 
-    public Room() {
-    }
 
-    public Room(int no, int floor, String roomType, String viewType) {
-        this.no = no;
-        this.floor = floor;
-        this.roomType = roomType;
-        this.viewType = viewType;
-    }
 }

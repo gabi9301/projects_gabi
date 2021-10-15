@@ -20,7 +20,14 @@ public class MemoryRoomRepository implements RoomRepository{
 
     @Override
     public void save(Room room) {
-        room.setId(id++);
+        room = new Room(id++
+                ,room.getNo()
+                ,room.getFloor()
+                ,room.getRoomType()
+                ,room.getViewType()
+                ,room.getPrice()
+                ,room.getAvailability()
+                ,room.getCapacity());
         storage.put(room.getId(), room);
     }
 

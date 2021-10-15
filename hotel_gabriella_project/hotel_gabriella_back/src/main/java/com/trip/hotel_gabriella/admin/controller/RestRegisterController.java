@@ -1,9 +1,8 @@
 package com.trip.hotel_gabriella.admin.controller;
 
 
-import com.trip.hotel_gabriella.admin.service.RegisterService;
+import com.trip.hotel_gabriella.admin.service.RoomManageService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class RestRegisterController {
 
-    private final RegisterService registerService;
+    private final RoomManageService roomManageService;
 //
 //    @PostMapping("/register.do")
 //    public void registerRoom(@ModelAttribute Room room){
@@ -21,7 +20,7 @@ public class RestRegisterController {
     @PostMapping("/availableRooms")
     public String availableRoomNumber() {
         String availableRoomNumber = String.valueOf(
-                registerService.readAllRooms().size());
+                roomManageService.readAllRooms().size());
         return availableRoomNumber;
     }
 }
