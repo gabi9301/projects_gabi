@@ -7,7 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -24,14 +26,12 @@ public class RegisterController {
     }
 
 
-    @PostMapping("/admin/register.do")
-    public String registerRoom(@Valid RoomRegisterRequest roomRegisterRequest, Model model){
-        roomManageService.saveRoom(roomRegisterRequest);
-        List<Room> allRooms = roomManageService.readAllRooms();
 
+    @GetMapping("/admin/registeredRooms")
+    public String registeredRoomsList(Model model) {
+        List<Room> allRooms = roomManageService.readAllRooms();
         model.addAttribute("allRooms",allRooms);
         return "admin/registeredRooms";
-
     }
 
 

@@ -5,6 +5,8 @@ spring:
     password:
     driver-class-name: org.h2.Driver
 
+
+
 #    http:
 #      encoding:
 #        charset : 'UTF-8'

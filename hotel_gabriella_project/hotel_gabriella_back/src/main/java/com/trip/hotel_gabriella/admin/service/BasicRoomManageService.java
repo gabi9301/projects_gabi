@@ -15,13 +15,14 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class RoomManageServiceImpl implements RoomManageService {
+public class BasicRoomManageService implements RoomManageService {
 
     private final RoomRepository roomRepository;
 
     @Transactional
     public Room saveRoom(RoomRegisterRequest roomRegisterRequest){
         Room room = roomRegisterRequest.toRoomEntity();
+        System.out.println("room.getRoomType() = " + room.getRoomType());
         roomRepository.save(room);
         return room;
     }
