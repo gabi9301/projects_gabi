@@ -18,10 +18,10 @@ public class JpaMemberRepository implements MemberRepository{
 
 
     @Override
-    public int findCountByAccount(String account) {
+    public Long findCountByAccount(String account) {
         String query = "SELECT COUNT(m.account) FROM Member m WHERE m.account = :account";
 
-        return em.createQuery(query, Integer.class)
+        return em.createQuery(query, Long.class)
                 .setParameter("account", account)
                 .getSingleResult();
     }

@@ -30,27 +30,7 @@ public class MemberJoinRequest { //이 DTO에는 단순히 Member의 필드뿐 �
     @NotBlank(message = "주소는 필수항목입니다.")
     private Address address;
 
-    public MemberJoinRequest() {
-    }
-
-    public MemberJoinRequest(
-            String account
-            , String password
-            , String email
-            , String name
-            , String birth
-            , String phone
-            , Address address) {
-        this.account = account;
-        this.password = password;
-        this.email = email;
-        this.name = name;
-        this.birth = birth;
-        this.phone = phone;
-        this.address = address;
-    }
-
-    public Member toMemberEntity() {
+    public Member toEntity() {
         return Member.builder()
                 .account(account)
                 .password(password)

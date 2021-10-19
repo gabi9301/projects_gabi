@@ -1,0 +1,12 @@
+{
+  "account": "user",
+  "password": "password",
+  "email": "abc@mail.net",
+  "name": "아무개",
+  "birth": "930128",
+  "phone": "010-123-4567",
+  "city": "서울시",
+  "street": "역삼로",
+  "address_detail": "행복아파트 101호",
+  "zipcode": "123-456"
+}

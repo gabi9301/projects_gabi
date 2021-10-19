@@ -21,7 +21,7 @@ public class BasicRoomManageService implements RoomManageService {
 
     @Transactional
     public Room saveRoom(RoomRegisterRequest roomRegisterRequest){
-        Room room = roomRegisterRequest.toRoomEntity();
+        Room room = roomRegisterRequest.toEntity();
         System.out.println("room.getRoomType() = " + room.getRoomType());
         roomRepository.save(room);
         return room;

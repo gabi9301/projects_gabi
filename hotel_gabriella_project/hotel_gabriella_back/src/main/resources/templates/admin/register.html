@@ -15,19 +15,15 @@
                 type: "post",
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify($("#registerForm").serializeObject()),
-                success: function(data) {
-                    console.log(data);
+                success: function() {
                     location.href = "/admin/registeredRooms";
                 },
                 error: function() {
                     alert("failed");
                 }
             });
-
-            return;
         });
     });
-
     </script>
 
 

@@ -5,6 +5,8 @@ import com.trip.hotel_gabriella.admin.model.RoomRegisterRequest;
 import com.trip.hotel_gabriella.admin.service.RoomManageService;
 import com.trip.hotel_gabriella.common.domain.Room;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,20 +31,16 @@ public class RestRegisterController {
 
 
     @PostMapping("/availableRooms")
-    public String availableRoomNumber() {
-        String availableRoomNumber = String.valueOf(
-                roomManageService.readAllRooms().size());
-        return availableRoomNumber;
+    public ResponseEntity<Integer> availableRoomNumber() {
+        int availableRoomNumber = roomManageService.readAllRooms().size();
+        return new ResponseEntity<>(availableRoomNumber, HttpStatus.OK);
     }
 
     @PostMapping("/admin/register.do")
-    public Map<String,Object> registerRoom(@RequestBody @Valid RoomRegisterRequest roomRegisterRequest, Model model){
-        Map<String,Object> resultMap = new HashMap<>();
-        System.out.println("roomRegisterRequest.getRoomType() = " + roomRegisterRequest.getRoomType());
+    public ResponseEntity<Void> registerRoom(
+            @RequestBody @Valid RoomRegisterRequest roomRegisterRequest){
         roomManageService.saveRoom(roomRegisterRequest);
-        resultMap.put("result", "success");
-        return resultMap;
-
+        return new ResponseEntity<>(HttpStatus.OK);
 
     }
 }
