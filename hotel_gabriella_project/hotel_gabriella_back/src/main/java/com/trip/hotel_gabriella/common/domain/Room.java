@@ -12,7 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor  //@Entity 는 public or protected 인 no-args 생성자 필수
 @DynamicInsert
 @Entity
-public class Room {
+public class Room extends BaseEntity{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "room_id")
     private Long id;

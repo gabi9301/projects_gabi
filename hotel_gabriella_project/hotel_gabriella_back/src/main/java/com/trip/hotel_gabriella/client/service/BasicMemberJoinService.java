@@ -1,9 +1,11 @@
 package com.trip.hotel_gabriella.client.service;
 
 import com.trip.hotel_gabriella.client.model.MemberJoinRequest;
+import com.trip.hotel_gabriella.client.model.MemberJoinResponse;
 import com.trip.hotel_gabriella.client.repository.MemberRepository;
+import com.trip.hotel_gabriella.common.domain.Member;
+import com.trip.hotel_gabriella.common.mappers.MemberJoinMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -37,13 +39,22 @@ public class BasicMemberJoinService implements MemberJoinService{
         return result;
     }
 
-    @Override
     @Transactional
-    public void registerMember(MemberJoinRequest memberJoinRequest) {
+    public MemberJoinResponse registerMember(MemberJoinRequest memberJoinRequest) {
+        MemberJoinResponse result = null;
         if(checkUniqueAccount(memberJoinRequest.getAccount())) {
+
             memberJoinRequest.setEncodedPassword(
                     passwordEncoder.encode(memberJoinRequest.getPassword()));
-            memberRepository.save(memberJoinRequest.toEntity());
+
+            Member member = (Member) memberJoinRequest.toEntity(memberJoinRequest);
+            memberRepository.save(member);
+
+            MemberJoinResponse memberJoinResponse
+                    = (MemberJoinResponse) new MemberJoinResponse().toDto(member);
+
+            result = memberJoinResponse;
         }
+        return result;
     }
 }

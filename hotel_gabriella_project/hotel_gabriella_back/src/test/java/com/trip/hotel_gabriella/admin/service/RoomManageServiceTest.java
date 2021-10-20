@@ -1,9 +1,10 @@
 package com.trip.hotel_gabriella.admin.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.trip.hotel_gabriella.admin.model.RoomDetails;
 import com.trip.hotel_gabriella.admin.model.RoomRegisterRequest;
-import com.trip.hotel_gabriella.common.domain.Room;
-import org.assertj.core.api.Assertions;
+import com.trip.hotel_gabriella.admin.model.RoomRegisterResponse;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -39,20 +40,16 @@ public class RoomManageServiceTest {
                 = objectMapper.readValue(new File(filePath),RoomRegisterRequest.class);
 
         //when
-
-        Room room = roomManageService.saveRoom(roomRegisterRequest);
-
-        Room findRoom = roomManageService.readRoom(room.getId());
+        RoomRegisterResponse result = roomManageService.saveRoom(roomRegisterRequest);
 
         //then
-
-        Assertions.assertThat(room).isEqualTo(findRoom);
+        Assertions.assertNotNull(result.getId());
     }
 
     @Test
     @DisplayName("방 목록 전체보기")
     public void readAllRooms() {
-        List<Room> allRooms = roomManageService.readAllRooms();
+        List<RoomDetails> allRooms = roomManageService.readAllRooms();
 
     }
 

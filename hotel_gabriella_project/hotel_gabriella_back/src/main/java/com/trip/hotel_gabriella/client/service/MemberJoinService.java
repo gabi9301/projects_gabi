@@ -1,6 +1,7 @@
 package com.trip.hotel_gabriella.client.service;
 
 import com.trip.hotel_gabriella.client.model.MemberJoinRequest;
+import com.trip.hotel_gabriella.client.model.MemberJoinResponse;
 
 
 public interface MemberJoinService {
@@ -9,6 +10,6 @@ public interface MemberJoinService {
 
     public String encodePassword(String passwordCandidate);
 
-    public void registerMember(MemberJoinRequest memberJoinRequest);
+    public MemberJoinResponse registerMember(MemberJoinRequest memberJoinRequest);
 
 }

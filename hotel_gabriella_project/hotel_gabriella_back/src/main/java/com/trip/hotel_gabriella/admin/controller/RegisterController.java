@@ -1,5 +1,6 @@
 package com.trip.hotel_gabriella.admin.controller;
 
+import com.trip.hotel_gabriella.admin.model.RoomDetails;
 import com.trip.hotel_gabriella.admin.model.RoomRegisterRequest;
 import com.trip.hotel_gabriella.admin.service.RoomManageService;
 import com.trip.hotel_gabriella.common.domain.Room;
@@ -29,7 +30,7 @@ public class RegisterController {
 
     @GetMapping("/admin/registeredRooms")
     public String registeredRoomsList(Model model) {
-        List<Room> allRooms = roomManageService.readAllRooms();
+        List<RoomDetails> allRooms = roomManageService.readAllRooms();
         model.addAttribute("allRooms",allRooms);
         return "admin/registeredRooms";
     }

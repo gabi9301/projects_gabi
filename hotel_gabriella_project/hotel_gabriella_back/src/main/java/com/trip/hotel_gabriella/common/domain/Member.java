@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Member {
+public class Member extends BaseEntity{
     @Id @GeneratedValue
     @Column(name = "member_id")
     private Long id;
@@ -26,6 +26,7 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private MemberGrade memberGrade;
 
+    @Builder.Default
     @OneToMany(mappedBy = "member")
     private List<Reservation> reservations = new ArrayList<>();
 
