@@ -1,8 +1,10 @@
 package com.trip.hotel_gabriella.client.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.trip.hotel_gabriella.client.model.MemberJoinRequest;
-import com.trip.hotel_gabriella.client.model.MemberJoinResponse;
+import com.trip.hotel_gabriella.client.model.member.MemberRegisterRequest;
+import com.trip.hotel_gabriella.client.model.member.MemberRegisterResponse;
+import com.trip.hotel_gabriella.client.model.terms.TermsRegisterRequest;
+import com.trip.hotel_gabriella.client.service.member.MemberJoinService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
@@ -15,6 +17,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import javax.transaction.Transactional;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -32,13 +35,16 @@ public class MemberJoinServiceTest{
 
     private final String FILE_PATH = "src/test/resources/test-json/member-join.json";
 
-    private MemberJoinRequest memberJoinRequest;
+    private MemberRegisterRequest memberRegisterRequest;
+    private List<TermsRegisterRequest> termsRegisterRequestList;
 
     @BeforeEach
     public void setup() throws IOException {
         //given
-        memberJoinRequest
-                = objectMapper.readValue(new File(FILE_PATH),MemberJoinRequest.class);
+        memberRegisterRequest
+                = objectMapper.readValue(new File(FILE_PATH), MemberRegisterRequest.class);
+
+        termsRegisterRequestList = objectMapper.readValue(new File(FILE_PATH), List.class);
     }
 
     @Test
@@ -46,7 +52,7 @@ public class MemberJoinServiceTest{
     public void checkUniqueAccount() {
 
         //when
-        boolean result = memberJoinService.checkUniqueAccount(memberJoinRequest.getAccount());
+        boolean result = memberJoinService.checkUniqueAccount(memberRegisterRequest.getAccount());
 
         //then
         Assertions.assertTrue(result);
@@ -57,16 +63,28 @@ public class MemberJoinServiceTest{
     public void encodePassword() {
 
         //when
-        String encodedPassword = memberJoinService.encodePassword(memberJoinRequest.getPassword());
+        String encodedPassword = memberJoinService.encodePassword(memberRegisterRequest.getPassword());
 
         //then
-        Assertions.assertTrue(passwordEncoder.matches(memberJoinRequest.getPassword(), encodedPassword));
+        Assertions.assertTrue(passwordEncoder.matches(memberRegisterRequest.getPassword(), encodedPassword));
 
     }
     @Test
     @DisplayName("새로운 회원 등록")
     public void registerMember() {
-        MemberJoinResponse result = memberJoinService.registerMember(memberJoinRequest);
+        MemberRegisterResponse result = memberJoinService.registerMember(memberRegisterRequest);
+        
         Assertions.assertNotNull(result.getId());
+    }
+    
+    @Test
+    @DisplayName("동의항목이 제대로 들어왔는지 확인")
+    public void readTerms() {
+        for (Object item : termsRegisterRequestList) {
+            TermsRegisterRequest request = (TermsRegisterRequest) item;
+            System.out.println("item.getTermCode() = " + request.getTermCode());
+            System.out.println("item.getAgreeYn() = " + request.getAgreeYn());
+            System.out.println("item.getMember() = " + request.getMember());
+        }
     }
 }

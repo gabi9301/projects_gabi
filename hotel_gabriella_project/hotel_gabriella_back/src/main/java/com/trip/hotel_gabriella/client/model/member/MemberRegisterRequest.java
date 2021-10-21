@@ -1,16 +1,14 @@
-package com.trip.hotel_gabriella.client.model;
+package com.trip.hotel_gabriella.client.model.member;
 
+import com.trip.hotel_gabriella.client.model.BaseDTO;
 import com.trip.hotel_gabriella.common.domain.Address;
-import com.trip.hotel_gabriella.common.domain.BaseEntity;
 import com.trip.hotel_gabriella.common.domain.Member;
 import lombok.Getter;
 
 import javax.validation.constraints.NotBlank;
 
 @Getter
-public class MemberJoinRequest extends BaseDto implements GenericRequest { //이 DTO에는 단순히 Member의 필드뿐 아니라 동의 항목 필드도 들어가야 한다.
-
-    private Long id;
+public class MemberRegisterRequest extends BaseDTO implements GenericRequestEntityAdapter<Member> { //이 DTO에는 단순히 Member의 필드뿐 아니라 동의 항목 필드도 들어가야 한다.
 
     @NotBlank(message = "아이디는 필수항목입니다.")
     private String account;
@@ -38,7 +36,7 @@ public class MemberJoinRequest extends BaseDto implements GenericRequest { //이
     }
 
     @Override
-    public BaseEntity toEntity(BaseDto dto) {
+    public Member toEntity() {
         return Member.builder()
                 .account(account)
                 .password(password)

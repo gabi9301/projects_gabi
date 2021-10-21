@@ -1,9 +1,9 @@
-package com.trip.hotel_gabriella.admin.service;
+package com.trip.hotel_gabriella.admin.service.room;
 
 
-import com.trip.hotel_gabriella.admin.model.RoomDetails;
-import com.trip.hotel_gabriella.admin.model.RoomRegisterRequest;
-import com.trip.hotel_gabriella.admin.model.RoomRegisterResponse;
+import com.trip.hotel_gabriella.admin.model.room.RoomDetails;
+import com.trip.hotel_gabriella.admin.model.room.RoomRegisterRequest;
+import com.trip.hotel_gabriella.admin.model.room.RoomRegisterResponse;
 import com.trip.hotel_gabriella.admin.repository.RoomRepository;
 import com.trip.hotel_gabriella.common.domain.Room;
 import lombok.RequiredArgsConstructor;
@@ -23,13 +23,13 @@ public class BasicRoomManageService implements RoomManageService {
     private final RoomRepository roomRepository;
 
     @Transactional
-    public RoomRegisterResponse saveRoom(RoomRegisterRequest roomRegisterRequest){
+    public RoomRegisterResponse registerRoom(RoomRegisterRequest roomRegisterRequest){
         RoomRegisterResponse result = null;
 
-        Room room = (Room)roomRegisterRequest.toEntity(roomRegisterRequest);
+        Room room = roomRegisterRequest.toEntity();
         roomRepository.save(room);
 
-        result = (RoomRegisterResponse) new RoomRegisterResponse().toDto(room);
+        result = new RoomRegisterResponse().fromEntity(room);
         return result;
     }
 
@@ -38,7 +38,7 @@ public class BasicRoomManageService implements RoomManageService {
         RoomDetails result = null;
 
         Room room = roomRepository.findById(id);
-        result = (RoomDetails) new RoomDetails().toDto(room);
+        result = new RoomDetails().fromEntity(room);
         return result;
     }
 
@@ -47,7 +47,7 @@ public class BasicRoomManageService implements RoomManageService {
         List<RoomDetails> result = new ArrayList<>();
         List<Room> rooms = roomRepository.findAll();
         for (Room room : rooms) {
-            result.add((RoomDetails) new RoomDetails().toDto(room));
+            result.add(new RoomDetails().fromEntity(room));
         }
         return result;
     }

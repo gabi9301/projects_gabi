@@ -1,13 +1,12 @@
 package com.trip.hotel_gabriella.config;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.trip.hotel_gabriella.admin.repository.JpaRoomRepository;
 import com.trip.hotel_gabriella.admin.repository.RoomRepository;
-import com.trip.hotel_gabriella.admin.service.RoomManageService;
-import com.trip.hotel_gabriella.admin.service.BasicRoomManageService;
+import com.trip.hotel_gabriella.admin.service.room.RoomManageService;
+import com.trip.hotel_gabriella.admin.service.room.BasicRoomManageService;
 import com.trip.hotel_gabriella.client.repository.JpaMemberRepository;
 import com.trip.hotel_gabriella.client.repository.MemberRepository;
-import com.trip.hotel_gabriella.client.service.BasicMemberJoinService;
-import com.trip.hotel_gabriella.client.service.MemberJoinService;
+import com.trip.hotel_gabriella.client.service.member.BasicMemberJoinService;
+import com.trip.hotel_gabriella.client.service.member.MemberJoinService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

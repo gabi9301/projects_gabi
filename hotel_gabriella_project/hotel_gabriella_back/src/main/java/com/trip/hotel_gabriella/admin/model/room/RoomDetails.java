@@ -1,14 +1,13 @@
-package com.trip.hotel_gabriella.admin.model;
+package com.trip.hotel_gabriella.admin.model.room;
 
-import com.trip.hotel_gabriella.client.model.BaseDto;
-import com.trip.hotel_gabriella.client.model.GenericResponse;
+import com.trip.hotel_gabriella.client.model.BaseDTO;
+import com.trip.hotel_gabriella.client.model.member.GenericResponseEntityAdatper;
 import com.trip.hotel_gabriella.common.domain.Availability;
-import com.trip.hotel_gabriella.common.domain.BaseEntity;
 import com.trip.hotel_gabriella.common.domain.Room;
 import lombok.Getter;
 
 @Getter
-public class RoomDetails extends BaseDto implements GenericResponse {
+public class RoomDetails extends BaseDTO implements GenericResponseEntityAdatper<Room> {
     private Long id;
     private int no;
     private int floor;
@@ -19,8 +18,7 @@ public class RoomDetails extends BaseDto implements GenericResponse {
     private int capacity;
 
     @Override
-    public BaseDto toDto(BaseEntity entity) {
-        Room room = (Room) entity;
+    public RoomDetails fromEntity(Room room) {
 
         this.id = room.getId();
         this.no = room.getNo();

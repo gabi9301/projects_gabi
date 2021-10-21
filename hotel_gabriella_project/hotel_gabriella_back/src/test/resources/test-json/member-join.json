@@ -8,5 +8,7 @@
   "city": "서울시",
   "street": "역삼로",
   "address_detail": "행복아파트 101호",
-  "zipcode": "123-456"
-}
+  "zipcode": "123-456",
+  "termsRegisterRequestList" : [[{"termsCode": "smsAccept"},{"agreeYn": "y"}]
+                              ,[{"termsCode": "emailAccept"},{"agreeYn": "n"}]]
+  }
