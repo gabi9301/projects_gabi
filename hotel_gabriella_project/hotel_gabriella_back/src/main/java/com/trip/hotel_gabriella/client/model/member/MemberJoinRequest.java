@@ -11,4 +11,5 @@ public class MemberJoinRequest extends BaseDTO {
 
     private TermsRegisterRequest termsRegisterRequest;
 
+
 }

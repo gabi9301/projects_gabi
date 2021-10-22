@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <title>Register Hotel Room</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="text/javascript" src="js/src/common.js" ></script>
+    <script type="text/javascript" src="/static/common/js/src/common.js" ></script>
     <script>
 
 
-    $(document).ready(function(){
+    $(function(){
 
-        $("#registerForm").submit(function(e){
+        $("#registerForm").on("submit",function(e){
             e.preventDefault();
             $.ajax({
                 url: "/admin/register.do",
@@ -28,8 +31,7 @@
 
 
 
-    <title>Register Hotel Room</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
 
 </head>
 <body>

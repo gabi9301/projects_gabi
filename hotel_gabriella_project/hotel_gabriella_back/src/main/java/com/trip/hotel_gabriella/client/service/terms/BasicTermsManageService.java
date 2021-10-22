@@ -7,7 +7,7 @@ import com.trip.hotel_gabriella.common.domain.TermsHistory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BasicTermsManageService implements TermsMangeService{
+public class BasicTermsManageService implements TermsManageService {
     @Override
     public void saveTerms(TermsRegisterRequest termsRegisterRequest) {
         //컨버팅하고 레지스터
@@ -16,12 +16,14 @@ public class BasicTermsManageService implements TermsMangeService{
     @Override
     public List<TermsHistory> convertTermsForHistory(TermsRegisterRequest termsRegisterRequest) {
         List<TermsHistory> termsHistories = new ArrayList<TermsHistory>();
-        for (TermsRegisterRequest item: termsRegisterRequest.getTermsRegisterRequestList()) {
-            termsHistories.add(TermsHistory.builder()
-                            .termCode(item.getTermCode())
-                            .agreeYn(item.getAgreeYn())
-                            .member(item.getMember())
-                            .build());
+        List<TermsRegisterRequest> termsRegisterRequests = termsRegisterRequest.getTerms();
+        
+        for (TermsRegisterRequest termRegisterRequest : termsRegisterRequests) {
+            System.out.println("termRegisterRequest.getTermsCode() = " + termRegisterRequest.getTermsCode());
+            TermsHistory item = TermsHistory.builder()
+                    .termsCode(termsRegisterRequest.getTermsCode())
+                    .agreeYn(termRegisterRequest.getAgreeYn())
+                    .build();
         }
         return termsHistories;
     }

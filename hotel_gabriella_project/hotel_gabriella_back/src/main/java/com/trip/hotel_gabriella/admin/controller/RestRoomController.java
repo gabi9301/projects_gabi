@@ -14,7 +14,7 @@ import javax.validation.Valid;
 
 @RestController //json이나 xml 타입으로 response body를 넘겨준다는 것, 그리고 뷰가 아니라 데이터를 리턴
 @RequiredArgsConstructor
-public class RestRegisterController {
+public class RestRoomController {
 
     private final RoomManageService roomManageService;
 //

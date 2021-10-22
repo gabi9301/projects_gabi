@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../../static/common/js/src/common.js" ></script>
+    <script>
+        $(document).ready(function () {
+            console.log(JSON.stringify($('#memberInfo, #termsInfo').serialize()));
+        });
+
+        function joinMember() {
+
+            $.ajax({
+                url: "/client/joinMember.do",
+                type: "post",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify($('#memberInfo, #termsInfo').serialize()),
+                success: function() {
+
+                },
+                error: function() {
+                    alert("failed");
+                }
+            });
+        }
+
+
+
+    </script>
+
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form id="memberInfo">
+    <input type="text" name="account" value="user">
+    <input type="text" name="password" value="password">
+    <input type="text" name="email" value="abc@mail.net">
+    <input type="text" name="name" value="아무개">
+    <input type="text" name="birth" value="930128">
+    <input type="text" name="phone" value="010-123-4567">
+    <input type="text" name="city" value="서울시">
+    <input type="text" name="street" value="역삼로">
+    <input type="text" name="address_detail" value="행복아파트 101호">
+    <input type="text" name="zipcode" value="123-456">
+</form>
+<form id="termsInfo">
+    <div>sms 동의
+        <input type="radio" id="smsAccept_y" name="smsAccept" value="y"
+               checked>
+        <label for="smsAccept_y">네</label>
+    </div>
+
+    <div>
+        <input type="radio" id="smsAccept_n" name="smsAccept" value="n">
+        <label for="smsAccept_n">아니오</label>
+    </div>
+    <div>email 동의
+        <input type="radio" id="emailAccept_y" name="emailAccept" value="y"
+               checked>
+        <label for="emailAccept_y">네</label>
+    </div>
+
+    <div>
+        <input type="radio" id="emailAccept_n" name="emailAccept" value="n">
+        <label for="emailAccept_n">아니오</label>
+    </div>
+</form>
+<input type="button" id="" onclick="joinMember()">
+</body>
+</html>

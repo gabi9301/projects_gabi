@@ -11,7 +11,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-public class RegisterController {
+public class RoomController {
 
     private final RoomManageService roomManageService;
 

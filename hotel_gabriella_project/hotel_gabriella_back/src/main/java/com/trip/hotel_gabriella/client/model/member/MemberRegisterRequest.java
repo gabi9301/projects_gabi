@@ -5,7 +5,9 @@ import com.trip.hotel_gabriella.common.domain.Address;
 import com.trip.hotel_gabriella.common.domain.Member;
 import lombok.Getter;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Getter
 public class MemberRegisterRequest extends BaseDTO implements GenericRequestEntityAdapter<Member> { //이 DTO에는 단순히 Member의 필드뿐 아니라 동의 항목 필드도 들어가야 한다.
@@ -28,7 +30,8 @@ public class MemberRegisterRequest extends BaseDTO implements GenericRequestEnti
     @NotBlank(message = "전화번호는 필수항목입니다.")
     private String phone;
 
-    @NotBlank(message = "주소는 필수항목입니다.")
+
+    @Valid
     private Address address;
 
     public void setEncodedPassword(String encodedPassword) {
@@ -47,6 +50,5 @@ public class MemberRegisterRequest extends BaseDTO implements GenericRequestEnti
                 .address(address)
                 .build();
     }
-
 
 }

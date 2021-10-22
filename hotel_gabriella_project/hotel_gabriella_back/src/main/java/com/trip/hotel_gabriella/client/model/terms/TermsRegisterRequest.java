@@ -10,18 +10,14 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-public class TermsRegisterRequest extends BaseDTO implements GenericRequestEntityAdapter<TermsHistory> {
-    private String termCode;
+public class TermsRegisterRequest extends BaseDTO {
+
+    private String termsCode;
     private String agreeYn;
     private Member member;
-    private List<TermsRegisterRequest> termsRegisterRequestList;
 
-    @Override
-    public TermsHistory toEntity() {
-        return TermsHistory.builder()
-                .termCode(termCode)
-                .agreeYn(agreeYn)
-                .member(member)
-                .build();
-    }
+    List<TermsRegisterRequest> terms;
+
+
+
 }

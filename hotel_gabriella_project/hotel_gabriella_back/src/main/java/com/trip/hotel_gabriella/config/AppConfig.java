@@ -7,6 +7,8 @@ import com.trip.hotel_gabriella.client.repository.JpaMemberRepository;
 import com.trip.hotel_gabriella.client.repository.MemberRepository;
 import com.trip.hotel_gabriella.client.service.member.BasicMemberJoinService;
 import com.trip.hotel_gabriella.client.service.member.MemberJoinService;
+import com.trip.hotel_gabriella.client.service.terms.BasicTermsManageService;
+import com.trip.hotel_gabriella.client.service.terms.TermsManageService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -45,6 +47,10 @@ public class AppConfig {
     @Bean
     public MemberJoinService memberJoinService() {
         return new BasicMemberJoinService(memberRepository(), passwordEncoder());
+    }
+    @Bean
+    public TermsManageService termsManageService() {
+        return new BasicTermsManageService();
     }
 
 

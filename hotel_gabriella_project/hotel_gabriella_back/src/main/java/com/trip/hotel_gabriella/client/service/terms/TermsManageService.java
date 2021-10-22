@@ -6,7 +6,7 @@ import com.trip.hotel_gabriella.common.domain.TermsHistory;
 
 import java.util.List;
 
-public interface TermsMangeService {
+public interface TermsManageService {
 
     public void saveTerms(TermsRegisterRequest termsRegisterRequest);
 

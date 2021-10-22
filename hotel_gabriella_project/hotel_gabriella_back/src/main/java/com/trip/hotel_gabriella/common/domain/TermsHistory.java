@@ -23,7 +23,7 @@ public class TermsHistory extends BaseEntity {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    private String termCode;
+    private String termsCode;
     private LocalDateTime beginAt;
     private LocalDateTime endAt;
     private String agreeYn;
