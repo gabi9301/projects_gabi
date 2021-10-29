@@ -1,0 +1,26 @@
+{
+  "memberRegisterRequest":{
+    "account":"user",
+    "password":"password",
+    "email":"abc@mail.net",
+    "name":"아무개",
+    "birth":"930128",
+    "phone":"01012343567",
+    "address":{
+      "city":"서울시",
+      "street":"역삼로",
+      "address_detail":"행복아파트 101호",
+      "zipcode":"123-456"
+    }
+  },
+  "terms":[
+    {
+      "termsCode":"smsAgree",
+      "agreeYn":"y"
+    },
+    {
+      "termsCode":"emailAgree",
+      "agreeYn":"n"
+    }
+  ]
+}

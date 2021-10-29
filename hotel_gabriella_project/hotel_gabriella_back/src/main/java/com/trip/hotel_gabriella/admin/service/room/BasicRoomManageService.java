@@ -1,12 +1,13 @@
 package com.trip.hotel_gabriella.admin.service.room;
 
+import lombok.RequiredArgsConstructor;
 
 import com.trip.hotel_gabriella.admin.model.room.RoomDetails;
 import com.trip.hotel_gabriella.admin.model.room.RoomRegisterRequest;
 import com.trip.hotel_gabriella.admin.model.room.RoomRegisterResponse;
 import com.trip.hotel_gabriella.admin.repository.RoomRepository;
 import com.trip.hotel_gabriella.common.domain.Room;
-import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)

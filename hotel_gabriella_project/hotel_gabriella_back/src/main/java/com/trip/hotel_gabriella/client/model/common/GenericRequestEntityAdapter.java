@@ -1,4 +1,4 @@
-package com.trip.hotel_gabriella.client.model.member;
+package com.trip.hotel_gabriella.client.model.common;
 
 import com.trip.hotel_gabriella.common.domain.BaseEntity;
 

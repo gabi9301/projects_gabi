@@ -1,12 +1,14 @@
 package com.trip.hotel_gabriella.common.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 
 @Getter
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "reservation_amenity")
 public class ReservationAmenity {
     @Id @GeneratedValue
@@ -21,6 +23,8 @@ public class ReservationAmenity {
     @JoinColumn(name = "amenity_id")
     private Amenity amenity;
 
+    @NotBlank(message = "이용자 수는 필수항목 입니다.")
+    @Positive
     private int count;
 
     public void changeReservation(Reservation reservation) {

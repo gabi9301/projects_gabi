@@ -1,29 +1,26 @@
 package com.trip.hotel_gabriella.common.domain;
 
-import lombok.Getter;
+import com.trip.hotel_gabriella.common.validation.annotation.Zipcode;
+import lombok.*;
 
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @Embeddable
-@NotNull(message = "주소는 필수항목입니다.")
 public class Address {
-
+    @NotBlank(message = "도시명은 필수항목입니다.")
     private String city;
+
+    @NotBlank(message = "거리명은 필수항목입니다.")
     private String street;
+
     private String address_detail;
+
+    @NotBlank(message = "우편번호는 필수항목입니다.")
+    @Zipcode
     private String zipcode;
 
-    public Address() {
-    }
-
-    @SuppressWarnings("unused")
-    public Address(String city, String street, String address_detail, String zipcode) {
-        this.city = city;
-        this.street = street;
-        this.address_detail = address_detail;
-        this.zipcode = zipcode;
-    }
 }

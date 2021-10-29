@@ -1,12 +1,12 @@
 package com.trip.hotel_gabriella.common.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Getter
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "reservation_room")
 public class ReservationRoom {
 

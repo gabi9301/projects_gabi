@@ -1,16 +1,15 @@
 package com.trip.hotel_gabriella.admin.repository;
 
 import com.trip.hotel_gabriella.common.domain.Room;
+
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Component
 @Repository
 public class MemoryRoomRepository implements RoomRepository{
 

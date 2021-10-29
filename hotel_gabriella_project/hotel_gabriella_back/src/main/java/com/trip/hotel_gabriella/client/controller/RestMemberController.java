@@ -1,9 +1,10 @@
 package com.trip.hotel_gabriella.client.controller;
 
-import com.trip.hotel_gabriella.client.model.member.MemberJoinRequest;
-import com.trip.hotel_gabriella.client.model.member.MemberRegisterRequest;
-import com.trip.hotel_gabriella.client.service.member.BasicMemberJoinService;
 import lombok.RequiredArgsConstructor;
+
+import com.trip.hotel_gabriella.client.model.member.MemberJoinRequest;
+import com.trip.hotel_gabriella.client.service.member.BasicMemberJoinService;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,10 +23,7 @@ public class RestMemberController {
     public ResponseEntity<Void> joinMember(
             @RequestBody @Valid MemberJoinRequest memberJoinRequest) {
 
-        System.out.println("memberJoinRequest.getMemberRegisterRequest().getAccount() = " + memberJoinRequest.getMemberRegisterRequest().getAccount());
-        System.out.println("memberJoinRequest.getTermsRegisterRequest() = " + memberJoinRequest.getTermsRegisterRequest());
-        
-        //System.out.println("memberJoinRequest.account= " + memberJoinRequest.getMemberRegisterRequest().getAccount());
+        memberJoinService.joinMember(memberJoinRequest);
 
         return new ResponseEntity<Void>(HttpStatus.CREATED);
     }

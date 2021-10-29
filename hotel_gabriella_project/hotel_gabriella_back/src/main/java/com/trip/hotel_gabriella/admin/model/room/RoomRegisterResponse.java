@@ -1,12 +1,13 @@
 package com.trip.hotel_gabriella.admin.model.room;
 
-import com.trip.hotel_gabriella.client.model.BaseDTO;
-import com.trip.hotel_gabriella.client.model.member.GenericResponseEntityAdatper;
-import com.trip.hotel_gabriella.common.domain.Room;
 import lombok.Getter;
 
+import com.trip.hotel_gabriella.client.model.BaseDTO;
+import com.trip.hotel_gabriella.client.model.common.GenericResponseEntityAdapter;
+import com.trip.hotel_gabriella.common.domain.Room;
+
 @Getter
-public class RoomRegisterResponse extends BaseDTO implements GenericResponseEntityAdatper<Room> {
+public class RoomRegisterResponse extends BaseDTO implements GenericResponseEntityAdapter<Room> {
 
     private Long id;
 

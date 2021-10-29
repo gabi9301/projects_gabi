@@ -1,7 +1,6 @@
 package com.trip.hotel_gabriella.client.service.member;
 
 import com.trip.hotel_gabriella.client.model.member.MemberJoinRequest;
-import com.trip.hotel_gabriella.client.model.member.MemberJoinResponse;
 import com.trip.hotel_gabriella.client.model.member.MemberRegisterRequest;
 import com.trip.hotel_gabriella.client.model.member.MemberRegisterResponse;
 
@@ -14,6 +13,6 @@ public interface MemberJoinService {
 
     public MemberRegisterResponse registerMember(MemberRegisterRequest memberRegisterRequest);
 
-    public MemberJoinResponse joinMember(MemberJoinRequest memberJoinRequest);
+    public void joinMember(MemberJoinRequest memberJoinRequest);
 
 }

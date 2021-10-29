@@ -1,33 +1,53 @@
 package com.trip.hotel_gabriella.common.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.trip.hotel_gabriella.common.validation.annotation.Phone;
+import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Reservation {
     @Id @GeneratedValue
     @Column(name = "reservation_id")
     private Long id;
-    private LocalDateTime checkIn;
-    private LocalDateTime checkOut;
-    private String name;
-    private String phone;
-    private int capacity;
-    @OneToMany(mappedBy = "reservation")
-    private List<ReservationRoom> reservationRooms = new ArrayList<>();
-    @OneToMany(mappedBy = "reservation")
-    private List<ReservationAmenity> reservationAmenities = new ArrayList<>();
 
+    @NotBlank(message = "체크인 시간은 필수항목 입니다.")
+    private LocalDateTime checkIn;
+
+    @NotBlank(message = "체크아웃 시간은 필수항목 입니다.")
+    private LocalDateTime checkOut;
+
+    @NotBlank(message = "이름은 필수항목 입니다.")
+    private String name;
+
+    @NotBlank(message = "휴대폰 번호는 필수항목 입니다.")
+    @Phone
+    private String phone;
+
+    @NotBlank(message = "정원은 필수항목 입니다.")
+    @Min(1) @Max(10)
+    private int capacity;
+
+    @NotBlank(message = "회원여부는 필수항목입니다.")
     private Boolean isMember;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
+
+    @OneToMany(mappedBy = "reservation")
+    private List<ReservationRoom> reservationRooms = new ArrayList<>();
+
+    @OneToMany(mappedBy = "reservation")
+    private List<ReservationAmenity> reservationAmenities = new ArrayList<>();
 
     public void changeMember(Member member) {
         if(this.member != null) {  //이미 예약자가 설정된 상태에서 바꿀 경우

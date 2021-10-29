@@ -26,6 +26,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-devtools'
+    implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.7'
 
     implementation 'org.springframework.boot:spring-boot-starter-validation:2.5.5'
     implementation 'org.springframework.boot:spring-boot-starter-security'
@@ -59,6 +60,7 @@ dependencies {
     //JUnit Vintage와 JUnit 4.12이상의 라이브러리를 추가하면 된다.
     testCompileOnly 'junit:junit:4.13.2'
     testRuntimeOnly 'org.junit.vintage:junit-vintage-engine:5.3.1'
+
 
     runtimeOnly 'com.h2database:h2'
 

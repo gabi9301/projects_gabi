@@ -1,9 +1,9 @@
-package com.trip.hotel_gabriella.client.model.member;
+package com.trip.hotel_gabriella.client.model.common;
 
 import com.trip.hotel_gabriella.client.model.BaseDTO;
 import com.trip.hotel_gabriella.common.domain.BaseEntity;
 
-public interface GenericResponseEntityAdatper<E extends BaseEntity> {
+public interface GenericResponseEntityAdapter<E extends BaseEntity> {
 
     public BaseDTO fromEntity(E entity);
 }

@@ -1,6 +1,7 @@
 package com.trip.hotel_gabriella.client.repository;
 
 import com.trip.hotel_gabriella.common.domain.Member;
+
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
@@ -8,7 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
-@Component
 @Repository
 @Transactional(rollbackOn = Exception.class)
 public class JpaMemberRepository implements MemberRepository{

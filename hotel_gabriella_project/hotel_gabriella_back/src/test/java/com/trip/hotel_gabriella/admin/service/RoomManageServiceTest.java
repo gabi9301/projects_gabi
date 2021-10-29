@@ -5,20 +5,18 @@ import com.trip.hotel_gabriella.admin.model.room.RoomDetails;
 import com.trip.hotel_gabriella.admin.model.room.RoomRegisterRequest;
 import com.trip.hotel_gabriella.admin.model.room.RoomRegisterResponse;
 import com.trip.hotel_gabriella.admin.service.room.RoomManageService;
-import org.junit.jupiter.api.Assertions;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.*;
 
-@ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Transactional
 public class RoomManageServiceTest {
@@ -43,14 +41,15 @@ public class RoomManageServiceTest {
         RoomRegisterResponse result = roomManageService.registerRoom(roomRegisterRequest);
 
         //then
-        Assertions.assertNotNull(result.getId());
+        assertThat(result.getId()).isNotNull();
     }
 
     @Test
     @DisplayName("방 목록 전체보기")
     public void readAllRooms() {
         List<RoomDetails> allRooms = roomManageService.readAllRooms();
-        Assertions.assertEquals(allRooms.size(),248);
+        assertThat(allRooms.size()).isEqualTo(248);
+
     }
 
 }

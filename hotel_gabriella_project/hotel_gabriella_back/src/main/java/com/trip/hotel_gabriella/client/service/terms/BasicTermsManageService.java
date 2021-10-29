@@ -1,36 +1,59 @@
 package com.trip.hotel_gabriella.client.service.terms;
 
+import lombok.RequiredArgsConstructor;
+
 import com.trip.hotel_gabriella.client.model.terms.TermsRegisterRequest;
 import com.trip.hotel_gabriella.client.model.terms.TermsRegisterResponse;
+import com.trip.hotel_gabriella.client.repository.TermsRepository;
+import com.trip.hotel_gabriella.common.domain.Member;
 import com.trip.hotel_gabriella.common.domain.TermsHistory;
+
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
+@RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class BasicTermsManageService implements TermsManageService {
-    @Override
-    public void saveTerms(TermsRegisterRequest termsRegisterRequest) {
-        //컨버팅하고 레지스터
-    }
 
-    @Override
-    public List<TermsHistory> convertTermsForHistory(TermsRegisterRequest termsRegisterRequest) {
+    private final TermsRepository termsRepository;
+
+    @Transactional
+    public void processTerms(List<TermsRegisterRequest> termsRegisterRequestList, Member member) {
         List<TermsHistory> termsHistories = new ArrayList<TermsHistory>();
-        List<TermsRegisterRequest> termsRegisterRequests = termsRegisterRequest.getTerms();
-        
-        for (TermsRegisterRequest termRegisterRequest : termsRegisterRequests) {
-            System.out.println("termRegisterRequest.getTermsCode() = " + termRegisterRequest.getTermsCode());
-            TermsHistory item = TermsHistory.builder()
-                    .termsCode(termsRegisterRequest.getTermsCode())
-                    .agreeYn(termRegisterRequest.getAgreeYn())
-                    .build();
+
+        for (TermsRegisterRequest termsItem : termsRegisterRequestList) {
+            if(termsItem.getMember()==null){
+                termsItem.setTargetMember(member);
+            }
+            TermsHistory item = termsItem.toEntity();
+            termsHistories.add(item);
         }
-        return termsHistories;
+
+        registerTermsList(termsHistories);
+
     }
 
-    @Override
-    public TermsRegisterResponse registerTerms(List<TermsHistory> termsHistories) {
-        //리포지토리를 사용해서 하나씩 DB에 넣기
-        return null;
+
+    @Transactional
+    public TermsRegisterResponse registerTerms(TermsHistory termsHistory) {
+        TermsRegisterResponse result = null;
+        termsRepository.save(termsHistory);
+        result = new TermsRegisterResponse().fromEntity(termsHistory);
+        return result;
     }
+
+    @Transactional
+    public void registerTermsList(List<TermsHistory> termsHistories) {
+        for (TermsHistory termsHistory : termsHistories) {
+           registerTerms(termsHistory);
+        }
+
+    }
+
+
 }

@@ -1,20 +1,16 @@
 package com.trip.hotel_gabriella.admin.repository;
 
-
 import com.trip.hotel_gabriella.common.domain.Room;
-import com.trip.hotel_gabriella.config.AppConfig;
-import lombok.RequiredArgsConstructor;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+
 import java.util.List;
 
-@Component
 @Repository
 @Transactional(rollbackOn = Exception.class)
 public class JpaRoomRepository implements RoomRepository{

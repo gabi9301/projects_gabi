@@ -1,33 +1,34 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Register Hotel Room</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="text/javascript" src="/static/common/js/src/common.js" ></script>
+    <script type="text/javascript" src="/common/js/src/common.js" ></script>
     <script>
 
 
-    $(function(){
+        $(function(){
 
-        $("#registerForm").on("submit",function(e){
-            e.preventDefault();
-            $.ajax({
-                url: "/admin/register.do",
-                type: "post",
-                contentType: "application/json; charset=utf-8",
-                data: JSON.stringify($("#registerForm").serializeObject()),
-                success: function() {
-                    location.href = "/admin/registeredRooms";
-                },
-                error: function() {
-                    alert("failed");
-                }
+            $("#registerForm").on("submit",function(e){
+                e.preventDefault();
+                $.ajax({
+                    url: "/admin/register.do",
+                    type: "post",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify($("#registerForm").serializeObject()),
+                    success: function() {
+                        location.href = "/admin/registeredRooms";
+                    },
+                    error: function() {
+                        alert("failed");
+                    }
+                });
             });
         });
-    });
     </script>
+
+    <title>Register Hotel Room</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
 
 
 
