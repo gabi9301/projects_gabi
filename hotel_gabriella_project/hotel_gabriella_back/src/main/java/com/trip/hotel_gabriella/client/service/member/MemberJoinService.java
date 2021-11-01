@@ -4,15 +4,17 @@ import com.trip.hotel_gabriella.client.model.member.MemberJoinRequest;
 import com.trip.hotel_gabriella.client.model.member.MemberRegisterRequest;
 import com.trip.hotel_gabriella.client.model.member.MemberRegisterResponse;
 
+import javax.validation.Valid;
+
 
 public interface MemberJoinService {
 
-    public boolean checkUniqueAccount(String accountCandidate);
+    boolean checkUniqueAccount(String accountCandidate);
 
-    public String encodePassword(String passwordCandidate);
+    String encodePassword(String passwordCandidate);
 
-    public MemberRegisterResponse registerMember(MemberRegisterRequest memberRegisterRequest);
+    MemberRegisterResponse registerMember(@Valid MemberRegisterRequest memberRegisterRequest);
 
-    public void joinMember(MemberJoinRequest memberJoinRequest);
+    void signInMember(MemberJoinRequest memberJoinRequest);
 
 }

@@ -25,8 +25,8 @@ public class MemoryRoomRepository implements RoomRepository{
                 ,room.getRoomType()
                 ,room.getViewType()
                 ,room.getPrice()
-                ,room.getAvailability()
-                ,room.getCapacity());
+                ,room.getCapacity()
+                ,room.getAvailability());
         storage.put(room.getId(), room);
     }
 

@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDateTime;
 
@@ -19,6 +20,7 @@ public class TermsHistory extends BaseEntity {
     @Column(name = "terms_history_id")
     private Long id;
 
+    @NotNull(message = "회원 정보는 필수입니다.")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
@@ -26,10 +28,8 @@ public class TermsHistory extends BaseEntity {
     @NotBlank(message = "동의항목 코드는 필수항목 입니다.")
     private String termsCode;
 
-
     @PastOrPresent
     private LocalDateTime beginAt;
-
 
     @PastOrPresent
     private LocalDateTime endAt;

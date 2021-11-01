@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
 @Getter
@@ -20,7 +21,7 @@ public class Amenity {
 
     private String description;
 
-    @NotBlank(message = "가격은 필수 항목입니다.")
+    @NotNull(message = "가격은 필수 항목입니다.")
     @PositiveOrZero
     private int price;
 

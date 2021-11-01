@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface RoomRepository {
 
-    public void save(Room room);
+    void save(Room room);
 
-    public Room findById(Long id);
+    Room findById(Long id);
 
-    public List<Room> findAll();
+    List<Room> findAll();
 }

@@ -9,13 +9,13 @@ import java.util.List;
 
 public interface TermsManageService {
 
-    public void processTerms(List<TermsRegisterRequest> termsRegisterRequests, Member member);
+    void processTerms(List<TermsRegisterRequest> termsRegisterRequests, Member member);
 
-    //public List<TermsHistory> convertTermsForHistory(TermsRegisterRequest termsRegisterRequest);
+    //List<TermsHistory> convertTermsForHistory(TermsRegisterRequest termsRegisterRequest);
 
-    public TermsRegisterResponse registerTerms(TermsHistory termsHistory);
+    TermsRegisterResponse registerTerms(TermsHistory termsHistory);
 
-    public void registerTermsList(List<TermsHistory> termsHistories);
+    void registerTermsList(List<TermsHistory> termsHistories);
 
 
 }

@@ -1,6 +1,7 @@
 package com.trip.hotel_gabriella.client.model.member;
 
 import com.trip.hotel_gabriella.common.validation.annotation.*;
+import com.trip.hotel_gabriella.common.validation.validator.ValidationGroups;
 import lombok.Getter;
 
 import com.trip.hotel_gabriella.client.model.BaseDTO;
@@ -18,7 +19,7 @@ public class MemberRegisterRequest extends BaseDTO implements GenericRequestEnti
     private String account;
 
     @NotBlank(message = "비밀번호는 필수항목입니다.")
-    @Password
+    @Password(groups = {ValidationGroups.validatePassword.class})
     private String password;
 
     @NotBlank(message = "메일 주소는 필수항목입니다.")
@@ -35,7 +36,6 @@ public class MemberRegisterRequest extends BaseDTO implements GenericRequestEnti
     @NotBlank(message = "전화번호는 필수항목입니다.")
     @Phone
     private String phone;
-
 
     @Valid
     private Address address;
@@ -56,6 +56,5 @@ public class MemberRegisterRequest extends BaseDTO implements GenericRequestEnti
                 .address(address)
                 .build();
     }
-
 
 }

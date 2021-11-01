@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +20,10 @@ public class Reservation {
     @Column(name = "reservation_id")
     private Long id;
 
-    @NotBlank(message = "체크인 시간은 필수항목 입니다.")
+    @NotNull(message = "체크인 시간은 필수항목 입니다.")
     private LocalDateTime checkIn;
 
-    @NotBlank(message = "체크아웃 시간은 필수항목 입니다.")
+    @NotNull(message = "체크아웃 시간은 필수항목 입니다.")
     private LocalDateTime checkOut;
 
     @NotBlank(message = "이름은 필수항목 입니다.")
@@ -32,11 +33,11 @@ public class Reservation {
     @Phone
     private String phone;
 
-    @NotBlank(message = "정원은 필수항목 입니다.")
+    @NotNull(message = "정원은 필수항목 입니다.")
     @Min(1) @Max(10)
     private int capacity;
 
-    @NotBlank(message = "회원여부는 필수항목입니다.")
+    @NotNull(message = "회원여부는 필수항목입니다.")
     private Boolean isMember;
 
     @ManyToOne(fetch = FetchType.LAZY)

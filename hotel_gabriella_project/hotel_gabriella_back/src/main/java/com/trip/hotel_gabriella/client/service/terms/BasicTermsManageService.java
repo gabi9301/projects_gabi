@@ -33,18 +33,15 @@ public class BasicTermsManageService implements TermsManageService {
             TermsHistory item = termsItem.toEntity();
             termsHistories.add(item);
         }
-
         registerTermsList(termsHistories);
-
     }
-
 
     @Transactional
     public TermsRegisterResponse registerTerms(TermsHistory termsHistory) {
-        TermsRegisterResponse result = null;
+
         termsRepository.save(termsHistory);
-        result = new TermsRegisterResponse().fromEntity(termsHistory);
-        return result;
+
+        return new TermsRegisterResponse().fromEntity(termsHistory);
     }
 
     @Transactional

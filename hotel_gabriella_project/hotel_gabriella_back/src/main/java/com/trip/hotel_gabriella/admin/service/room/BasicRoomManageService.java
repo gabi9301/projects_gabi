@@ -24,22 +24,19 @@ public class BasicRoomManageService implements RoomManageService {
 
     @Transactional
     public RoomRegisterResponse registerRoom(RoomRegisterRequest roomRegisterRequest){
-        RoomRegisterResponse result = null;
 
         Room room = roomRegisterRequest.toEntity();
         roomRepository.save(room);
 
-        result = new RoomRegisterResponse().fromEntity(room);
-        return result;
+        return new RoomRegisterResponse().fromEntity(room);
     }
 
     @Override
     public RoomDetails readRoom(Long id) {
-        RoomDetails result = null;
 
         Room room = roomRepository.findById(id);
-        result = new RoomDetails().fromEntity(room);
-        return result;
+
+        return new RoomDetails().fromEntity(room);
     }
 
     @Override

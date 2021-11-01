@@ -1,7 +1,7 @@
 {
   "memberRegisterRequest":{
-    "account":"user",
-    "password":"password",
+    "account":"user912",
+    "password":"passWord2#",
     "email":"abc@mail.net",
     "name":"아무개",
     "birth":"930128",
@@ -10,7 +10,7 @@
       "city":"서울시",
       "street":"역삼로",
       "address_detail":"행복아파트 101호",
-      "zipcode":"123-456"
+      "zipcode":"12345"
     }
   },
   "terms":[

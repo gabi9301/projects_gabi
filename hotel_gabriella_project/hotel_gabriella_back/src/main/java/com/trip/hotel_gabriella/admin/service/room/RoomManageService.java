@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface RoomManageService {
 
-    public RoomRegisterResponse registerRoom(RoomRegisterRequest roomRegisterRequest);
+    RoomRegisterResponse registerRoom(RoomRegisterRequest roomRegisterRequest);
 
-    public RoomDetails readRoom(Long id);
+    RoomDetails readRoom(Long id);
 
-    public List<RoomDetails> readAllRooms();
+    List<RoomDetails> readAllRooms();
 }

@@ -89,7 +89,7 @@ jacocoTestCoverageVerification {    //JACOCO 설정은 여기만 조정하면 OK
             limit {
                 counter = 'BRANCH'
                 value = 'COVEREDRATIO'
-                minimum = 0.90
+                minimum = 0.50
             }
         }
     }

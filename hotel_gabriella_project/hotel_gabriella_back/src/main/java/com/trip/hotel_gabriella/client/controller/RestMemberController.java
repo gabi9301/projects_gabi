@@ -23,7 +23,7 @@ public class RestMemberController {
     public ResponseEntity<Void> joinMember(
             @RequestBody @Valid MemberJoinRequest memberJoinRequest) {
 
-        memberJoinService.joinMember(memberJoinRequest);
+        memberJoinService.signInMember(memberJoinRequest);
 
         return new ResponseEntity<Void>(HttpStatus.CREATED);
     }

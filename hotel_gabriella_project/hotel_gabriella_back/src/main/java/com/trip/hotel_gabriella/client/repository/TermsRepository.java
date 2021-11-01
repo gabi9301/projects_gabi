@@ -4,6 +4,6 @@ import com.trip.hotel_gabriella.common.domain.TermsHistory;
 
 public interface TermsRepository {
 
-    public void save(TermsHistory termsHistory);
+    void save(TermsHistory termsHistory);
 
 }

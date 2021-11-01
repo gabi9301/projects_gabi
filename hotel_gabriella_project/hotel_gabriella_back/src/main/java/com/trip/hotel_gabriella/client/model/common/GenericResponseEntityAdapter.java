@@ -5,5 +5,5 @@ import com.trip.hotel_gabriella.common.domain.BaseEntity;
 
 public interface GenericResponseEntityAdapter<E extends BaseEntity> {
 
-    public BaseDTO fromEntity(E entity);
+    BaseDTO fromEntity(E entity);
 }

@@ -1,6 +1,6 @@
 package com.trip.hotel_gabriella.client.service.member;
 
-import com.trip.hotel_gabriella.common.validation.validator.PasswordValidator;
+import com.trip.hotel_gabriella.common.validation.validator.ValidationGroups;
 import lombok.RequiredArgsConstructor;
 
 import com.trip.hotel_gabriella.client.model.member.MemberJoinRequest;
@@ -12,7 +12,6 @@ import com.trip.hotel_gabriella.client.service.terms.TermsManageService;
 import com.trip.hotel_gabriella.common.domain.Member;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
@@ -22,7 +21,6 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Validated
 @Transactional(readOnly = true)
 public class BasicMemberJoinService implements MemberJoinService {
 
@@ -35,25 +33,25 @@ public class BasicMemberJoinService implements MemberJoinService {
 
     @Transactional
     public boolean checkUniqueAccount(String accountCandidate) {
-        boolean result = false;
         Long count = memberRepository.findCountByAccount(accountCandidate);
         if(count == 0){
-            result = true;
+            return true;
+        }else {
+            return false;
         }
-        return result;
 
     }
 
     @Override
     public String encodePassword(String passwordCandidate) {
-        //validator.validate();
-        String result = passwordEncoder.encode(passwordCandidate);
-        return result;
+
+        return passwordEncoder.encode(passwordCandidate);
     }
 
     @Transactional
-    public MemberRegisterResponse registerMember(@Valid MemberRegisterRequest memberRegisterRequest) {
-        MemberRegisterResponse result = null;
+    public MemberRegisterResponse registerMember(
+            @Validated(ValidationGroups.validatePassword.class)
+                    MemberRegisterRequest memberRegisterRequest) {
 
         if(checkUniqueAccount(memberRegisterRequest.getAccount())) {
 
@@ -63,13 +61,15 @@ public class BasicMemberJoinService implements MemberJoinService {
             Member member = memberRegisterRequest.toEntity();
             memberRepository.save(member);
 
-            result = new MemberRegisterResponse().fromEntity(member);
+            return new MemberRegisterResponse().fromEntity(member);
+        }else{
+            System.out.println("계정 아이디 중복, 에러 핸들러 필요");
+            return null;
         }
-        return result;
     }
 
     @Transactional
-    public void joinMember(MemberJoinRequest memberJoinRequest) {
+    public void signInMember(MemberJoinRequest memberJoinRequest) {
 
         MemberRegisterRequest memberRegisterRequest = memberJoinRequest.getMemberRegisterRequest();
         List<TermsRegisterRequest> termsRegisterRequestList = memberJoinRequest.getTerms();
@@ -79,9 +79,6 @@ public class BasicMemberJoinService implements MemberJoinService {
         if(memberRegisterResponse != null) {
             Member newMember = Member.builder().id(memberRegisterResponse.getId()).build();
             termsManageService.processTerms(termsRegisterRequestList,newMember);
-
-        }else{
-            System.out.println("이미 있는 계정! Exception handler 필요!");
         }
     }
 }

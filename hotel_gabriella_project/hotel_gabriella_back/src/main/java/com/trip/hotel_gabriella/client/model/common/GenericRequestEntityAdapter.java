@@ -4,5 +4,5 @@ import com.trip.hotel_gabriella.common.domain.BaseEntity;
 
 public interface GenericRequestEntityAdapter<E extends BaseEntity> {
 
-    public E toEntity();
+    E toEntity();
 }
