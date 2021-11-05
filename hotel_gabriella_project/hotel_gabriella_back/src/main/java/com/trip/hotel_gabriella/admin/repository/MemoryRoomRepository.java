@@ -11,13 +11,12 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Repository
-public class MemoryRoomRepository implements RoomRepository{
+public class MemoryRoomRepository{
 
     private static Map<Long, Room> storage = new HashMap<>();
 
     private Long id = 1L;
 
-    @Override
     public void save(Room room) {
         room = new Room(id++
                 ,room.getNo()
@@ -30,12 +29,10 @@ public class MemoryRoomRepository implements RoomRepository{
         storage.put(room.getId(), room);
     }
 
-    @Override
     public Room findById(Long id) {
         return storage.get(id);
     }
 
-    @Override
     public List<Room> findAll() {
         List<Room> allRooms = storage.values().stream().collect(Collectors.toList());
         return allRooms;

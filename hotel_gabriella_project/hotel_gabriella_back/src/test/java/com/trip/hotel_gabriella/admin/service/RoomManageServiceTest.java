@@ -1,7 +1,7 @@
 package com.trip.hotel_gabriella.admin.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.trip.hotel_gabriella.admin.model.room.RoomDetails;
+import com.trip.hotel_gabriella.admin.model.room.RoomInfo;
 import com.trip.hotel_gabriella.admin.model.room.RoomRegisterRequest;
 import com.trip.hotel_gabriella.admin.model.room.RoomRegisterResponse;
 import com.trip.hotel_gabriella.admin.service.room.RoomManageService;
@@ -47,7 +47,7 @@ public class RoomManageServiceTest {
     @Test
     @DisplayName("방 목록 전체보기")
     public void readAllRooms() {
-        List<RoomDetails> allRooms = roomManageService.readAllRooms();
+        List<RoomInfo> allRooms = roomManageService.readAllRooms();
         assertThat(allRooms.size()).isEqualTo(248);
 
     }

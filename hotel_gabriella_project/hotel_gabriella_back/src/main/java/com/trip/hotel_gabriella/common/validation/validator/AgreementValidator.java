@@ -13,12 +13,8 @@ public class AgreementValidator implements ConstraintValidator<Agreement,String>
         if(value == null ) {
             return false;
         }else {
-            if (value.equals("Y") || value.equals("N") ||
-                    value.equals("y") || value.equals("y")) {
-                return true;
-            } else {
-                return false;
-            }
+            return value.equals("Y") || value.equals("N") ||
+                    value.equals("y") || value.equals("n");
         }
     }
 }

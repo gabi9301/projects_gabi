@@ -1,6 +1,6 @@
 package com.trip.hotel_gabriella.common.mappers;
 
-import com.trip.hotel_gabriella.client.model.member.MemberRegisterRequest;
+import com.trip.hotel_gabriella.user.model.member.MemberRegisterRequest;
 import com.trip.hotel_gabriella.common.domain.Member;
 
 //@Mapper(componentModel = "spring")

@@ -1,22 +1,20 @@
 package com.trip.hotel_gabriella.config;
 
-import com.trip.hotel_gabriella.admin.repository.JpaRoomRepository;
 import com.trip.hotel_gabriella.admin.repository.RoomRepository;
 import com.trip.hotel_gabriella.admin.service.room.RoomManageService;
-import com.trip.hotel_gabriella.admin.service.room.BasicRoomManageService;
-import com.trip.hotel_gabriella.client.repository.JpaMemberRepository;
-import com.trip.hotel_gabriella.client.repository.JpaTermsRepository;
-import com.trip.hotel_gabriella.client.repository.MemberRepository;
-import com.trip.hotel_gabriella.client.repository.TermsRepository;
-import com.trip.hotel_gabriella.client.service.member.BasicMemberJoinService;
-import com.trip.hotel_gabriella.client.service.member.MemberJoinService;
-import com.trip.hotel_gabriella.client.service.terms.BasicTermsManageService;
-import com.trip.hotel_gabriella.client.service.terms.TermsManageService;
+import com.trip.hotel_gabriella.admin.service.room.RoomManageServiceImpl;
+import com.trip.hotel_gabriella.user.repository.MemberRepository;
+import com.trip.hotel_gabriella.user.repository.TermsRepository;
+import com.trip.hotel_gabriella.user.service.member.MemberAuthServiceImpl;
+import com.trip.hotel_gabriella.user.service.member.MemberJoinServiceImpl;
+import com.trip.hotel_gabriella.user.service.member.MemberAuthService;
+import com.trip.hotel_gabriella.user.service.member.MemberJoinService;
+import com.trip.hotel_gabriella.user.service.terms.TermsManageServiceImpl;
+import com.trip.hotel_gabriella.user.service.terms.TermsManageService;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
@@ -24,39 +22,29 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class AppConfig {
 
     @Bean
-    public RoomRepository roomRepository(){
-        return new JpaRoomRepository();
+    public RoomManageService roomManageService(RoomRepository roomRepository){
+        return new RoomManageServiceImpl(roomRepository);
     }
 
     @Bean
-    public MemberRepository memberRepository() {
-        return new JpaMemberRepository();
+    public MemberJoinService memberJoinService(
+            MemberRepository memberRepository,PasswordEncoder passwordEncoder
+            ,TermsRepository termsRepository) {
+        return new MemberJoinServiceImpl(
+                memberRepository,passwordEncoder,termsManageService(termsRepository));
     }
 
     @Bean
-    public RoomManageService roomManageService(){
-        return new BasicRoomManageService(roomRepository());
+    public TermsManageService termsManageService(TermsRepository termsRepository) {
+        return new TermsManageServiceImpl(termsRepository);
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    public MemberAuthService memberAuthService(MemberRepository memberRepository, PasswordEncoder passwordEncoder){
+        return new MemberAuthServiceImpl(memberRepository,passwordEncoder);
     }
 
-    @Bean
-    public MemberJoinService memberJoinService() {
-        return new BasicMemberJoinService(memberRepository(), passwordEncoder(),termsManageService());
-    }
 
-    @Bean
-    public TermsRepository termsRepository() {
-        return new JpaTermsRepository();
-    }
-
-    @Bean
-    public TermsManageService termsManageService() {
-        return new BasicTermsManageService(termsRepository());
-    }
 
 
 

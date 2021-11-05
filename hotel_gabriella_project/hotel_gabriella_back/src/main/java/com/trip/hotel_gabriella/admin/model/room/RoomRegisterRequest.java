@@ -2,8 +2,8 @@ package com.trip.hotel_gabriella.admin.model.room;
 
 import lombok.Getter;
 
-import com.trip.hotel_gabriella.client.model.BaseDTO;
-import com.trip.hotel_gabriella.client.model.common.GenericRequestEntityAdapter;
+import com.trip.hotel_gabriella.common.interfaces.model.GenericRequestEntityAdapter;
+import com.trip.hotel_gabriella.user.model.BaseDTO;
 import com.trip.hotel_gabriella.common.domain.Room;
 
 import javax.validation.constraints.NotNull;

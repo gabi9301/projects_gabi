@@ -2,7 +2,7 @@ package com.trip.hotel_gabriella.admin.controller;
 
 import lombok.RequiredArgsConstructor;
 
-import com.trip.hotel_gabriella.admin.model.room.RoomDetails;
+import com.trip.hotel_gabriella.admin.model.room.RoomInfo;
 import com.trip.hotel_gabriella.admin.service.room.RoomManageService;
 
 import org.springframework.stereotype.Controller;
@@ -26,7 +26,7 @@ public class RoomController {
 
     @GetMapping("/admin/registeredRooms")
     public String registeredRoomsList(Model model) {
-        List<RoomDetails> allRooms = roomManageService.readAllRooms();
+        List<RoomInfo> allRooms = roomManageService.readAllRooms();
         model.addAttribute("allRooms",allRooms);
         return "admin/registeredRooms";
     }

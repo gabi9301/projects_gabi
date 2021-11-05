@@ -8,10 +8,10 @@ public class HomeController {
 
     @GetMapping("/")
     public String index(){
-     return "client/index";
+     return "user/public/index";
     }
 
-    @GetMapping("/admin/")
+    @GetMapping("/adminMain")
     public String adminIndex(){
         return "admin/index";
     }
