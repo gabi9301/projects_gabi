@@ -17,8 +17,9 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
             , HttpServletResponse response
             , AuthenticationException authException
     ) throws IOException, ServletException {
-        System.out.println("request.getRequestURI() = " + request.getRequestURI());
+
         String requestURI = request.getRequestURI();
+        System.out.println("requestURI = " + requestURI);
 
         if(requestURI.contains("/admin/")){
             response.sendRedirect("/accessDeniedException");
