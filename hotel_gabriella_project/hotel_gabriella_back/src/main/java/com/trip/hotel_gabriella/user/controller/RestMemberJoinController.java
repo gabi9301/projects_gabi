@@ -19,7 +19,7 @@ public class RestMemberJoinController {
 
     private final MemberJoinServiceImpl memberJoinService;
     
-    @PostMapping("/joinMember.do")
+    @PostMapping("/join.do")
     public ResponseEntity<Void> joinMember(
             @RequestBody @Valid MemberJoinCommand memberJoinCommand) {
 

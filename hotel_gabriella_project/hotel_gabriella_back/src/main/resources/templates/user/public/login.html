@@ -6,6 +6,26 @@
 </head>
 <body>
     <h1>The Member Login Page</h1>
+    <form action="/login.do" method="post">
+
+
+        <div class="container">
+            <label for="uname"><b>Username</b></label>
+            <input type="text" id="uname" placeholder="Enter Username" name="account" required>
+
+            <label for="psw"><b>Password</b></label>
+            <input type="password" id="psw" placeholder="Enter Password" name="password" required>
+
+            <button type="submit">Login</button>
+            <label>
+                <input type="checkbox" checked="checked" name="remember"> Remember me
+            </label>
+        </div>
+
+        <div class="container" style="background-color:#f1f1f1">
+            <button type="button" class="cancelbtn">Cancel</button>
+        </div>
+    </form>
 
 </body>
 </html>

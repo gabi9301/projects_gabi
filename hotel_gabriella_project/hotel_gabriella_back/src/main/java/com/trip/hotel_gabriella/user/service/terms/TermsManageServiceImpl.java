@@ -36,11 +36,11 @@ public class TermsManageServiceImpl implements TermsManageService {
     }
 
     @Transactional
-    public TermsRegisterResponse registerTerms(TermsHistory termsHistory) {
+    public void registerTerms(TermsHistory termsHistory) {
 
         termsRepository.save(termsHistory);
 
-        return new TermsRegisterResponse().fromEntity(termsHistory);
+        new TermsRegisterResponse().fromEntity(termsHistory);
     }
 
     @Transactional

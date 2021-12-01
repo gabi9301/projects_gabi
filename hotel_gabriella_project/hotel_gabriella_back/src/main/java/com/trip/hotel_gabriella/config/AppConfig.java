@@ -5,9 +5,7 @@ import com.trip.hotel_gabriella.admin.service.room.RoomManageService;
 import com.trip.hotel_gabriella.admin.service.room.RoomManageServiceImpl;
 import com.trip.hotel_gabriella.user.repository.MemberRepository;
 import com.trip.hotel_gabriella.user.repository.TermsRepository;
-import com.trip.hotel_gabriella.user.service.member.MemberAuthServiceImpl;
 import com.trip.hotel_gabriella.user.service.member.MemberJoinServiceImpl;
-import com.trip.hotel_gabriella.user.service.member.MemberAuthService;
 import com.trip.hotel_gabriella.user.service.member.MemberJoinService;
 import com.trip.hotel_gabriella.user.service.terms.TermsManageServiceImpl;
 import com.trip.hotel_gabriella.user.service.terms.TermsManageService;
@@ -39,10 +37,6 @@ public class AppConfig {
         return new TermsManageServiceImpl(termsRepository);
     }
 
-    @Bean
-    public MemberAuthService memberAuthService(MemberRepository memberRepository, PasswordEncoder passwordEncoder){
-        return new MemberAuthServiceImpl(memberRepository,passwordEncoder);
-    }
 
 
 
