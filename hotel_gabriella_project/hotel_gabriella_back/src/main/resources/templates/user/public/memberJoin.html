@@ -1,70 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="text/javascript" src="/common/js/src/serializejson.js"></script>
-    <script type="text/javascript" src="/common/js/src/common.js" ></script>
-    <script>
-        $(document).ready(function () {
-
-        });
-
-        function joinMember() {
-            const memberRegisterRequest = $("#memberInfo").serializeJSON();
-            const terms = $("#termsInfo").serializeJSON({useIntKeysAsArrayIndex:true});
-            const merged = $.extend({memberRegisterRequest},terms);
-
-            console.log(JSON.stringify(merged));
-
-            $.ajaxSetup({
-
-            });
-
-            $.ajax({
-                url: "/join.do",
-                type: "post",
-                contentType: "application/json; charset=utf-8",
-                data: JSON.stringify(merged),
-                success: function() {
-
-                },
-                error: function() {
-                    alert("failed");
-                }
-            });
-        }
-
-
-
-    </script>
-
-
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<!--suppress HtmlRequiredTitleElement -->
+<head th:replace="fragments/head_resource.html :: head_resource_fragment"></head>
 <body>
+<header th:replace="fragments/header.html :: header_fragment"></header>
 <form id="memberInfo">
-    <input type="text" name="account" value="user912">
-    <input type="text" name="password" value="passWord32@">
-    <input type="text" name="email" value="abc@mail.net">
-    <input type="text" name="name" value="아무개">
-    <input type="text" name="birth" value="930128">
-    <input type="text" name="phone" value="01012345678">
-    <input type="text" name="address[city]" value="서울시">
-    <input type="text" name="address[street]" value="역삼로">
-    <input type="text" name="address[address_detail]" value="행복아파트 101호">
-    <input type="text" name="address[zipcode]" value="12345">
+    <label>
+        <input type="text" name="account" value="user912">
+    </label>
+    <label>
+        <input type="text" name="password" value="passWord32@">
+    </label>
+    <label>
+        <input type="text" name="email" value="abc@mail.net">
+    </label>
+    <label>
+        <input type="text" name="name" value="아무개">
+    </label>
+    <label>
+        <input type="text" name="birth" value="930128">
+    </label>
+    <label>
+        <input type="text" name="phone" value="01012345678">
+    </label>
+    <label>
+        <input type="text" name="address[city]" value="서울시">
+    </label>
+    <label>
+        <input type="text" name="address[street]" value="역삼로">
+    </label>
+    <label>
+        <input type="text" name="address[address_detail]" value="행복아파트 101호">
+    </label>
+    <label>
+        <input type="text" name="address[zipcode]" value="12345">
+    </label>
 </form>
 <form id="termsInfo">
     <div>sms 동의
         <input type="hidden" name="terms[0][termsCode]" value="smsAgree">
         <div>
-        <input type="radio" id="agreeYn_sms_y" name="terms[0][agreeYn]" value="y" checked>
-        <label for="agreeYn_sms_y">네</label>
+            <input type="radio" id="agreeYn_sms_y" name="terms[0][agreeYn]" value="y" checked>
+            <label for="agreeYn_sms_y">네</label>
         </div>
         <div>
-        <input type="radio" id="agreeYn_sms_n" name="terms[0][agreeYn]" value="n">
-        <label for="agreeYn_sms_n">아니오</label>
+            <input type="radio" id="agreeYn_sms_n" name="terms[0][agreeYn]" value="n">
+            <label for="agreeYn_sms_n">아니오</label>
         </div>
     </div>
     <div>email 동의
@@ -80,5 +61,37 @@
     </div>
 </form>
 <input type="button" id="" onclick="joinMember()" value="submit">
+<footer th:replace="fragments/footer.html :: footer_fragment"></footer>
+
 </body>
+
 </html>
+<script>
+    $(document).ready(function () {
+
+    });
+
+    function joinMember() {
+        const memberRegisterRequest = $("#memberInfo").serializeJSON();
+        const terms = $("#termsInfo").serializeJSON({useIntKeysAsArrayIndex: true});
+        const merged = $.extend({memberRegisterRequest}, terms);
+
+        console.log(JSON.stringify(merged));
+
+        $.ajaxSetup({});
+
+        $.ajax({
+            url: "/join.do",
+            type: "post",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(merged),
+            success: function () {
+
+            },
+            error: function () {
+                alert("failed");
+            }
+        });
+    }
+
+</script>

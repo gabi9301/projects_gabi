@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
+<!--suppress HtmlRequiredTitleElement -->
+<head th:replace="fragments/head_resource.html :: head_resource_fragment">
 
-    <title></title></head>
+</head>
+
 <body>
-<h1>OVER HERE!This should be client index</h1>
-<p>also it should be the default index page for the project</p>
-<div th:if="${session.account}">
-    <span th:text="${session.account}">님</span>
-    <button><a href="/logout.do">로그아웃</a></button>
+
+<header th:replace="fragments/header.html :: header_fragment"></header>
+
+<div th:fragment="custom_content" class="hg_index_container">
+<p>wow</p>
 </div>
+
+<footer th:replace="fragments/footer.html :: footer_fragment"></footer>
+
 </body>
+
 </html>

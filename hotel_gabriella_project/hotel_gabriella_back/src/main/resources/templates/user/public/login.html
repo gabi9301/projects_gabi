@@ -1,31 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Login page</title>
-</head>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<!--suppress HtmlRequiredTitleElement -->
+<head th:replace="fragments/head_resource.html :: head_resource_fragment"></head>
+
 <body>
-    <h1>The Member Login Page</h1>
+
+<header th:replace="fragments/header.html :: header_fragment"></header>
+<div class="hg_login_form_container">
     <form action="/login.do" method="post">
-
-
-        <div class="container">
-            <label for="uname"><b>Username</b></label>
-            <input type="text" id="uname" placeholder="Enter Username" name="account" required>
-
-            <label for="psw"><b>Password</b></label>
-            <input type="password" id="psw" placeholder="Enter Password" name="password" required>
-
-            <button type="submit">Login</button>
-            <label>
-                <input type="checkbox" checked="checked" name="remember"> Remember me
-            </label>
-        </div>
-
-        <div class="container" style="background-color:#f1f1f1">
-            <button type="button" class="cancelbtn">Cancel</button>
+        <div class="hg_login_form_inner_wrap">
+            <div class="hg_login_form_contents_wrap">
+                <div class="hg_login_contents_inner_wrap">
+                    <div class="hg_login_input_wrap">
+                        <div class="hg_login_form_item">
+                            <label for="account" class="hg_login_form_item_label">Id</label>
+                            <input type="text" class="hg_login_input" id="account" placeholder="Enter Username" name="account" required>
+                        </div>
+                        <div class="hg_login_form_item">
+                            <label for="password" class="hg_login_form_item_label">Password</label>
+                            <input type="password" class="hg_login_input" id="password" placeholder="Enter Password" name="password" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="hg_login_form_submit_button">Login</button>
+                </div>
+                <div class="hg_login_remember_wrap">
+                    <label>
+                        <input type="checkbox" checked="checked" name="remember"> Remember me
+                    </label>
+                </div>
+            </div>
         </div>
     </form>
+</div>
+
+<footer th:replace="fragments/footer.html :: footer_fragment"></footer>
 
 </body>
+
 </html>

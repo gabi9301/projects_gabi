@@ -16,6 +16,8 @@ spring:
 #    prefix: classpath:/templates/  여기를 주석으로 바꿔도 상관없는 이유는 저게 디폴트라서고
 #    suffix: .html                  경로 적을 때 / 빼고 html 이름만 적어두면 됨.   ex)<a href="register">
 
+
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -24,6 +26,14 @@ spring:
         #        show-sql: true
         format_sql: true
     open-in-view: false
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          public-key-location:
+
+
 
 logging:
   level:

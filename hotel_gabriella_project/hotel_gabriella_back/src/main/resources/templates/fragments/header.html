@@ -1,5 +1,39 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<header th:fragment="header_fragment">
-    HEADER 영역
+<header th:fragment="header_fragment" class="hg_header">
+
+    <nav th:if="${session.account}" class="hg_header_navbar">
+
+        <ol class="hg_header_contents_container hg_header_auth_done_contents">
+            <li  class="hg_header_account_name">
+                <span th:text="|${session.account}님|"></span>
+            </li>
+            <li class="hg_header_icon">
+                <a href="#">
+                    <img th:src="@{/common/images/profile_icon.png}" alt="profile_icon" class="hg_header_icon_img">
+                </a>
+            </li>
+            <li class="hg_header_icon">
+                <a href="/logout.do">
+                    <img th:src="@{/common/images/logout_icon.png}" alt="logout_icon" class="hg_header_icon_img">
+                </a>
+            </li>
+        </ol>
+    </nav>
+    <nav th:unless="${session.account}" class="hg_header_navbar">
+        <ol class="hg_header_contents_container hg_header_auth_yet_contents">
+            <li class="hg_header_icon">
+                <a href="/login">
+                    <img th:src="@{/common/images/login_icon.png}" alt="login_icon" class="hg_header_icon_img">
+                </a>
+            </li>
+            <li class="hg_header_icon">
+                <a href="/joinMember">
+                    <img th:src="@{/common/images/join_icon.png}" alt="join_icon" class="hg_header_icon_img">
+                </a>
+            </li>
+        </ol>
+    </nav>
+    <h1 class="hg_header_title"></h1>
+
 </header>

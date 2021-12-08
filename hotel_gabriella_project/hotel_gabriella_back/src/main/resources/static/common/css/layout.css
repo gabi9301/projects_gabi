@@ -1,0 +1,152 @@
+@charset "utf-8";
+/*noinspection CssUnknownTarget*/
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans&display=swap');
+
+.hg_header {
+    width: 100vw;
+}
+
+.hg_header_navbar {
+    display: block;
+    position: fixed;
+    width: 100vw;
+    height: 60px;
+    color: black;
+    background-color: #ddd;
+    font-size: 50px;
+    text-align: right;
+    vertical-align: middle;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.hg_header_contents_container {
+    height: 60px;
+    display: flex;
+    float: right;
+
+    justify-content: space-between;
+    width: auto;
+    align-items: center;
+}
+
+.hg_header_account_name {
+    display: block;
+    font-size: 20px;
+    line-height: 20px;
+    padding: 5px 20px;
+    box-sizing: border-box;
+    border-bottom: 1px solid black;
+}
+
+.hg_header_icon_img {
+    width: 35px;
+    padding-bottom:4px;
+    box-sizing: border-box;
+    margin: 0 25px;
+}
+
+.hg_header_title {
+    width: 100vw;
+    height: 200px;
+    padding-top: 60px;
+    box-sizing: border-box;
+    text-align: center;
+    font-family: 'Kumbh Sans', sans-serif;
+    color: hotpink;
+    background-color: pink;
+    font-size: 100px;
+}
+
+.hg_footer {
+    height: 150px;
+    color: #fff;
+    background-color: #000;
+}
+
+@media (max-width: 1902px) {
+    .hg_header {
+        width: 100vw;
+    }
+
+    .hg_header_navbar {
+        width: 100vw;
+        height: 3.15vw;
+        color: black;
+        background-color: #ddd;
+        font-size: 2.62vw;
+        padding: 0 1.05vw;
+        box-sizing: border-box;
+    }
+
+    .hg_header_contents_container {
+        height: 3.15vw;
+        display: flex;
+        float: right;
+
+    }
+
+    .hg_header_account_name {
+        display: block;
+        font-size: 1.05vw;
+        line-height: 1.05vw;
+        padding: 0.26vw 1.05vw;
+        box-sizing: border-box;
+        border-bottom: 1px solid black;
+    }
+
+    .hg_header_icon_img {
+        width: 1.84vw;
+        padding-bottom:0.21vw;
+        box-sizing: border-box;
+    }
+
+    .hg_header_title {
+        width: 100vw;
+        height: 10.51vw;
+        padding-top: 3.15vw;
+        box-sizing: border-box;
+        text-align: center;
+        font-family: 'Kumbh Sans', sans-serif;
+        color: hotpink;
+        background-color: pink;
+        font-size: 5.25vw;
+    }
+
+    .hg_footer {
+        height: 7.88vw;
+        color: #fff;
+        background-color: #000;
+    }
+
+
+}
+
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media (min-width: 992px) {
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media (min-width: 768px) {
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media (min-width: 600px) {
+
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media (max-width: 600px) {
+
+}
+
+
+

@@ -18,7 +18,7 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class JwtTokenProvider { //JWT 토큰의 생성과 유효성 검사를 책임진다.
 
-    @Value("spring.jwt.secret")
+    @Value("${jwt.secret}")
     private String SECRET_KEY;
 
     private final long tokenValidMilliseconds = 1000L * 60 * 60;
