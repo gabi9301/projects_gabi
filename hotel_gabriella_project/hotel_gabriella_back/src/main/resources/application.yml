@@ -6,6 +6,9 @@ spring:
     driver-class-name: org.h2.Driver
 
 
+jwt:
+  tokenValidMilliSeconds: 3600000
+
 
 #    http:
 #      encoding:
@@ -27,11 +30,10 @@ spring:
         format_sql: true
     open-in-view: false
 
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          public-key-location:
+
+
+
+
 
 
 

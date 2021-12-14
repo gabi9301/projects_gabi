@@ -1,10 +1,6 @@
 package com.trip.hotel_gabriella.user.model.member;
 
-import com.trip.hotel_gabriella.common.domain.BaseEntity;
-import com.trip.hotel_gabriella.common.domain.Member;
-import com.trip.hotel_gabriella.common.interfaces.model.GenericResponseEntityAdapter;
 import com.trip.hotel_gabriella.user.model.BaseDTO;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

@@ -3,6 +3,7 @@ package com.trip.hotel_gabriella.config;
 import com.trip.hotel_gabriella.common.exception.handler.CustomAccessDeniedHandler;
 import com.trip.hotel_gabriella.common.exception.handler.CustomAuthenticationEntryPoint;
 import com.trip.hotel_gabriella.common.security.CustomAuthenticationProvider;
+import com.trip.hotel_gabriella.common.security.JwtTokenProvider;
 import com.trip.hotel_gabriella.common.security.MemberLoginSuccessHandler;
 import com.trip.hotel_gabriella.user.repository.MemberRepository;
 import com.trip.hotel_gabriella.user.service.member.MemberDetailsService;
@@ -111,6 +112,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     public AuthenticationProvider authProvider() {
         return new CustomAuthenticationProvider(memberDetailsService(),passwordEncoder());
     }
+
+
 
 
 }
