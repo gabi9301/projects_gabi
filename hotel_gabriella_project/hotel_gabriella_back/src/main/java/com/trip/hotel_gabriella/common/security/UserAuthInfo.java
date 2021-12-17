@@ -1,4 +1,4 @@
-package com.trip.hotel_gabriella.user.model.member;
+package com.trip.hotel_gabriella.common.security;
 
 import com.trip.hotel_gabriella.user.model.BaseDTO;
 import lombok.Getter;
@@ -12,19 +12,17 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
-
 @Getter
-public class MemberAuthInfo extends BaseDTO implements UserDetails {
-
+public class UserAuthInfo extends BaseDTO implements UserDetails {
     private final String account;
     private final String password;
     private Collection<? extends GrantedAuthority> authorities;
     private final HashMap<String,Object> extraInfo = new HashMap<>();
 
-
-    public MemberAuthInfo(String account, String password) {
+    public UserAuthInfo(String account, String password){
         this.account = account;
         this.password = password;
+
     }
 
     @Override

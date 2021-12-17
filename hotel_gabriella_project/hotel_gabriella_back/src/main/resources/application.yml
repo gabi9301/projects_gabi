@@ -6,8 +6,7 @@ spring:
     driver-class-name: org.h2.Driver
 
 
-jwt:
-  tokenValidMilliSeconds: 3600000
+
 
 
 #    http:
@@ -29,6 +28,10 @@ jwt:
         #        show-sql: true
         format_sql: true
     open-in-view: false
+
+
+jwt:
+  tokenValidMilliSeconds: 3600000
 
 
 

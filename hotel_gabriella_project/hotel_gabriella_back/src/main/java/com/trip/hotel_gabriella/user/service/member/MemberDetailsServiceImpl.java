@@ -1,10 +1,9 @@
 package com.trip.hotel_gabriella.user.service.member;
 
-import com.trip.hotel_gabriella.user.model.member.MemberAuthInfo;
+import com.trip.hotel_gabriella.common.security.UserAuthInfo;
 import com.trip.hotel_gabriella.user.repository.MemberRepository;
 import com.trip.hotel_gabriella.common.domain.Member;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,22 +16,23 @@ public class MemberDetailsServiceImpl implements MemberDetailsService {
     private final MemberRepository memberRepository;
 
     @Override
-    public MemberAuthInfo loadUserByUsername(String account) throws UsernameNotFoundException {
+    public UserAuthInfo loadUserByUsername(String account) throws UsernameNotFoundException {
 
         Member findMember =
                 memberRepository.findByAccount(account)
                         .orElseThrow(()->new UsernameNotFoundException("Account Not Found"));
         
 
-        MemberAuthInfo memberAuthInfo
-                = new MemberAuthInfo(findMember.getAccount(), findMember.getPassword());
-        memberAuthInfo.setRoles("MEMBER");
+        UserAuthInfo userAuthInfo
+                = new UserAuthInfo(findMember.getAccount(), findMember.getPassword());
+        userAuthInfo.setRoles("MEMBER");
 
-        memberAuthInfo.setExtraInfo("id", findMember.getId());
+        userAuthInfo.setExtraInfo("id", findMember.getId());
 
-        System.out.println(memberAuthInfo.getAccount());
+        System.out.println(userAuthInfo.getAccount());
+        System.out.println("실제 멤버 로그인 시 여기를 찍는 지 궁금합니다.");
 
-        return memberAuthInfo;
+        return userAuthInfo;
     }
 
 }

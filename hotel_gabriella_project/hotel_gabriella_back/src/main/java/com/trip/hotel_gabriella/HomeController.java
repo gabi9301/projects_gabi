@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 public class HomeController {
 
+    //Member
     @GetMapping("/")
     public String index() {
         return "user/public/index";
@@ -21,6 +22,19 @@ public class HomeController {
     public String memberLoginPage() {
         return "user/public/login";
     }
+
+    //Admin
+    @GetMapping("/adminMain")
+    public String index_admin() {
+        return "admin/index";
+    }
+
+    @GetMapping("/adminLogin")
+    public String adminLoginPage() {
+        return "admin/login";
+    }
+
+    //Generic
 
     @GetMapping("/{page}.view")
     public String movePage(@PathVariable("page") String returnPage) {
