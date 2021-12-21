@@ -5,9 +5,15 @@
       "type": "java.lang.String",
       "description": "Description for jwt.secret."
     },
+
     {
-      "name": "jwt.tokenValidMilliSeconds",
+      "name": "spring.jwt.expire.accessTokenValidMilliSeconds",
       "type": "java.lang.Long",
-      "description": "Description for jwt.tokenValidMilliSeconds."
+      "description": "Description for spring.jwt.expire.accessTokenValidMilliSeconds."
+    },
+    {
+      "name": "spring.jwt.expire.refreshTokenValidMilliSeconds",
+      "type": "java.lang.Long",
+      "description": "Description for spring.jwt.expire.refreshTokenValidMilliSeconds."
     }
   ] }

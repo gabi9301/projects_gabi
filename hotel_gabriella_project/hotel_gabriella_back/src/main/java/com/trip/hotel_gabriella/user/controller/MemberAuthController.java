@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -34,10 +35,10 @@ public class MemberAuthController {//JWT 토큰 방식으로 로그인 시 해�
                 = new CustomAuthenticationProvider(memberDetailsService,passwordEncoder,jwtTokenProvider_member);
     }
 @PostMapping("/login")
-public ResponseEntity<String> loginMember(
+public ResponseEntity<Map<String,Object>> loginMember(
         @RequestBody @Valid LoginCommand loginCommand){
 
-    String authToken = authProvider.authenticate(loginCommand);
+    Map<String,Object> authToken = authProvider.authenticate(loginCommand);
 
     return new ResponseEntity<>(authToken,HttpStatus.CREATED);
 }

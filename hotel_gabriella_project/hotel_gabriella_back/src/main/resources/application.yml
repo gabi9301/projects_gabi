@@ -4,6 +4,10 @@ spring:
     username: sa
     password:
     driver-class-name: org.h2.Driver
+  jwt:
+    expire:
+      accessTokenValidMilliSeconds: 1800000  #60 x 30 x 1000 : 30분
+      refreshTokenValidMilliSeconds: 604800000 #60 x 60 x 24 x 7 x 1000 : 1주
 
 
 
@@ -30,8 +34,7 @@ spring:
     open-in-view: false
 
 
-jwt:
-  tokenValidMilliSeconds: 3600000
+
 
 
 

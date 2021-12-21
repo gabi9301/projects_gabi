@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.Map;
+
 //@Component  //서버 세션 방식으로 로그인 시 Bean으로 등록이 되어 있어야 작동한다
 @RequiredArgsConstructor
 public class CustomAuthenticationProvider implements AuthenticationProvider {
@@ -41,7 +43,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
     //JWT 방식으로 로그인 할 경우
 
-    public String authenticate(LoginCommand loginCommand) {
+    public Map<String, Object> authenticate(LoginCommand loginCommand) {
         String account = loginCommand.getAccount();
         String password = loginCommand.getPassword();
 
