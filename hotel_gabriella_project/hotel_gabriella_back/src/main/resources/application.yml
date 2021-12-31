@@ -10,6 +10,15 @@ spring:
       refreshTokenValidMilliSeconds: 604800000 #60 x 60 x 24 x 7 x 1000 : 1주
 
 
+  redis:
+    host: localhost #기본 값
+    port: 6379  #기본 값
+
+
+
+
+
+
 
 
 

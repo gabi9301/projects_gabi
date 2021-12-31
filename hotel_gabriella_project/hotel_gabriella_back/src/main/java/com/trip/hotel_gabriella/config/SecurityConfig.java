@@ -1,12 +1,7 @@
 package com.trip.hotel_gabriella.config;
 
 import com.trip.hotel_gabriella.admin.repository.AdminRepository;
-import com.trip.hotel_gabriella.common.exception.handler.CustomAccessDeniedHandler;
-import com.trip.hotel_gabriella.common.exception.handler.CustomAuthenticationEntryPoint;
-import com.trip.hotel_gabriella.common.security.CustomAuthenticationProvider;
-import com.trip.hotel_gabriella.common.security.JwtAuthenticationFilter;
-import com.trip.hotel_gabriella.common.security.JwtTokenProvider;
-import com.trip.hotel_gabriella.common.security.MemberLoginSuccessHandler;
+import com.trip.hotel_gabriella.common.security.*;
 import com.trip.hotel_gabriella.user.repository.MemberRepository;
 import com.trip.hotel_gabriella.user.service.admin.AdminDetailsService;
 import com.trip.hotel_gabriella.user.service.admin.AdminDetailsServiceImpl;
@@ -14,10 +9,6 @@ import com.trip.hotel_gabriella.user.service.member.MemberDetailsService;
 import com.trip.hotel_gabriella.user.service.member.MemberDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -32,6 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final MemberRepository memberRepository;
     private final AdminRepository adminRepository;
+    private final RedisTemplateService redisAuthService;
 
 
     //토큰 인증 방식--------------------------------------------------
@@ -56,14 +48,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new AdminDetailsServiceImpl(adminRepository);
     }
 
+
+
+
     @Bean
     public JwtTokenProvider jwtTokenProvider_member() {
-        return new JwtTokenProvider(memberDetailsService());
+        return new JwtTokenProvider(memberDetailsService(),redisAuthService);
     }
 
     @Bean
     public JwtTokenProvider jwtTokenProvider_admin() {
-        return new JwtTokenProvider(adminDetailsService());
+        return new JwtTokenProvider(adminDetailsService(),redisAuthService);
     }
 
 

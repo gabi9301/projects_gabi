@@ -14,12 +14,13 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Map;
 
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends GenericFilterBean {
 
-    private final JwtTokenProvider jwtTokenProvider1;
-    private final JwtTokenProvider getJwtTokenProvider2;
+    private final JwtTokenProvider jwtTokenProvider_member;
+    private final JwtTokenProvider jwtTokenProvider_admin;
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -29,21 +30,38 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
         JwtTokenProvider jwtTokenProvider;
 
         if (url.contains("/member/")) {
-            jwtTokenProvider = jwtTokenProvider1;
+            jwtTokenProvider = jwtTokenProvider_member;
         } else if (url.contains("/admin/")) {
-            jwtTokenProvider = getJwtTokenProvider2;
+            jwtTokenProvider = jwtTokenProvider_admin;
         }else{
             jwtTokenProvider = null;
         }
 
-        if (jwtTokenProvider != null) {
-            String token = jwtTokenProvider.resolveToken((HttpServletRequest) request);
 
-            if (token != null && jwtTokenProvider.validateToken(token)) {
-                Authentication authentication = jwtTokenProvider.getAuthentication(token);
-                SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        if (jwtTokenProvider != null) {
+            Map<String,String> tokenMap = jwtTokenProvider.resolveToken((HttpServletRequest) request);
+            String accessToken = tokenMap.get("authorization");
+            String refreshToken = tokenMap.get("refreshToken");
+
+            if(accessToken != null){
+                if(jwtTokenProvider.validateToken(accessToken)){
+                    this.setAuthentication(accessToken, jwtTokenProvider);
+                }else if(!jwtTokenProvider.validateToken(accessToken) && refreshToken != null){
+                    //엑세스 토큰은 만료되었지만 refresh 토큰이 있는 경우
+                    if(jwtTokenProvider.validateToken(refreshToken)){ // refresh 토큰이 유효한 경우
+
+                    }
+                }
+
             }
+
         }
         chain.doFilter(request, response);
+    }
+
+    public void setAuthentication(String token, JwtTokenProvider jwtTokenProvider) {
+        Authentication authentication = jwtTokenProvider.getAuthentication(token);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 }

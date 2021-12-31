@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -33,10 +34,10 @@ public class AdminAuthController {
 
 
     @PostMapping("/adminLogin")
-    public ResponseEntity<String> loginAdmin(
+    public ResponseEntity<Map<String,Object>> loginAdmin(
             @RequestBody @Valid LoginCommand loginCommand){
 
-        String authToken = authProvider.authenticate(loginCommand);
+        Map<String,Object> authToken = authProvider.authenticate(loginCommand);
 
         return new ResponseEntity<>(authToken, HttpStatus.CREATED);
     }
