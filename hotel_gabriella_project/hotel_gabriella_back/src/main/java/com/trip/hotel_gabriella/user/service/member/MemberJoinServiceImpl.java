@@ -32,11 +32,7 @@ public class MemberJoinServiceImpl implements MemberJoinService {
     @Transactional
     public boolean checkUniqueAccount(String accountCandidate) {
         Long count = memberRepository.findCountByAccount(accountCandidate);
-        if(count == 0){
-            return true;
-        }else {
-            return false;
-        }
+        return count == 0;
 
     }
 

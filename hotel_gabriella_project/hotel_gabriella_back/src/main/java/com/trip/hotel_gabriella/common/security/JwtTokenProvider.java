@@ -1,6 +1,8 @@
 package com.trip.hotel_gabriella.common.security;
 
 import com.trip.hotel_gabriella.common.interfaces.service.RedisService;
+import com.trip.hotel_gabriella.user.service.admin.AdminDetailsService;
+import com.trip.hotel_gabriella.user.service.member.MemberDetailsService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -9,8 +11,8 @@ import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
@@ -19,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.util.*;
 
-//@Component
+
 @RequiredArgsConstructor
 public class JwtTokenProvider { //JWT 토큰의 생성과 유효성 검사를 책임진다.
 
@@ -33,20 +35,24 @@ public class JwtTokenProvider { //JWT 토큰의 생성과 유효성 검사를 �
     @Value("${spring.jwt.expire.refreshTokenValidMilliSeconds}")
     private long refreshTokenValidMilliSeconds;
 
-    private final UserDetailsService userDetailsService;
+//    private final UserDetailsService userDetailsService;
+
+    private final MemberDetailsService memberDetailsService;
+
+    private final AdminDetailsService adminDetailsService;
 
     private final RedisService redisService;
 
-    public Map<String, Object> createToken(UserAuthInfo userAuthInfo) {   //토큰을 생성한다
+    public Map<String, String> createToken(UserAuthInfo userAuthInfo) {   //토큰을 생성한다
         String accessToken = createAccessToken(userAuthInfo);
         String refreshToken = createRefreshToken(userAuthInfo);
         System.out.println("refreshTokenValidMilliSeconds = " + refreshTokenValidMilliSeconds);
         redisService.setData(userAuthInfo.getAccount(),refreshToken,refreshTokenValidMilliSeconds);
 
-        Map<String ,Object> tokenMap = new HashMap<>();
+        Map<String ,String> tokenMap = new HashMap<>();
 
-        tokenMap.put("userAccToken",accessToken);
-        tokenMap.put("userRefToken", refreshToken);
+        tokenMap.put("accessToken",accessToken);
+        tokenMap.put("refreshToken", refreshToken);
 
         return tokenMap;
     }
@@ -69,8 +75,11 @@ public class JwtTokenProvider { //JWT 토큰의 생성과 유효성 검사를 �
 
 
     public String createRefreshToken(UserAuthInfo userAuthInfo) {
+        Claims claims = Jwts.claims().setSubject(userAuthInfo.getAccount());
+
         Date now = new Date();
         return Jwts.builder()
+                .setClaims(claims)
                 .setIssuedAt(now)
                 .setExpiration(new Date(now.getTime() + refreshTokenValidMilliSeconds))
                 .signWith(secretKey)
@@ -83,7 +92,7 @@ public class JwtTokenProvider { //JWT 토큰의 생성과 유효성 검사를 �
 
     public Map<String,String> resolveToken(HttpServletRequest request) {
         Map<String,String> tokenMap = new HashMap<>();
-        tokenMap.put("accessToken", resolveAccessToken(request));
+        tokenMap.put("authorization", resolveAccessToken(request));
         tokenMap.put("refreshToken", resolveRefreshToken(request));
         return tokenMap;
     }
@@ -92,7 +101,7 @@ public class JwtTokenProvider { //JWT 토큰의 생성과 유효성 검사를 �
        return request.getHeader("authorization") != null ? request.getHeader("authorization") : null;
     }
     public String resolveRefreshToken(HttpServletRequest request) {
-       return request.getHeader("authorization") != null ? request.getHeader("refreshToken") : null;
+       return request.getHeader("refreshToken") != null ? request.getHeader("refreshToken") : null;
     }
 
 
@@ -122,8 +131,15 @@ public class JwtTokenProvider { //JWT 토큰의 생성과 유효성 검사를 �
         }
     }
 
-    public Authentication getAuthentication(String token) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(this.getUserIdentifyKey(token));
+    public Authentication getAuthentication(String token,String serviceIdentifier) {
+        UserDetails userDetails = null;
+        if(serviceIdentifier.equals("member")){
+            userDetails = memberDetailsService.loadUserByUsername(this.getUserIdentifyKey(token));
+        }else if(serviceIdentifier.equals("admin")){
+            userDetails = adminDetailsService.loadUserByUsername(this.getUserIdentifyKey(token));
+        }
+
+        assert userDetails != null;
         return new CustomAuthenticationToken(userDetails,"",userDetails.getAuthorities());
     }
 
@@ -134,6 +150,29 @@ public class JwtTokenProvider { //JWT 토큰의 생성과 유효성 검사를 �
     public void setHeaderRefreshToken(HttpServletResponse response, String refreshToken) {
         response.setHeader("refreshToken", refreshToken);
     }
+
+    public Map<String,String> reissueToken(TokenReissueRequest tokenReissueRequest){
+
+        Map<String, String> tokenMap = null;
+        Authentication authentication =
+                this.getAuthentication(tokenReissueRequest.getTokenPayload().getRefreshToken()
+                        , tokenReissueRequest.getDetailsServiceIdentifier());
+        UserDetails userDetails = ((UserDetails) authentication.getPrincipal());
+
+        if ((redisService.exist("RT_" + userDetails.getUsername())
+                && (redisService.getData("RT_" + userDetails.getUsername())).equals(tokenReissueRequest.getTokenPayload().getRefreshToken()))) {
+
+            UserAuthInfo userAuthInfo
+                    = new UserAuthInfo(userDetails.getUsername(), userDetails.getPassword());
+            tokenMap = this.createToken(userAuthInfo);
+
+            System.out.println("newAccessToken = " + tokenMap.get("accessToken"));
+            System.out.println("refreshToken = " + tokenMap.get("refreshToken"));
+        }
+        return tokenMap;
+    }
+
+
 
 
 }

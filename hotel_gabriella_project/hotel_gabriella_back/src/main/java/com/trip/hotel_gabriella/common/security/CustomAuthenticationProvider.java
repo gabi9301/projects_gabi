@@ -43,7 +43,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
     //JWT 방식으로 로그인 할 경우
 
-    public Map<String, Object> authenticate(LoginCommand loginCommand) {
+    public Map<String, String> authenticate(LoginCommand loginCommand) {
         String account = loginCommand.getAccount();
         String password = loginCommand.getPassword();
 
@@ -55,4 +55,10 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
         return jwtTokenProvider.createToken(userAuthInfo);
     }
+
+    public Map<String,String > reissue(TokenReissueRequest tokenReissueRequest){
+        return jwtTokenProvider.reissueToken(tokenReissueRequest);
+    }
+
+
 }

@@ -5,4 +5,6 @@ public interface RedisService {
 
     public Object getData(String key);
 
+    public Boolean exist(String key);
+
 }

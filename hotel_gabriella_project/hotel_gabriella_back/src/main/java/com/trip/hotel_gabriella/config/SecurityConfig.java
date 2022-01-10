@@ -1,6 +1,7 @@
 package com.trip.hotel_gabriella.config;
 
 import com.trip.hotel_gabriella.admin.repository.AdminRepository;
+import com.trip.hotel_gabriella.common.interfaces.service.RedisService;
 import com.trip.hotel_gabriella.common.security.*;
 import com.trip.hotel_gabriella.user.repository.MemberRepository;
 import com.trip.hotel_gabriella.user.service.admin.AdminDetailsService;
@@ -23,7 +24,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final MemberRepository memberRepository;
     private final AdminRepository adminRepository;
-    private final RedisTemplateService redisAuthService;
+    private final RedisService redisService;
+    //private final JwtTokenProvider jwtTokenProvider;
+
 
 
     //토큰 인증 방식--------------------------------------------------
@@ -39,9 +42,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/member/**").hasRole("MEMBER")
                 .anyRequest().permitAll()
                 .and()
-                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider_member(), jwtTokenProvider_admin()),
+                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider(),redisService),
                         UsernamePasswordAuthenticationFilter.class);
     }
+
+
+
+
 
     @Bean
     public AdminDetailsService adminDetailsService() {
@@ -51,15 +58,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 
-    @Bean
-    public JwtTokenProvider jwtTokenProvider_member() {
-        return new JwtTokenProvider(memberDetailsService(),redisAuthService);
-    }
-
-    @Bean
-    public JwtTokenProvider jwtTokenProvider_admin() {
-        return new JwtTokenProvider(adminDetailsService(),redisAuthService);
-    }
+//    @Bean
+//    public JwtTokenProvider jwtTokenProvider_member() {
+//        return new JwtTokenProvider(memberDetailsService(),redisAuthService);
+//    }
+//
+//    @Bean
+//    public JwtTokenProvider jwtTokenProvider_admin() {
+//        return new JwtTokenProvider(adminDetailsService(),redisAuthService);
+//    }
 
 
 
@@ -153,6 +160,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new MemberDetailsServiceImpl(memberRepository);
     }
 
+    @Bean
+    public JwtTokenProvider jwtTokenProvider(){
+        return new JwtTokenProvider(memberDetailsService(),adminDetailsService(),redisService);
+    }
+
+    @Bean
+    public JwtInterceptor jwtInterceptor(){
+        return new JwtInterceptor(jwtTokenProvider(),redisService);
+    }
 
 
 

@@ -24,7 +24,12 @@ public class RedisTemplateService implements RedisService {
 
     @Override
     public Object getData(String key) {
-        return redisTemplate.opsForValue().get("RT_" + key);
+        return redisTemplate.opsForValue().get(key);
+    }
+
+    @Override
+    public Boolean exist(String key) {
+        return redisTemplate.hasKey(key);
     }
 
 

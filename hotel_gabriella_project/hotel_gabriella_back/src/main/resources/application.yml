@@ -6,7 +6,7 @@ spring:
     driver-class-name: org.h2.Driver
   jwt:
     expire:
-      accessTokenValidMilliSeconds: 1800000  #60 x 30 x 1000 : 30분
+      accessTokenValidMilliSeconds: 60000  #60 x 1 x 1000 : 1분
       refreshTokenValidMilliSeconds: 604800000 #60 x 60 x 24 x 7 x 1000 : 1주
 
 

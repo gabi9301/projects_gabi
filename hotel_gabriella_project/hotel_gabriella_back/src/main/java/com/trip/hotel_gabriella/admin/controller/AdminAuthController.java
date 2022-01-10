@@ -22,22 +22,22 @@ public class AdminAuthController {
 
     private final AdminDetailsService adminDetailsService;
     private final PasswordEncoder passwordEncoder;
-    private final JwtTokenProvider jwtTokenProvider_admin;
+    private final JwtTokenProvider jwtTokenProvider;
 
     private CustomAuthenticationProvider authProvider;
 
     @PostConstruct
     public void init() {
         authProvider
-                = new CustomAuthenticationProvider(adminDetailsService,passwordEncoder,jwtTokenProvider_admin);
+                = new CustomAuthenticationProvider(adminDetailsService,passwordEncoder,jwtTokenProvider);
     }
 
 
     @PostMapping("/adminLogin")
-    public ResponseEntity<Map<String,Object>> loginAdmin(
+    public ResponseEntity<Map<String,String>> loginAdmin(
             @RequestBody @Valid LoginCommand loginCommand){
 
-        Map<String,Object> authToken = authProvider.authenticate(loginCommand);
+        Map<String,String> authToken = authProvider.authenticate(loginCommand);
 
         return new ResponseEntity<>(authToken, HttpStatus.CREATED);
     }
