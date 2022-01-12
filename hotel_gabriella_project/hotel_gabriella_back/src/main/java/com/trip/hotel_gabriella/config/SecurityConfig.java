@@ -1,5 +1,6 @@
 package com.trip.hotel_gabriella.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.trip.hotel_gabriella.admin.repository.AdminRepository;
 import com.trip.hotel_gabriella.common.interfaces.service.RedisService;
 import com.trip.hotel_gabriella.common.security.*;
@@ -17,6 +18,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.filter.CorsFilter;
 
 @EnableWebSecurity(debug = true) //@Configuration 포함함
 @RequiredArgsConstructor
@@ -25,6 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final MemberRepository memberRepository;
     private final AdminRepository adminRepository;
     private final RedisService redisService;
+    private final ObjectMapper objectMapper;
     //private final JwtTokenProvider jwtTokenProvider;
 
 
@@ -42,8 +45,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/member/**").hasRole("MEMBER")
                 .anyRequest().permitAll()
                 .and()
-                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider(),redisService),
-                        UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider()),
+                        UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new ExceptionHandlerFilter(objectMapper), CorsFilter.class);
     }
 
 

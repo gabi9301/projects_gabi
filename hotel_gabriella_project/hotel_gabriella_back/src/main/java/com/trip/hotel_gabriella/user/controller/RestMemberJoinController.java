@@ -25,6 +25,6 @@ public class RestMemberJoinController {
 
         memberJoinService.signInMember(memberJoinCommand);
 
-        return new ResponseEntity<Void>(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

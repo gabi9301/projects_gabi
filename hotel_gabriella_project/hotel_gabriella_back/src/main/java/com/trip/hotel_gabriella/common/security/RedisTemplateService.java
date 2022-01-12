@@ -32,6 +32,11 @@ public class RedisTemplateService implements RedisService {
         return redisTemplate.hasKey(key);
     }
 
+    @Override
+    public void deleteData(String key) {
+        redisTemplate.delete(key);
+    }
+
 
     //--이하 Repository 버전-------------------------------------
 //    private final RedisAuthRepository redisAuthRepository;
