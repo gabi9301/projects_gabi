@@ -5,8 +5,8 @@ import lombok.Getter;
 @Getter
 public enum ErrorCode {
 
-    ACCESS_TOKEN_INVALID(401, "T001", "Invalid Access Token"),
-    REFRESH_TOKEN_INVALID(401, "TOO2","Invalid Refresh Token");
+    ACCESS_TOKEN_INVALID(403, "T001", "Invalid Access Token"),
+    REFRESH_TOKEN_INVALID(403, "TOO2","Invalid Refresh Token");
 
     private final int status;
     private final String code;

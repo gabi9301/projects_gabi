@@ -60,6 +60,11 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         return jwtTokenProvider.reissueToken(tokenReissueRequest);
     }
 
+    public void logout(String accessToken){
+        jwtTokenProvider.invalidateToken(accessToken);
+
+    }
+
 
 
 }

@@ -27,8 +27,7 @@ public class JpaRoomRepository{
 
  //   @Override
     public Room findById(Long id) {
-        Room findRoom = em.find(Room.class, id);
-        return findRoom;
+        return em.find(Room.class, id);
     }
 
  //   @Override

@@ -44,6 +44,11 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
             String refreshToken = tokenMap.get("refreshToken");
 
             if (accessToken != null) {
+
+                if(jwtTokenProvider.isLoggedOut(accessToken)){
+                    chain.doFilter(request,response);
+                }
+
                 //엑세스 토큰이 유효할 경우
                 if (jwtTokenProvider.validateToken(accessToken)) {
                     this.setAuthentication(accessToken, detailsServiceIdentifier);

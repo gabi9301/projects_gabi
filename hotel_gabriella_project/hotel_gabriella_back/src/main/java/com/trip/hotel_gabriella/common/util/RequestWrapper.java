@@ -9,20 +9,19 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import java.io.*;
 
 public class RequestWrapper extends HttpServletRequestWrapper {
-    /**
-     * Constructs a request object wrapping the given request.
-     *
-     * @param request The request to wrap
-     * @throws IllegalArgumentException if the request is null
-     */
-
-    private final ObjectMapper objectMapper;
 
     private final String body;
+
     public RequestWrapper(HttpServletRequest request, Object newBody) throws IOException {
         super(request);
 
-        this.objectMapper = new ObjectMapper();
+        /**
+         * Constructs a request object wrapping the given request.
+         *
+         * @param request The request to wrap
+         * @throws IllegalArgumentException if the request is null
+         */
+        ObjectMapper objectMapper = new ObjectMapper();
         StringBuilder stringBuilder = new StringBuilder();
         BufferedReader bufferedReader = null;
         try {
@@ -37,23 +36,16 @@ public class RequestWrapper extends HttpServletRequestWrapper {
             } else {
                 stringBuilder.append("");
             }
-        } catch (IOException ex) {
-            throw ex;
         } finally {
             if (bufferedReader != null) {
                 try {
                     bufferedReader.close();
                 } catch (IOException ex) {
-                    throw ex;
+                    ex.printStackTrace();
                 }
             }
         }
         //Store request body content in 'body' variable
-        System.out.println(objectMapper.writeValueAsString(newBody));
-
-        stringBuilder.append(objectMapper.writeValueAsString(newBody));
-
-        System.out.println("StringBuilder = " + stringBuilder.toString());
 
         this.body = stringBuilder.toString();
     }
@@ -61,7 +53,7 @@ public class RequestWrapper extends HttpServletRequestWrapper {
     @Override
     public ServletInputStream getInputStream() throws IOException {
         final ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(body.getBytes());
-        ServletInputStream servletInputStream = new ServletInputStream() {
+        return new ServletInputStream() {
 
 
             @Override
@@ -83,7 +75,6 @@ public class RequestWrapper extends HttpServletRequestWrapper {
                 return byteArrayInputStream.read();
             }
         };
-        return servletInputStream;
     }
 
     @Override

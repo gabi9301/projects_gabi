@@ -1,14 +1,14 @@
 package com.trip.hotel_gabriella.common.security;
 
-import com.trip.hotel_gabriella.common.domain.RedisUser;
+//import com.trip.hotel_gabriella.common.domain.RedisUser;
 import com.trip.hotel_gabriella.common.interfaces.service.RedisService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
-import java.util.Optional;
-import java.util.concurrent.TimeUnit;
+// import java.util.Optional;
+// import java.util.concurrent.TimeUnit;
 
 @Service
 @RequiredArgsConstructor
@@ -19,7 +19,7 @@ public class RedisTemplateService implements RedisService {
     @Override
     public void setData(String key, Object value,long refreshTokenValidMilliSeconds) {
 
-        redisTemplate.opsForValue().set("RT_"+ key, value, Duration.ofMillis(refreshTokenValidMilliSeconds));
+        redisTemplate.opsForValue().set(key, value, Duration.ofMillis(refreshTokenValidMilliSeconds));
     }
 
     @Override
@@ -38,15 +38,17 @@ public class RedisTemplateService implements RedisService {
     }
 
 
-    //--이하 Repository 버전-------------------------------------
-//    private final RedisAuthRepository redisAuthRepository;
-//
-//    public void setData(String account, String refreshToken){
-//        RedisUser redisUser = new RedisUser(account,refreshToken);
-//        redisAuthRepository.save(redisUser);
-//    }
-//
-//    public Optional<RedisUser> getData(String id){
-//        return redisAuthRepository.findById(id);
-//    }
+    /*
+--이하 Repository 버전-------------------------------------
+    private final RedisAuthRepository redisAuthRepository;
+
+    public void setData(String account, String refreshToken){
+        RedisUser redisUser = new RedisUser(account,refreshToken);
+        redisAuthRepository.save(redisUser);
+    }
+
+    public Optional<RedisUser> getData(String id){
+        return redisAuthRepository.findById(id);
+    }
+*/
 }

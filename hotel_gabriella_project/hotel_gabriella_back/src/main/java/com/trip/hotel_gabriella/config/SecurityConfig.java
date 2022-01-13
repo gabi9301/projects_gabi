@@ -18,6 +18,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.filter.CorsFilter;
 
 @EnableWebSecurity(debug = true) //@Configuration 포함함
@@ -45,9 +46,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/member/**").hasRole("MEMBER")
                 .anyRequest().permitAll()
                 .and()
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .addLogoutHandler(new CustomLogoutHandler(jwtTokenProvider()))
+                .logoutSuccessUrl("/login")
+                .and()
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider()),
                         UsernamePasswordAuthenticationFilter.class)
-                .addFilterBefore(new ExceptionHandlerFilter(objectMapper), CorsFilter.class);
+                .addFilterBefore(new ExceptionHandlerFilter(objectMapper), CorsFilter.class)
+                ;
+
+
     }
 
 

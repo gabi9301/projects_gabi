@@ -47,11 +47,11 @@ public class JwtTokenProvider { //JWT 토큰의 생성과 유효성 검사를 �
         String accessToken = createAccessToken(userAuthInfo);
         String refreshToken = createRefreshToken(userAuthInfo);
         System.out.println("refreshTokenValidMilliSeconds = " + refreshTokenValidMilliSeconds);
-        redisService.setData(userAuthInfo.getAccount(),refreshToken,refreshTokenValidMilliSeconds);
+        redisService.setData("RT_" + userAuthInfo.getAccount(), refreshToken, refreshTokenValidMilliSeconds);
 
-        Map<String ,String> tokenMap = new HashMap<>();
+        Map<String, String> tokenMap = new HashMap<>();
 
-        tokenMap.put("accessToken",accessToken);
+        tokenMap.put("accessToken", accessToken);
         tokenMap.put("refreshToken", refreshToken);
 
         return tokenMap;
@@ -88,24 +88,20 @@ public class JwtTokenProvider { //JWT 토큰의 생성과 유효성 검사를 �
     }
 
 
-
-
-    public Map<String,String> resolveToken(HttpServletRequest request) {
-        Map<String,String> tokenMap = new HashMap<>();
+    public Map<String, String> resolveToken(HttpServletRequest request) {
+        Map<String, String> tokenMap = new HashMap<>();
         tokenMap.put("authorization", resolveAccessToken(request));
         tokenMap.put("refreshToken", resolveRefreshToken(request));
         return tokenMap;
     }
 
     public String resolveAccessToken(HttpServletRequest request) {
-       return request.getHeader("authorization") != null ? request.getHeader("authorization") : null;
+        return request.getHeader("authorization") != null ? request.getHeader("authorization") : null;
     }
+
     public String resolveRefreshToken(HttpServletRequest request) {
-       return request.getHeader("refreshToken") != null ? request.getHeader("refreshToken") : null;
+        return request.getHeader("refreshToken") != null ? request.getHeader("refreshToken") : null;
     }
-
-
-
 
 
     public String getUserIdentifyKey(String token) {
@@ -131,16 +127,16 @@ public class JwtTokenProvider { //JWT 토큰의 생성과 유효성 검사를 �
         }
     }
 
-    public Authentication getAuthentication(String token,String serviceIdentifier) {
+    public Authentication getAuthentication(String token, String serviceIdentifier) {
         UserDetails userDetails = null;
-        if(serviceIdentifier.equals("member")){
+        if (serviceIdentifier.equals("member")) {
             userDetails = memberDetailsService.loadUserByUsername(this.getUserIdentifyKey(token));
-        }else if(serviceIdentifier.equals("admin")){
+        } else if (serviceIdentifier.equals("admin")) {
             userDetails = adminDetailsService.loadUserByUsername(this.getUserIdentifyKey(token));
         }
 
         assert userDetails != null;
-        return new CustomAuthenticationToken(userDetails,"",userDetails.getAuthorities());
+        return new CustomAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
     public void setHeaderAccessToken(HttpServletResponse response, String accessToken) {
@@ -151,7 +147,7 @@ public class JwtTokenProvider { //JWT 토큰의 생성과 유효성 검사를 �
         response.setHeader("refreshToken", refreshToken);
     }
 
-    public Map<String,String> reissueToken(TokenReissueRequest tokenReissueRequest){
+    public Map<String, String> reissueToken(TokenReissueRequest tokenReissueRequest) {
 
         Map<String, String> tokenMap = null;
         Authentication authentication =
@@ -173,6 +169,38 @@ public class JwtTokenProvider { //JWT 토큰의 생성과 유효성 검사를 �
     }
 
 
+    public long getExpirationTime(String accessToken) {
+        Date expiration = Jwts.parserBuilder()
+                .setSigningKey(secretKey).build()
+                .parseClaimsJws(accessToken)
+                .getBody()
+                .getExpiration();
+
+        long now = new Date().getTime();
+
+        return expiration.getTime() - now;
+
+
+    }
+
+    public void invalidateToken(String accessToken) {
+
+        String account = this.getUserIdentifyKey(accessToken);
+        if (this.validateToken(accessToken)) {
+            long expiration = this.getExpirationTime(accessToken);
+            redisService.setData(accessToken, "logout", expiration);
+        }
+
+        if (redisService.exist("RT_" + account)) {
+            redisService.deleteData("RT_" + account);
+        }
+    }
+
+    public boolean isLoggedOut(String accessKey){
+
+        return redisService.exist(accessKey)
+                && redisService.getData(accessKey).equals("logout");
+    }
 
 
 }

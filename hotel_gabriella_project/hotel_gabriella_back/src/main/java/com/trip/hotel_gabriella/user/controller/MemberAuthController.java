@@ -47,19 +47,11 @@ public class MemberAuthController {//JWT 토큰 방식으로 로그인 시 해�
         TokenPayload tokenPayload = new TokenPayload(tokenMap.get("authorization"), tokenMap.get("refreshToken"));
         TokenReissueRequest tokenReissueRequest = new TokenReissueRequest(tokenPayload, null);
 
-        System.out.println("tokenReissueRequest = " + tokenReissueRequest);
-
         tokenReissueRequest.changeServiceIdentifier("member");
         Map<String, String> newAuthToken = authProvider.reissue(tokenReissueRequest);
         return new ResponseEntity<>(newAuthToken, HttpStatus.CREATED);
     }
 
-    @GetMapping
-    public ResponseEntity<Void> logoutMember(){
-
-
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
 
 
 }
