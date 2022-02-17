@@ -1,4 +1,4 @@
-package com.trip.hotel_gabriella.user.service.admin;
+package com.trip.hotel_gabriella.admin.service.admin;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 

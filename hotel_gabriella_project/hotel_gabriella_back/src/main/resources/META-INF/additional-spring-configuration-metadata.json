@@ -9,5 +9,15 @@
       "name": "spring.jwt.expire.refreshTokenValidMilliSeconds",
       "type": "java.lang.Long",
       "description": "Description for spring.jwt.expire.refreshTokenValidMilliSeconds."
+    },
+    {
+      "name": "hotel.time.checkIn",
+      "type": "java.lang.String",
+      "description": "Description for hotel.time.checkIn."
+    },
+    {
+      "name": "hotel.time.checkOut",
+      "type": "java.lang.String",
+      "description": "Description for hotel.time.checkOut."
     }
   ] }

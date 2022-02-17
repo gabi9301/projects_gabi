@@ -6,10 +6,12 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Getter
+@Builder
+@AllArgsConstructor
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "reservation_room")
-public class ReservationRoom {
+public class ReservationRoom extends BaseEntity {
 
     @Id @GeneratedValue
     @Column(name = "reservation_room_id")

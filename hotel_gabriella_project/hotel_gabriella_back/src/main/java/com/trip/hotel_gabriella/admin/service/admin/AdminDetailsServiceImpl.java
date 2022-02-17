@@ -1,4 +1,4 @@
-package com.trip.hotel_gabriella.user.service.admin;
+package com.trip.hotel_gabriella.admin.service.admin;
 
 import com.trip.hotel_gabriella.admin.repository.AdminRepository;
 import com.trip.hotel_gabriella.common.domain.Admin;
@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class AdminDetailsServiceImpl implements AdminDetailsService{
+public class AdminDetailsServiceImpl implements AdminDetailsService {
 
     private final AdminRepository adminRepository;
 

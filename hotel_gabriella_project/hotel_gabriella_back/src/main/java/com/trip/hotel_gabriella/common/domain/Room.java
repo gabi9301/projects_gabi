@@ -26,8 +26,11 @@ public class Room extends BaseEntity{
     @Positive
     private int floor;
 
-    private String roomType;
-    private String viewType;
+    @Enumerated(EnumType.STRING)
+    private RoomType roomType;
+
+    @Enumerated(EnumType.STRING)
+    private ViewType viewType;
 
     @PositiveOrZero
     private int price;
@@ -36,6 +39,7 @@ public class Room extends BaseEntity{
     private int capacity;
 
     @Enumerated(EnumType.STRING)
+    @Builder.Default
     private Availability availability = Availability.AVAILABLE;
 
 

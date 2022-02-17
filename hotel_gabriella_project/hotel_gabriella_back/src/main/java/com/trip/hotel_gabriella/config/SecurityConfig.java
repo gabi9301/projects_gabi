@@ -2,11 +2,11 @@ package com.trip.hotel_gabriella.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.trip.hotel_gabriella.admin.repository.AdminRepository;
+import com.trip.hotel_gabriella.admin.service.admin.AdminDetailsService;
+import com.trip.hotel_gabriella.admin.service.admin.AdminDetailsServiceImpl;
 import com.trip.hotel_gabriella.common.interfaces.service.RedisService;
 import com.trip.hotel_gabriella.common.security.*;
 import com.trip.hotel_gabriella.user.repository.MemberRepository;
-import com.trip.hotel_gabriella.user.service.admin.AdminDetailsService;
-import com.trip.hotel_gabriella.user.service.admin.AdminDetailsServiceImpl;
 import com.trip.hotel_gabriella.user.service.member.MemberDetailsService;
 import com.trip.hotel_gabriella.user.service.member.MemberDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;

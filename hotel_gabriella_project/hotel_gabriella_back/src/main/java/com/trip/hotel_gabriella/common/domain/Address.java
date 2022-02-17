@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 @NoArgsConstructor
 @Embeddable
-public class Address {
+public class Address extends BaseEntity{
     @NotBlank(message = "도시명은 필수항목입니다.")
     private String city;
 

@@ -1,11 +1,11 @@
 package com.trip.hotel_gabriella.admin.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.trip.hotel_gabriella.admin.model.room.RoomInfo;
 import com.trip.hotel_gabriella.admin.model.room.RoomRegisterRequest;
 import com.trip.hotel_gabriella.admin.model.room.RoomRegisterResponse;
 import com.trip.hotel_gabriella.admin.service.room.RoomManageService;
 
+import com.trip.hotel_gabriella.common.model.RoomInfo;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package com.trip.hotel_gabriella.common.security;
 
-import com.trip.hotel_gabriella.user.service.admin.AdminDetailsService;
+import com.trip.hotel_gabriella.admin.service.admin.AdminDetailsService;
 import com.trip.hotel_gabriella.user.service.member.MemberDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;

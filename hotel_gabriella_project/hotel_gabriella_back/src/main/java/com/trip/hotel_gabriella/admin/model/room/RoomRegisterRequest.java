@@ -1,5 +1,7 @@
 package com.trip.hotel_gabriella.admin.model.room;
 
+import com.trip.hotel_gabriella.common.domain.RoomType;
+import com.trip.hotel_gabriella.common.domain.ViewType;
 import lombok.Getter;
 
 import com.trip.hotel_gabriella.common.interfaces.model.GenericRequestEntityAdapter;
@@ -21,11 +23,14 @@ public class RoomRegisterRequest extends BaseDTO implements GenericRequestEntity
 
     @Override
     public Room toEntity() {
+        RoomType roomTypeE = RoomType.valueOf(roomType);
+        ViewType viewTypeE = ViewType.valueOf(viewType);
+
         return Room.builder()
                 .no(no)
                 .floor(floor)
-                .roomType(roomType)
-                .viewType(viewType)
+                .roomType(roomTypeE)
+                .viewType(viewTypeE)
                 .build();
 
     }

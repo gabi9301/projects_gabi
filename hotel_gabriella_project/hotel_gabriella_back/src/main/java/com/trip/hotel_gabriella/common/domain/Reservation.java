@@ -9,13 +9,16 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@Builder
+@AllArgsConstructor
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Reservation {
+public class Reservation extends BaseEntity{
     @Id @GeneratedValue
     @Column(name = "reservation_id")
     private Long id;
@@ -45,9 +48,11 @@ public class Reservation {
     private Member member;
 
     @OneToMany(mappedBy = "reservation")
+    @Builder.Default
     private List<ReservationRoom> reservationRooms = new ArrayList<>();
 
     @OneToMany(mappedBy = "reservation")
+    @Builder.Default
     private List<ReservationAmenity> reservationAmenities = new ArrayList<>();
 
     public void changeMember(Member member) {
@@ -57,5 +62,7 @@ public class Reservation {
         this.member = member;
         member.getReservations().add(this);
     }
+
+
 
 }

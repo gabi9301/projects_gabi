@@ -10,7 +10,7 @@ import javax.validation.constraints.Positive;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "reservation_amenity")
-public class ReservationAmenity {
+public class ReservationAmenity extends BaseEntity {
     @Id @GeneratedValue
     @Column(name = "reservation_amenity_id")
     private Long id;

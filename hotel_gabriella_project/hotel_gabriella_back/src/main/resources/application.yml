@@ -15,6 +15,12 @@ spring:
     port: 6379  #기본 값
 
 
+hotel:
+  time:
+    checkIn: 1400
+    checkOut: 1100
+
+
 
 
 

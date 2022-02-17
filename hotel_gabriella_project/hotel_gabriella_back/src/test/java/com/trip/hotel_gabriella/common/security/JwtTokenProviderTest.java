@@ -1,15 +1,11 @@
 package com.trip.hotel_gabriella.common.security;
 
-import com.trip.hotel_gabriella.common.domain.RedisUser;
 import com.trip.hotel_gabriella.common.interfaces.service.RedisService;
-import com.trip.hotel_gabriella.user.service.admin.AdminDetailsService;
-import com.trip.hotel_gabriella.user.service.member.MemberDetailsService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Map;
-import java.util.Optional;
 
 @SpringBootTest
 class JwtTokenProviderTest {

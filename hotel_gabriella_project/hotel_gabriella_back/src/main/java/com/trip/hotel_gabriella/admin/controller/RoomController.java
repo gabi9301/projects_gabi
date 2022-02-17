@@ -1,8 +1,8 @@
 package com.trip.hotel_gabriella.admin.controller;
 
+import com.trip.hotel_gabriella.common.model.RoomInfo;
 import lombok.RequiredArgsConstructor;
 
-import com.trip.hotel_gabriella.admin.model.room.RoomInfo;
 import com.trip.hotel_gabriella.admin.service.room.RoomManageService;
 
 import org.springframework.security.access.annotation.Secured;
