@@ -45,9 +45,9 @@ const SearchRoom = props => {
           className={classes.inner_container}
           onClick={props.onShowResvOption}
         >
-          <Label title="객실수" content="1" />
-          <Label title="성인" content="2" />
-          <Label title="어린이" content="0" />
+          <Label title="인원" content="2" />
+          <Label title="전망" content="바다" />
+          {/* <Label title="" content="0" /> */}
         </div>
         <div className={classes.inner_container}>
           <span className={classes.promotion}>프로모션 코드</span>

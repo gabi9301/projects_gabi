@@ -77,6 +77,8 @@ const ResvDetail = (props) => {
     const targetClassName = event.target.className.toString();
     const Today = moment().format("YYYYMMDD").toString();
 
+    console.log(targetId);
+
     if (targetText !== " " && +targetId >= +Today && !targetClassName.includes("invalid")) {
       if (selectedInState.isSelected === false) {
         setSelectedInState({ isSelected: true, selectedInDate: targetId });
