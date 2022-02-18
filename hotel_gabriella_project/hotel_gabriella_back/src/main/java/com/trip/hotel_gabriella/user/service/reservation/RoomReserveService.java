@@ -8,10 +8,4 @@ public interface RoomReserveService {
     RoomReserveResponse bookRoom(RoomReserveRequest roomReserveRequest);
 
 
-
-
-
-
-
-
 }

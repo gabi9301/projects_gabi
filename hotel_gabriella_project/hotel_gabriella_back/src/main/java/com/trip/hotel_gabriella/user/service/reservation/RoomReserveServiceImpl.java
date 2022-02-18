@@ -1,6 +1,7 @@
 package com.trip.hotel_gabriella.user.service.reservation;
 
 
+import com.trip.hotel_gabriella.common.domain.ReservationRoom;
 import com.trip.hotel_gabriella.user.model.reservation.RoomReserveRequest;
 import com.trip.hotel_gabriella.user.model.reservation.RoomReserveResponse;
 import com.trip.hotel_gabriella.user.repository.ReservationRoomRepository;
@@ -17,6 +18,12 @@ public class RoomReserveServiceImpl implements RoomReserveService{
 
     @Override
     public RoomReserveResponse bookRoom(RoomReserveRequest roomReserveRequest) {
-        return null;
+
+        ReservationRoom reservationRoom = roomReserveRequest.toEntity();
+        reservationRoom = reservationRoomRepository.save(reservationRoom);
+
+       return new RoomReserveResponse()
+               .fromEntity(reservationRoom);
+
     }
 }

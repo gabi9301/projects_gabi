@@ -5,6 +5,7 @@ import com.trip.hotel_gabriella.common.interfaces.model.GenericHttpRequestTransf
 import com.trip.hotel_gabriella.common.interfaces.model.GenericRequestEntityAdapter;
 import com.trip.hotel_gabriella.common.validation.annotation.Phone;
 import com.trip.hotel_gabriella.user.model.BaseDTO;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -14,6 +15,14 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class ReserveRequest extends BaseDTO implements GenericRequestEntityAdapter<Reservation> {
+
+
+    @Value("${hotel.time.checkIn}")
+    private String defaultCheckInHour;
+
+    @Value("${hotel.time.checkOut}")
+    private String defaultCheckOutHour;
+
 
     @NotNull(message = "체크인 시간은 필수항목 입니다.")
     private String checkIn;
@@ -36,14 +45,10 @@ public class ReserveRequest extends BaseDTO implements GenericRequestEntityAdapt
     private Boolean isMember;
 
 
-    public LocalDateTime checkInParse(String checkInDate, String checkInHour){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
-        return LocalDateTime.parse(checkInDate + checkInHour, formatter);
-    }
 
-    public LocalDateTime checkOutParse(String checkOutDate, String checkOutHour){
+    public LocalDateTime checkTimeParse(String checkDate, String checkHour){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
-        return LocalDateTime.parse(checkOutDate + checkOutHour, formatter);
+        return LocalDateTime.parse(checkDate + checkHour, formatter);
     }
 
 
@@ -51,8 +56,8 @@ public class ReserveRequest extends BaseDTO implements GenericRequestEntityAdapt
     public Reservation toEntity() {
 
         return Reservation.builder()
-                .checkIn(this.checkInParse(checkIn,"1400"))
-                .checkOut(this.checkOutParse(checkOut,"1100"))
+                .checkIn(this.checkTimeParse(checkIn,defaultCheckInHour))
+                .checkOut(this.checkTimeParse(checkOut,defaultCheckOutHour))
                 .name(name)
                 .phone(phone)
                 .capacity(capacity)
