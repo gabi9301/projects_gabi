@@ -1,10 +1,11 @@
 package com.trip.hotel_gabriella.user.model.reservation;
 
 import com.trip.hotel_gabriella.common.domain.Reservation;
-import com.trip.hotel_gabriella.common.interfaces.model.GenericHttpRequestTransferor;
+import com.trip.hotel_gabriella.common.domain.ViewType;
 import com.trip.hotel_gabriella.common.interfaces.model.GenericRequestEntityAdapter;
 import com.trip.hotel_gabriella.common.validation.annotation.Phone;
 import com.trip.hotel_gabriella.user.model.BaseDTO;
+import lombok.*;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.validation.constraints.Max;
@@ -14,20 +15,14 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+@Getter
+@Builder
 public class ReserveRequest extends BaseDTO implements GenericRequestEntityAdapter<Reservation> {
 
-
-    @Value("${hotel.time.checkIn}")
-    private String defaultCheckInHour;
-
-    @Value("${hotel.time.checkOut}")
-    private String defaultCheckOutHour;
-
-
-    @NotNull(message = "체크인 시간은 필수항목 입니다.")
+    @NotBlank(message = "체크인 시간은 필수항목 입니다.")
     private String checkIn;
 
-    @NotNull(message = "체크아웃 시간은 필수항목 입니다.")
+    @NotBlank(message = "체크아웃 시간은 필수항목 입니다.")
     private String checkOut;
 
     @NotBlank(message = "이름은 필수항목 입니다.")
@@ -46,18 +41,10 @@ public class ReserveRequest extends BaseDTO implements GenericRequestEntityAdapt
 
 
 
-    public LocalDateTime checkTimeParse(String checkDate, String checkHour){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
-        return LocalDateTime.parse(checkDate + checkHour, formatter);
-    }
-
-
     @Override
     public Reservation toEntity() {
 
         return Reservation.builder()
-                .checkIn(this.checkTimeParse(checkIn,defaultCheckInHour))
-                .checkOut(this.checkTimeParse(checkOut,defaultCheckOutHour))
                 .name(name)
                 .phone(phone)
                 .capacity(capacity)

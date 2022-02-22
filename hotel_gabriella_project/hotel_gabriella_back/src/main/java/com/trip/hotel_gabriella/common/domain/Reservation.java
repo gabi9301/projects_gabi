@@ -9,7 +9,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,8 +17,9 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Reservation extends BaseEntity{
-    @Id @GeneratedValue
+public class Reservation extends BaseEntity {
+    @Id
+    @GeneratedValue
     @Column(name = "reservation_id")
     private Long id;
 
@@ -37,11 +37,14 @@ public class Reservation extends BaseEntity{
     private String phone;
 
     @NotNull(message = "정원은 필수항목 입니다.")
-    @Min(1) @Max(10)
+    @Min(1)
+    @Max(10)
     private int capacity;
 
     @NotNull(message = "회원여부는 필수항목입니다.")
     private Boolean isMember;
+
+    private Boolean isCanceled = false;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID")
@@ -56,13 +59,24 @@ public class Reservation extends BaseEntity{
     private List<ReservationAmenity> reservationAmenities = new ArrayList<>();
 
     public void changeMember(Member member) {
-        if(this.member != null) {  //이미 예약자가 설정된 상태에서 바꿀 경우
+        if (this.member != null) {  //이미 예약자가 설정된 상태에서 바꿀 경우
             this.member.getReservations().remove(this);
         }
         this.member = member;
         member.getReservations().add(this);
     }
 
+    public void changeCheckIn(LocalDateTime localDateTime) {
+        this.checkIn = localDateTime;
+    }
+
+    public void changeCheckOut(LocalDateTime localDateTime) {
+        this.checkOut = localDateTime;
+    }
+
+    public void markAsCancel() {
+        this.isCanceled = true;
+    }
 
 
 }

@@ -12,13 +12,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class RoomManageServiceImpl implements RoomManageService {
 
-    private  final RoomRepository roomRepository;
+    private final RoomRepository roomRepository;
 
     @Transactional
     public RoomRegisterResponse registerRoom(RoomRegisterRequest roomRegisterRequest){
@@ -32,7 +33,8 @@ public class RoomManageServiceImpl implements RoomManageService {
     @Override
     public RoomInfo readRoom(Long id) {
 
-        Room room = roomRepository.getById(id);
+        Room room = roomRepository.findById(id)
+                .orElseThrow(NoSuchElementException::new);
 
         return new RoomInfo().fromEntity(room);
     }

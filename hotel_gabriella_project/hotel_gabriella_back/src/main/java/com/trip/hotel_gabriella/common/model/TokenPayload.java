@@ -1,4 +1,4 @@
-package com.trip.hotel_gabriella.common.security;
+package com.trip.hotel_gabriella.common.model;
 
 import lombok.AccessLevel;
 import lombok.Builder;

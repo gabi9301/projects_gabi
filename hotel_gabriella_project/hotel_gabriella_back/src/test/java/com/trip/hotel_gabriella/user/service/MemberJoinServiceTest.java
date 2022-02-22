@@ -79,7 +79,7 @@ public class MemberJoinServiceTest{
         //when
         String encodedPassword = memberJoinService.encodePassword(memberRegisterRequest.getPassword());
 
-        System.out.println("encodedPassword = " + encodedPassword);
+//        System.out.println("encodedPassword = " + encodedPassword);
 
         //then
         assertThat((passwordEncoder.matches(memberRegisterRequest.getPassword(), encodedPassword))).isTrue();

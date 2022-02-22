@@ -17,8 +17,8 @@ spring:
 
 hotel:
   time:
-    checkIn: 1400
-    checkOut: 1100
+    defaultCheckInHour: 1400
+    defaultCheckOutHour: 1100
 
 
 

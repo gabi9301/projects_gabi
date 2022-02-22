@@ -11,13 +11,13 @@
       "description": "Description for spring.jwt.expire.refreshTokenValidMilliSeconds."
     },
     {
-      "name": "hotel.time.checkIn",
+      "name": "hotel.time.defaultCheckInHour",
       "type": "java.lang.String",
-      "description": "Description for hotel.time.checkIn."
+      "description": "Description for hotel.time.defaultCheckInHour."
     },
     {
-      "name": "hotel.time.checkOut",
+      "name": "hotel.time.defaultCheckOutHour",
       "type": "java.lang.String",
-      "description": "Description for hotel.time.checkOut."
+      "description": "Description for hotel.time.defaultCheckOutHour."
     }
   ] }

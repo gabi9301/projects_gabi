@@ -26,7 +26,7 @@ public class TermsManageServiceImpl implements TermsManageService {
         List<TermsHistory> termsHistories = new ArrayList<TermsHistory>();
 
         for (TermsRegisterRequest termsItem : termsRegisterRequestList) {
-            if(termsItem.getMember()==null){
+            if (termsItem.getMember() == null) {
                 termsItem.setTargetMember(member);
             }
             TermsHistory item = termsItem.toEntity();
@@ -46,7 +46,7 @@ public class TermsManageServiceImpl implements TermsManageService {
     @Transactional
     public void registerTermsList(List<TermsHistory> termsHistories) {
         for (TermsHistory termsHistory : termsHistories) {
-           registerTerms(termsHistory);
+            registerTerms(termsHistory);
         }
 
     }

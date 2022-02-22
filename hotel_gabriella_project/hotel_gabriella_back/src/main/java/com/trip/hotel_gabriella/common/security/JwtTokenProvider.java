@@ -2,6 +2,7 @@ package com.trip.hotel_gabriella.common.security;
 
 import com.trip.hotel_gabriella.admin.service.admin.AdminDetailsService;
 import com.trip.hotel_gabriella.common.interfaces.service.RedisService;
+import com.trip.hotel_gabriella.common.model.TokenReissueRequest;
 import com.trip.hotel_gabriella.user.service.member.MemberDetailsService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;

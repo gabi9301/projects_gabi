@@ -1,4 +1,4 @@
-package com.trip.hotel_gabriella.common.security;
+package com.trip.hotel_gabriella.common.model;
 
 import com.trip.hotel_gabriella.common.interfaces.model.GenericHttpRequestTransferor;
 import com.trip.hotel_gabriella.common.validation.annotation.Account;

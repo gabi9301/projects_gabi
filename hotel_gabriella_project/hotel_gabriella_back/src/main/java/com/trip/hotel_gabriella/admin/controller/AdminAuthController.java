@@ -1,9 +1,9 @@
 package com.trip.hotel_gabriella.admin.controller;
 
 import com.trip.hotel_gabriella.admin.service.admin.AdminDetailsService;
+import com.trip.hotel_gabriella.common.model.LoginCommand;
 import com.trip.hotel_gabriella.common.security.CustomAuthenticationProvider;
 import com.trip.hotel_gabriella.common.security.JwtTokenProvider;
-import com.trip.hotel_gabriella.common.security.LoginCommand;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

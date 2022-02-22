@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Optional;
 
 public interface AdminRepository extends JpaRepository<Admin, Long> {
-    @Query("SELECT COUNT(a.account) FROM Admin a WHERE a.account = :account")
-    Long findCountByAccount(String account);
+//    @Query("SELECT COUNT(a.account) FROM Admin a WHERE a.account = :account")
+//    Long findCountByAccount(String account);
 
     //@Query("SELECT m FROM Member m WHERE m.account = :account")
     Optional<Admin> findByAccount(String account);

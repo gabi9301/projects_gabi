@@ -1,10 +1,8 @@
 package com.trip.hotel_gabriella.user.controller;
 
-import com.trip.hotel_gabriella.user.service.member.MemberJoinService;
+import com.trip.hotel_gabriella.user.model.reservation.BookingCommand;
+import com.trip.hotel_gabriella.user.service.reservation.BookingService;
 import lombok.RequiredArgsConstructor;
-
-import com.trip.hotel_gabriella.user.model.member.MemberJoinCommand;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,16 +13,18 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
-public class RestMemberJoinController {
+public class RestBookController {
 
-    private final MemberJoinService memberJoinService;
-    
-    @PostMapping("/join.do")
-    public ResponseEntity<Void> joinMember(
-            @RequestBody @Valid MemberJoinCommand memberJoinCommand) {
+    private final BookingService bookingService;
 
-        memberJoinService.signInMember(memberJoinCommand);
+    @PostMapping("/book.do")
+    public ResponseEntity<Void> bookReservation(@RequestBody @Valid BookingCommand bookingCommand){
+
+        bookingService.bookReservation(bookingCommand);
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
+
+
 }
