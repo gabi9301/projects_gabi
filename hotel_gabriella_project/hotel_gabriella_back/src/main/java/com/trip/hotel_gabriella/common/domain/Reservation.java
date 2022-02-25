@@ -74,7 +74,7 @@ public class Reservation extends BaseEntity {
         this.checkOut = localDateTime;
     }
 
-    public void markAsCancel() {
+    public void markAsCanceled() {
         this.isCanceled = true;
     }
 

@@ -36,6 +36,7 @@ public class ReserveRequest extends BaseDTO implements GenericRequestEntityAdapt
     @Min(1) @Max(10)
     private int capacity;
 
+
     @NotNull(message = "회원여부는 필수항목입니다.")
     private Boolean isMember;
 

@@ -51,6 +51,15 @@ public class ReserveServiceImpl implements ReserveService{
         return new ReservationInfo().fromEntity(reservation);
     }
 
+    @Transactional
+    public void cancelReservation(Long reservation_id) {
+        Reservation reservation
+                = reservationRepository.findById(reservation_id).orElseThrow(NoSuchElementException::new);
+
+        reservation.markAsCanceled();
+
+    }
+
     public LocalDateTime checkTimeParse(String checkDate, String checkHour){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
         return LocalDateTime.parse(checkDate + checkHour, formatter);

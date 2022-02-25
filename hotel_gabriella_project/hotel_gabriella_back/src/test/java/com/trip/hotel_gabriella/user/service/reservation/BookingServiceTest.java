@@ -1,11 +1,13 @@
 package com.trip.hotel_gabriella.user.service.reservation;
 
+import com.trip.hotel_gabriella.common.domain.ViewType;
 import com.trip.hotel_gabriella.common.model.BookingInfo;
 import com.trip.hotel_gabriella.common.model.ReservationInfo;
 import com.trip.hotel_gabriella.common.model.RoomInfo;
 import com.trip.hotel_gabriella.user.model.reservation.BookingCommand;
 import com.trip.hotel_gabriella.user.model.reservation.BookingResponse;
 import com.trip.hotel_gabriella.user.model.reservation.ReserveRequest;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +29,7 @@ public class BookingServiceTest {
     ReserveRequest reserveRequest;
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
         reserveRequest =
                 ReserveRequest.builder()
                         .checkIn("20220221")
@@ -41,13 +43,14 @@ public class BookingServiceTest {
         bookingCommand
                 = BookingCommand.builder()
                 .reserveRequest(reserveRequest)
-                .roomId(17L)
+                .viewType(ViewType.OCEAN)
+                .roomId(23L)
                 .build();
     }
 
     @Test
-    public void bookTest() throws Exception {
-    //given
+    public void bookReadTest() throws Exception {
+        //given
         BookingResponse bookingResponse
                 = bookingService.bookReservation(bookingCommand);
 
@@ -56,25 +59,33 @@ public class BookingServiceTest {
 
         //when
 
-        ReservationInfo reservationInfo =bookingInfo.getReservationInfo();
+        ReservationInfo reservationInfo = bookingInfo.getReservationInfo();
 
         RoomInfo roomInfo = bookingInfo.getRoomInfo();
 
         //then
 
-        assertThat(roomInfo.getNo()).isEqualTo(401);
+        assertThat(roomInfo.getNo()).isEqualTo(407);
         assertThat(reservationInfo.getName()).isEqualTo("Yujin");
 
     }
-    
-    
-    @Test
-    public void readTest() throws Exception {
-    //given
 
-    //when
-    
-    //then
+    @Test
+    public void bookCancelTest() throws Exception {
+        //given
+        BookingResponse bookingResponse
+                = bookingService.bookReservation(bookingCommand);
+
+        //when
+        bookingService.bookCancel(bookingResponse.getReserveId());
+
+        //then
+
+        BookingInfo bookingInfo
+                = bookingService.bookSearch(bookingResponse.getReserveId());
+
+        assertThat(bookingInfo.getReservationInfo().isCanceled()).isTrue();
     }
+
 
 }

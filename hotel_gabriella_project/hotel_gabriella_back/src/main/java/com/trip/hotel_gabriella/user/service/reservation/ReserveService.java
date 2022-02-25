@@ -12,5 +12,7 @@ public interface ReserveService {
 
     ReservationInfo readReservation(Long reservation_id);
 
+    void cancelReservation(Long reservation_id);
+
 
 }

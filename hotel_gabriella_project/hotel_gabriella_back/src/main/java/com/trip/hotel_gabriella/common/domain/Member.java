@@ -45,6 +45,9 @@ public class Member extends BaseEntity{
     @Embedded
     private Address address;
 
+    @Enumerated(EnumType.STRING)
+    private MemberGrade memberGrade = MemberGrade.BASIC;
+
     @Builder.Default
     @OneToMany(mappedBy = "member")
     private List<Reservation> reservations = new ArrayList<>();

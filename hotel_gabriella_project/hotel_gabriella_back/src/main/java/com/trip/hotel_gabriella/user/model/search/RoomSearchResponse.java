@@ -6,13 +6,16 @@ import com.trip.hotel_gabriella.common.interfaces.model.GenericHttpResponseTrans
 import com.trip.hotel_gabriella.common.interfaces.model.GenericResponseEntityAdapter;
 import com.trip.hotel_gabriella.common.model.RoomInfo;
 import com.trip.hotel_gabriella.user.model.BaseDTO;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.util.List;
 
 @Getter
+@Builder
 public class RoomSearchResponse extends BaseDTO implements GenericHttpResponseTransferor {
-    private List<RoomInfo> availableRooms;
+
+    private List<RoomInfo> suitableRooms;
 
 
 }

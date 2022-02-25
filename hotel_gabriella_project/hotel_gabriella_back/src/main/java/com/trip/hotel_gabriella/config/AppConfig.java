@@ -3,12 +3,12 @@ package com.trip.hotel_gabriella.config;
 import com.trip.hotel_gabriella.admin.repository.RoomRepository;
 import com.trip.hotel_gabriella.admin.service.room.RoomManageService;
 import com.trip.hotel_gabriella.admin.service.room.RoomManageServiceImpl;
-import com.trip.hotel_gabriella.user.repository.MemberRepository;
-import com.trip.hotel_gabriella.user.repository.ReservationRepository;
-import com.trip.hotel_gabriella.user.repository.ReservationRoomRepository;
-import com.trip.hotel_gabriella.user.repository.TermsRepository;
+import com.trip.hotel_gabriella.common.domain.Member;
+import com.trip.hotel_gabriella.user.repository.*;
 import com.trip.hotel_gabriella.user.service.member.MemberJoinServiceImpl;
 import com.trip.hotel_gabriella.user.service.member.MemberJoinService;
+import com.trip.hotel_gabriella.user.service.member.MyPageService;
+import com.trip.hotel_gabriella.user.service.member.MyPageServiceImpl;
 import com.trip.hotel_gabriella.user.service.reservation.*;
 import com.trip.hotel_gabriella.user.service.terms.TermsManageServiceImpl;
 import com.trip.hotel_gabriella.user.service.terms.TermsManageService;
@@ -59,6 +59,15 @@ public class AppConfig {
         return new BookingServiceImpl(reserveService(reservationRepository)
         ,roomReserveService(reservationRoomRepository)
         ,roomManageService);
+    }
+
+    @Bean
+    public MyPageService myPageService(MemberRepository memberRepository
+            , ReservationRepository reservationRepository
+            , CustomQueryDslRepository customQueryDslRepository){
+        return new MyPageServiceImpl(memberRepository
+                ,reservationRepository
+                ,customQueryDslRepository);
     }
 
 

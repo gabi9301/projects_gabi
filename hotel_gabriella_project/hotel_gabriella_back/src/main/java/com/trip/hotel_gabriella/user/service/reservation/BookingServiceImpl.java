@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 @Getter
+@Transactional(readOnly = true)
 public class BookingServiceImpl implements BookingService {
 
     private final ReserveService reserveService;
@@ -37,11 +38,11 @@ public class BookingServiceImpl implements BookingService {
 
         ViewType viewType = bookingCommand.getViewType();
 
-        if(capacity > roomInfo.getCapacity()
-                || !viewType.equals(roomInfo.getViewType())){
+        if (capacity > roomInfo.getCapacity()
+                || !(viewType.equals(roomInfo.getViewType()))) {
             //사용자 요청 속 정원과 전망 정보가 방 정보와 맞지 않음.
             //요청을 변조했을 수 있음.
-           throw new BookingConditionsNotMatchException();
+            throw new BookingConditionsNotMatchException();
         }
 
         ReserveResponse reserveResponse
@@ -52,7 +53,6 @@ public class BookingServiceImpl implements BookingService {
                 .room(Room.builder().id(bookingCommand.getRoomId()).build())
                 .reservation(Reservation.builder().id(reserveResponse.getId()).build())
                 .build();
-
 
 
         RoomReserveResponse roomReserveResponse
@@ -78,11 +78,18 @@ public class BookingServiceImpl implements BookingService {
                 = roomReserveService.readReservedRoom(reservationId);
 
         RoomInfo roomInfo
-                =roomManageService.readRoom(roomReservationInfo.getRoom_id());
+                = roomManageService.readRoom(roomReservationInfo.getRoom_id());
 
         return BookingInfo.builder()
                 .reservationInfo(reservationInfo)
                 .roomInfo(roomInfo)
                 .build();
+    }
+
+    @Transactional
+    public void bookCancel(Long reservation_Id) {
+
+        reserveService.cancelReservation(reservation_Id);
+
     }
 }

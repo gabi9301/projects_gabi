@@ -8,7 +8,9 @@ public interface BookingService {
 
     BookingResponse bookReservation(BookingCommand bookingCommand);
 
-    BookingInfo bookSearch(Long roomReservationId);
+    BookingInfo bookSearch(Long reservation_Id);
+
+    void bookCancel(Long reservation_Id);
 
 
 
