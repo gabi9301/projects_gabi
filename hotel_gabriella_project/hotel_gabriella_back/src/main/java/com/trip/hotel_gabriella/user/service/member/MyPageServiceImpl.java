@@ -30,7 +30,15 @@ public class MyPageServiceImpl implements MyPageService{
 
     @Override
     public MyPageReadResponse readMyPage(Long id) {
-        return null;
+
+        MemberInfo memberInfo = readMyPagePersonalInfo(id);
+        List<ReservationInfo> reservationInfos = readMyPageReservationInfo(id);
+
+
+        return MyPageReadResponse.builder()
+                .memberInfo(memberInfo)
+                .reservationInfoList(reservationInfos)
+                .build();
     }
 
     @Override

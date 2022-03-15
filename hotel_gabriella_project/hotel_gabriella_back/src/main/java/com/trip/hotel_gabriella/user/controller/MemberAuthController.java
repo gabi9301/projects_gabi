@@ -40,7 +40,7 @@ public class MemberAuthController {//JWT 토큰 방식으로 로그인 시 해�
             @RequestBody @Valid LoginCommand loginCommand) {
 
         Map<String, String> authToken = authProvider.authenticate(loginCommand);
-
+        //System.out.println("authToken = " + authToken);
         return new ResponseEntity<>(authToken, HttpStatus.CREATED);
     }
 

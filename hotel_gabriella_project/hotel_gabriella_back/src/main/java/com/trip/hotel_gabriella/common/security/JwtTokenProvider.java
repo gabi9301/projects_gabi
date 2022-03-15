@@ -51,7 +51,8 @@ public class JwtTokenProvider { //JWT 토큰의 생성과 유효성 검사를 �
         redisService.setData("RT_" + userAuthInfo.getAccount(), refreshToken, refreshTokenValidMilliSeconds);
 
         Map<String, String> tokenMap = new HashMap<>();
-
+        tokenMap.put("id", (userAuthInfo.getExtraInfo().get("id").toString()));
+        tokenMap.put("account", userAuthInfo.getAccount());
         tokenMap.put("accessToken", accessToken);
         tokenMap.put("refreshToken", refreshToken);
 

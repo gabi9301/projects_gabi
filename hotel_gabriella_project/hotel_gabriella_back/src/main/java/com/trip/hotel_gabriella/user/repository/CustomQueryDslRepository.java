@@ -1,6 +1,5 @@
 package com.trip.hotel_gabriella.user.repository;
 
-import com.querydsl.core.Tuple;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.trip.hotel_gabriella.common.domain.*;
