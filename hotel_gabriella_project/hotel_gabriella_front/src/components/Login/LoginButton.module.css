@@ -1,0 +1,17 @@
+.button_container {
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+.login_button {
+    width: 25rem;
+    height: 3rem;
+    margin: 1.3rem;
+    text-align: center;
+    color:black;
+    background-color: #ffe87c;
+    border-color: wheat;
+    border-radius: 0.5rem;
+    font-weight: bold;
+}
