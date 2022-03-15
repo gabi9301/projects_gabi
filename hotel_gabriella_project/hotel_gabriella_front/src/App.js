@@ -3,16 +3,20 @@ import Header from "./components/Layout/Header";
 import { BrowserRouter } from "react-router-dom";
 import MainRoute from "./components/MainRoutes";
 import Footer from "./components/Layout/Footer";
+import LoginProvider from "./store/LoginProvider";
 
 function App() {
+
   return (
-    <BrowserRouter>
-      <Header />
-      <MainRoute>
-        <Home />
-      </MainRoute>
-      <Footer />
-    </BrowserRouter>
+    <LoginProvider>
+      <BrowserRouter>
+        <Header />
+        <MainRoute>
+          <Home />
+        </MainRoute>
+        <Footer />
+      </BrowserRouter>
+    </LoginProvider>
   );
 }
 export default App;
