@@ -10,7 +10,6 @@ const LoginInput = (props) => {
       </label>
       <input
         type={props.type}
-        id="inputId"
         placeholder={props.placeholder}
         onChange={props.inputChangeHandler}
         className={classes.textInput}
