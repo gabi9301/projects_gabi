@@ -1,5 +1,6 @@
 package com.trip.hotel_gabriella.user.model.member;
 
+import com.trip.hotel_gabriella.common.domain.MemberGrade;
 import com.trip.hotel_gabriella.common.interfaces.model.GenericRequestEntityAdapter;
 import com.trip.hotel_gabriella.common.validation.annotation.*;
 import lombok.Getter;
@@ -53,6 +54,7 @@ public class MemberRegisterRequest extends BaseDTO implements GenericRequestEnti
                 .birth(birth)
                 .phone(phone)
                 .address(address)
+                .memberGrade(MemberGrade.BASIC)
                 .build();
     }
 

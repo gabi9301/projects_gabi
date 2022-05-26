@@ -28,7 +28,7 @@ public class Member extends BaseEntity{
 
     @NotBlank(message = "이메일은 필수항목 입니다.")
     @Email
-    @Column(unique = true)
+    //@Column(unique = true)
     private String email;
 
     @NotBlank(message = "이름은 필수항목 입니다.")

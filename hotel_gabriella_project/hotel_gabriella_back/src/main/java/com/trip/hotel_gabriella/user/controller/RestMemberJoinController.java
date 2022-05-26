@@ -1,5 +1,6 @@
 package com.trip.hotel_gabriella.user.controller;
 
+import com.trip.hotel_gabriella.common.model.MemberInfo;
 import com.trip.hotel_gabriella.user.service.member.MemberJoinService;
 import lombok.RequiredArgsConstructor;
 
@@ -18,13 +19,21 @@ import javax.validation.Valid;
 public class RestMemberJoinController {
 
     private final MemberJoinService memberJoinService;
-    
-    @PostMapping("/join.do")
+
+    @PostMapping("/joinMember")
     public ResponseEntity<Void> joinMember(
             @RequestBody @Valid MemberJoinCommand memberJoinCommand) {
 
+        System.out.println("memberJoinCommand = " + memberJoinCommand.getMemberRegisterRequest());
         memberJoinService.signInMember(memberJoinCommand);
 
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PostMapping("/checkUniqueAccount")
+    public ResponseEntity<Boolean> checkUniqueAccount(
+            @RequestBody MemberInfo memberInfo) {
+        boolean result = memberJoinService.checkUniqueAccount(memberInfo.getAccount());
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap");
+
+.item_container {
+  width: 94%;
+  height: 25%;
+  list-style: none;
+  display: flex;
+  /* margin: 5%; */
+  /* padding: 5%; */
+  margin-bottom: 2rem;
+  /* box-sizing: border-box; */
+  /* background-color: #eee; */
+  /* border-radius: 2rem; */
+  font-family: "Rubik", sans-serif;
+  border-bottom: 1px solid #ddd;
+}
+.img_inner_container {
+  padding: 1.2rem;
+  box-sizing: border-box;
+}
+.room_img {
+  /* width: auto;
+  height: auto; */
+  min-width: 20rem;
+  min-height: 16rem;
+  max-width: 23rem;
+  max-height: 23rem;
+  /* border-radius: 1rem; */
+}
+
+.content_inner_container {
+  margin: 1rem;
+  /* padding-left: 5rem;
+  box-sizing: border-box; */
+}
+
+.inner_title_wrap {
+  font-size: 2rem;
+  height: 25%;
+  padding: 0.3rem;
+  box-sizing: border-box;
+  
+}
+
+.inner_content_wrap {
+  
+  height: 75%;
+  width: 100%;
+  padding-top:15%;
+  box-sizing: border-box;
+ 
+  
+  /* padding-left:7rem;
+  box-sizing: border-box; */
+  /* padding-top: 10rem;
+  padding-left: 15rem;
+  box-sizing: border-box; */
+  /* padding-left: 20rem; */
+}
+
+.roomType_span {
+  margin-right: 1.5rem;
+}
+
+.detail_arrow_img:hover {
+cursor: pointer;
+}
+
+.capacity_span, .viewType_span {
+  font-size: 1rem;
+}
+
+.price_span_wrap {
+  font-size: 1.3rem;
+  margin-top: 3rem;
+}
+
+.reserve_button {
+  width: 15rem;
+  height: 3rem;
+  background-color: black;
+  color: white;
+  margin-left: 50rem;
+  margin-top: 13rem;
+  font-size: 0.9rem;
+  border-width: 0;
+}
+
+.reserve_button:hover {
+  cursor: pointer;
+  background-color: #ddd;
+  color: black;
+  border-width: 1px;
+}

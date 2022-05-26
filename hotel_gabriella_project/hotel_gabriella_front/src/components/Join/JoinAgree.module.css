@@ -1,0 +1,33 @@
+.join_agree_wrap {
+    height: 3rem;
+    margin: 3.5rem 0;
+    display: flex;
+    flex-direction: column;
+
+}
+.agree_category {
+    font-weight: bold;
+}
+
+
+.agree_category_wrap {
+    margin-left: 4.5rem;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.radio_wrap {
+    display: flex;
+    flex-direction: row;
+    padding: 0.2rem;
+    box-sizing: border-box;
+}
+
+.agree_category_inner_wrap {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1.5rem;
+    margin-top:1rem;
+}
+

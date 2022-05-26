@@ -1,0 +1,28 @@
+.select_container {
+  display: flex;
+  height: 30%;
+  width: 100%;
+  padding-top: 14%;
+  box-sizing: border-box;
+  text-align: center;
+}
+.select_span {
+  display: inline-block;
+  width: 30%;
+  text-align: center;
+  padding-top: 2%;
+  box-sizing: border-box;
+}
+
+.select_inner_container {
+  width: 70%;
+
+  padding-top: 2%;
+  box-sizing: border-box;
+}
+
+.select_viewBox {
+  width: 70%;
+  height: 60%;
+  text-align: center;
+}

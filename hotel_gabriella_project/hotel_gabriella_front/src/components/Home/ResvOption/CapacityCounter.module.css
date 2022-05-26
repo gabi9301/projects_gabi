@@ -1,0 +1,42 @@
+.counter_container {
+    display: flex;
+    height: 30%;
+    width: 100%;
+    padding-top:14%;
+    box-sizing: border-box;
+    text-align: center;
+    
+}
+.counter_span {
+    display: inline-block;
+    width: 30%;
+    text-align: center;
+    padding-top: 2%;
+    box-sizing: border-box;
+}
+
+.counter_inner_container {
+width: 70%;
+}
+
+.counter_button {
+border-width: 0;
+padding-top: 0.3rem;
+box-sizing: border-box;
+background-color: white;
+border-radius: 1rem;
+}
+
+.counter_button:hover {
+    background-color: #ddd;
+    cursor: pointer;
+    
+}
+
+
+.counter_state {
+    display: inline-block;
+    width: 35%;
+    text-align: center;
+    line-height: 0;
+}

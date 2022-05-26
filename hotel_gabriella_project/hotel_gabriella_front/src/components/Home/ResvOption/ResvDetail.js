@@ -2,9 +2,11 @@ import { useState, useEffect, useContext } from 'react';
 import DateContext from "../../../store/date-context";
 import moment from "moment";
 import Calendar from '../../UI/Calendar';
+import CapacityCounter from './CapacityCounter';
 import classes from './ResvDetail.module.css';
 import left_arrow from "../../../assets/image/left_arrow.png";
 import right_arrow from "../../../assets/image/right_arrow.png";
+import ViewSelect from './ViewSelect';
 
 const ResvDetail = (props) => {
  
@@ -166,8 +168,12 @@ const ResvDetail = (props) => {
             <img src={right_arrow} alt="right_arrow" />
           </button>
         </div>
-        <div>
-          <span>선택가능한 객실 2개</span>
+        <div className={classes.condition_select}>
+         <CapacityCounter />
+         <ViewSelect />
+         <button className={classes.select_complete_btn} onClick={props.onClose}>
+            선택완료
+         </button>
         </div>
       </div>
     );
