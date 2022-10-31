@@ -1,6 +1,7 @@
 package com.trip.hotel_gabriella.common.model;
 
 
+import com.querydsl.core.annotations.QueryProjection;
 import com.trip.hotel_gabriella.common.interfaces.model.GenericHttpResponseTransferor;
 import com.trip.hotel_gabriella.user.model.BaseDTO;
 import lombok.Builder;
@@ -14,5 +15,9 @@ public class BookingInfo extends BaseDTO implements GenericHttpResponseTransfero
 
     private RoomInfo roomInfo;
 
-
+    @QueryProjection
+    public BookingInfo(ReservationInfo reservationInfo, RoomInfo roomInfo) {
+        this.reservationInfo = reservationInfo;
+        this.roomInfo = roomInfo;
+    }
 }

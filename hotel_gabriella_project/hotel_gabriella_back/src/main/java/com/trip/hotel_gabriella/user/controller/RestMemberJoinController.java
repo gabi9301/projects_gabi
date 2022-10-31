@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 
 import com.trip.hotel_gabriella.user.model.member.MemberJoinCommand;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 public class RestMemberJoinController {
 
     private final MemberJoinService memberJoinService;
@@ -24,7 +26,7 @@ public class RestMemberJoinController {
     public ResponseEntity<Void> joinMember(
             @RequestBody @Valid MemberJoinCommand memberJoinCommand) {
 
-        System.out.println("memberJoinCommand = " + memberJoinCommand.getMemberRegisterRequest());
+        log.debug("memberJoinCommand = {}", memberJoinCommand.getMemberRegisterRequest());
         memberJoinService.signInMember(memberJoinCommand);
 
         return new ResponseEntity<>(HttpStatus.CREATED);

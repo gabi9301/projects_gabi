@@ -3,6 +3,7 @@ package com.trip.hotel_gabriella.common.domain;
 import com.trip.hotel_gabriella.common.validation.annotation.Phone;
 import lombok.*;
 
+import javax.annotation.Nullable;
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -43,8 +44,11 @@ public class Reservation extends BaseEntity {
 
     @NotNull(message = "회원여부는 필수항목입니다.")
     private Boolean isMember;
-
+    @Nullable
     private Boolean isCanceled = false;
+
+    @Enumerated(EnumType.STRING)
+    private ReservationType reservationType = ReservationType.BookReservation;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID")

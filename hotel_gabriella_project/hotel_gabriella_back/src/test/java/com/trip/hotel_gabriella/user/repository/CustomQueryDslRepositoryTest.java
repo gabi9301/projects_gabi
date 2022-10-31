@@ -5,6 +5,7 @@ import com.trip.hotel_gabriella.common.domain.*;
 import com.trip.hotel_gabriella.common.model.ReservationInfo;
 import com.trip.hotel_gabriella.common.model.RoomInfo;
 import com.trip.hotel_gabriella.user.model.search.RoomSearchRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,10 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 
 import static org.assertj.core.api.Assertions.*;
@@ -23,7 +26,11 @@ import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
+@Slf4j
 public class CustomQueryDslRepositoryTest {
+
+    @Autowired
+    private EntityManager em;
 
     @Autowired
     CustomQueryDslRepository customQueryDslRepository;
@@ -50,8 +57,9 @@ public class CustomQueryDslRepositoryTest {
     public void before() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
 
-        Member user912 = memberRepository.findByAccount("user912")
+        Member user12 = memberRepository.findByAccount("user12")
                 .orElseThrow(NoSuchElementException::new);
+         //System.out.println("user12.getName() = " + user12.getId());
 
         reservation = Reservation.builder()
                 .name("아무개")
@@ -60,11 +68,15 @@ public class CustomQueryDslRepositoryTest {
                 .checkOut(LocalDateTime.parse("202202231100", formatter))
                 .capacity(3)
                 .isMember(true)
-                .member(user912)
+                .isCanceled(false)
+                .member(user12)
                 .build();
 
         Reservation save = reservationRepository.save(reservation);
 
+
+
+        log.debug("save.getId() = {}" , save.getId());
         room = roomRepository.findById(6L).orElseThrow(NoSuchElementException::new);
 
         ReservationRoom reservationRoom = ReservationRoom.builder()
@@ -73,11 +85,12 @@ public class CustomQueryDslRepositoryTest {
                 .build();
 
         reservationRoomRepository.save(reservationRoom);
+        log.debug("reservationRoom.getReservation().getMember().getId() = {}" , reservationRoom.getReservation().getMember().getId());
 
-
-        ReservationRoom reservationRoom1 = reservationRoomRepository.findByReservation_id(save.getId()).orElseThrow(NoSuchElementException::new);
-        System.out.println("reservationRoom = " + reservationRoom1.getRoom().getId());
-
+        Optional<ReservationRoom> rr = reservationRoomRepository.findByReservationId(reservation.getId());
+        //ReservationRoom reservationRoom1 = reservationRoomRepository.getById(reservationRoom.getId());
+        log.debug("reservationRoom member name = {}" , rr.get().getReservation().getMember().getName());
+        em.flush();
 
         roomSearchRequest = RoomSearchRequest.builder()
                 .checkIn(LocalDateTime.parse("202202181400", formatter))
@@ -95,9 +108,9 @@ public class CustomQueryDslRepositoryTest {
 
         //when
         reservationsByMemberId
-                = customQueryDslRepository.findReservationsByMemberId(33L);
+                = customQueryDslRepository.findReservationsByMemberId(1L);
         //then
-        System.out.println("reservationsByMemberId = " + reservationsByMemberId.get(0).getName());
+        log.debug("reservationsByMemberName = {}" , reservationsByMemberId.get(0).getMember().getName());
         assertThat(reservationsByMemberId.size()).isEqualTo(1);
 
     }
@@ -114,7 +127,7 @@ public class CustomQueryDslRepositoryTest {
         //then
 
         for (RoomInfo suitableRoom : suitableRooms) {
-            System.out.println("suitableRoom = " + suitableRoom.getId() + " --" + suitableRoom.getRoomType());
+            log.debug("suitableRoom = {}" , suitableRoom.getId() + " --" + suitableRoom.getRoomType());
             Assertions.assertThat(suitableRoom.getId()).isNotEqualTo(6L);
         }
     }

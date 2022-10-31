@@ -10,6 +10,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,6 +25,7 @@ import java.util.*;
 
 
 @RequiredArgsConstructor
+@Slf4j
 public class JwtTokenProvider { //JWT 토큰의 생성과 유효성 검사를 책임진다.
 
     private SecretKey secretKey;
@@ -47,7 +49,7 @@ public class JwtTokenProvider { //JWT 토큰의 생성과 유효성 검사를 �
     public Map<String, String> createToken(UserAuthInfo userAuthInfo) {   //토큰을 생성한다
         String accessToken = createAccessToken(userAuthInfo);
         String refreshToken = createRefreshToken(userAuthInfo);
-        System.out.println("refreshTokenValidMilliSeconds = " + refreshTokenValidMilliSeconds);
+        log.debug("refreshTokenValidMilliSeconds = {}", refreshTokenValidMilliSeconds);
         redisService.setData("RT_" + userAuthInfo.getAccount(), refreshToken, refreshTokenValidMilliSeconds);
 
         Map<String, String> tokenMap = new HashMap<>();
@@ -164,8 +166,8 @@ public class JwtTokenProvider { //JWT 토큰의 생성과 유효성 검사를 �
                     = new UserAuthInfo(userDetails.getUsername(), userDetails.getPassword());
             tokenMap = this.createToken(userAuthInfo);
 
-            System.out.println("newAccessToken = " + tokenMap.get("accessToken"));
-            System.out.println("refreshToken = " + tokenMap.get("refreshToken"));
+            log.debug("newAccessToken = {}" , tokenMap.get("accessToken"));
+            log.debug("refreshToken = {}" , tokenMap.get("refreshToken"));
         }
         return tokenMap;
     }

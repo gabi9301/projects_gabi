@@ -10,6 +10,7 @@ import com.trip.hotel_gabriella.user.repository.MemberRepository;
 import com.trip.hotel_gabriella.user.service.terms.TermsManageService;
 import com.trip.hotel_gabriella.common.domain.Member;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +22,7 @@ import java.util.List;
 @Validated
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
+@Slf4j
 public class MemberJoinServiceImpl implements MemberJoinService {
 
     private final MemberRepository memberRepository;
@@ -55,7 +57,7 @@ public class MemberJoinServiceImpl implements MemberJoinService {
 
             return new MemberRegisterResponse().fromEntity(member);
         }else{
-            System.out.println("계정 아이디 중복, 에러 핸들러 필요");
+            log.info("계정 아이디 중복, 에러 핸들러 필요");
             return null;
         }
     }

@@ -1,6 +1,7 @@
 package com.trip.hotel_gabriella.user.model.reservation;
 
 import com.trip.hotel_gabriella.common.domain.Reservation;
+import com.trip.hotel_gabriella.common.domain.ReservationType;
 import com.trip.hotel_gabriella.common.domain.ViewType;
 import com.trip.hotel_gabriella.common.interfaces.model.GenericRequestEntityAdapter;
 import com.trip.hotel_gabriella.common.validation.annotation.Phone;
@@ -8,6 +9,8 @@ import com.trip.hotel_gabriella.user.model.BaseDTO;
 import lombok.*;
 import org.springframework.beans.factory.annotation.Value;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -40,6 +43,8 @@ public class ReserveRequest extends BaseDTO implements GenericRequestEntityAdapt
     @NotNull(message = "회원여부는 필수항목입니다.")
     private Boolean isMember;
 
+    @Enumerated(EnumType.STRING)
+    private ReservationType reservationType;
 
 
     @Override
@@ -50,6 +55,8 @@ public class ReserveRequest extends BaseDTO implements GenericRequestEntityAdapt
                 .phone(phone)
                 .capacity(capacity)
                 .isMember(isMember)
+                .reservationType(reservationType)
+                .isCanceled(false)
                 .build();
 
     }

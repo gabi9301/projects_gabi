@@ -1,6 +1,7 @@
 package com.trip.hotel_gabriella.user.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.trip.hotel_gabriella.common.domain.ViewType;
 import com.trip.hotel_gabriella.user.model.reservation.BookingCommand;
 import com.trip.hotel_gabriella.user.model.reservation.ReserveRequest;
 import com.trip.hotel_gabriella.user.service.reservation.BookingService;
@@ -15,6 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -30,6 +32,7 @@ public class RestBookControllerTest {
     private MockMvc mockMvc;
 
     @Test
+    @Transactional
     public void bookingTest() throws Exception {
         //given
 
@@ -39,7 +42,7 @@ public class RestBookControllerTest {
                         .checkOut("20220223")
                         .name("Yujin")
                         .phone("01093920423")
-                        .capacity(4)
+                        .capacity(3)
                         .isMember(false)
                         .build();
 
@@ -47,6 +50,7 @@ public class RestBookControllerTest {
                 = BookingCommand.builder()
                 .reserveRequest(reserveRequest)
                 .roomId(3L)
+                .viewType(ViewType.OCEAN)
                 .build();
 
         //when

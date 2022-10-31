@@ -7,6 +7,7 @@ import com.trip.hotel_gabriella.common.exception.customException.CustomException
 import com.trip.hotel_gabriella.common.exception.customException.ErrorCode;
 import com.trip.hotel_gabriella.common.exception.customException.RefreshTokenInvalidException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @RequiredArgsConstructor
+@Slf4j
 public class ExceptionHandlerFilter extends OncePerRequestFilter {
 
     private final ObjectMapper mapper;
@@ -37,7 +39,7 @@ public class ExceptionHandlerFilter extends OncePerRequestFilter {
                         .code(errorCode.getCode())
                         .message(e.toString());
 
-                System.out.println("-------------ExceptionHandlerFilter working...----------");
+                log.debug("-------------ExceptionHandlerFilter working...----------");
                 mapper.writeValue(response.getWriter(),errResponse);
             }
         }

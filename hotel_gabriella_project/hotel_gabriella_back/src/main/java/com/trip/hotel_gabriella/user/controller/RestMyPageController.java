@@ -7,6 +7,7 @@ import com.trip.hotel_gabriella.user.model.member.MyPageReadResponse;
 import com.trip.hotel_gabriella.user.repository.MemberRepository;
 import com.trip.hotel_gabriella.user.service.member.MyPageService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 public class RestMyPageController {
     private final MyPageService myPageService;
     private final MemberRepository memberRepository;
@@ -27,7 +29,7 @@ public class RestMyPageController {
         MyPageReadResponse myPageReadResponse
                 = myPageService.readMyPage(memberInfo.getId());
 
-        System.out.println("myPageReadResponse = " + myPageReadResponse);
+        log.debug("myPageReadResponse = {}" , myPageReadResponse);
 
 
         return new ResponseEntity<>(myPageReadResponse, HttpStatus.OK);

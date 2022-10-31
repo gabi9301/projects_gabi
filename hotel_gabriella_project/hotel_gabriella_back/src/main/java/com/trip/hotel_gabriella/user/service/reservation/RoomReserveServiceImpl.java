@@ -3,6 +3,7 @@ package com.trip.hotel_gabriella.user.service.reservation;
 
 import com.trip.hotel_gabriella.common.domain.ReservationRoom;
 import com.trip.hotel_gabriella.common.model.RoomReservationInfo;
+import com.trip.hotel_gabriella.user.model.reservation.ReservationReadRequest;
 import com.trip.hotel_gabriella.user.model.reservation.RoomReserveRequest;
 import com.trip.hotel_gabriella.user.model.reservation.RoomReserveResponse;
 import com.trip.hotel_gabriella.user.repository.ReservationRoomRepository;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -35,9 +37,11 @@ public class RoomReserveServiceImpl implements RoomReserveService{
     public RoomReservationInfo readReservedRoom(Long reservation_id) {
        ReservationRoom reservationRoom
                = reservationRoomRepository
-               .findByReservation_id(reservation_id)
+               .findByReservationId(reservation_id)
                .orElseThrow(NoSuchElementException::new);
         return new RoomReservationInfo().fromEntity(reservationRoom);
 
     }
+
+
 }

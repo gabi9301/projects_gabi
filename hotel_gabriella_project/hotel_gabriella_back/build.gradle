@@ -33,7 +33,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-devtools'
-    implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.7'
+    implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.8.1'
 
     implementation 'com.querydsl:querydsl-jpa'
 
@@ -56,8 +56,11 @@ dependencies {
 
 
 
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+
+
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor:2.6.3'
 
@@ -116,7 +119,7 @@ compileQuerydsl {
 //--------여기서부터 Jacoco 설정 시작----------------------------------------
 
 jacoco {
-    toolVersion = '0.8.5'
+    toolVersion = '0.8.7'
 }
 
 jacocoTestReport {

@@ -3,10 +3,7 @@ package com.trip.hotel_gabriella.user.repository;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.trip.hotel_gabriella.common.domain.*;
-import com.trip.hotel_gabriella.common.model.QReservationInfo;
-import com.trip.hotel_gabriella.common.model.QRoomInfo;
-import com.trip.hotel_gabriella.common.model.ReservationInfo;
-import com.trip.hotel_gabriella.common.model.RoomInfo;
+import com.trip.hotel_gabriella.common.model.*;
 import com.trip.hotel_gabriella.user.model.search.RoomSearchRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -52,8 +49,7 @@ public class CustomQueryDslRepository {
                                         .from(reservationRoom)
                                         .join(reservationRoom.reservation, reservation)
                                         .where(
-                                                reservation.checkIn.loe(roomSearchRequest.getCheckIn()),
-                                                reservation.checkOut.goe(roomSearchRequest.getCheckOut())
+                                                reservation.checkOut.goe(roomSearchRequest.getCheckIn())
                                         )
                         )
                 )
@@ -75,18 +71,47 @@ public class CustomQueryDslRepository {
                         , reservation.checkOut.stringValue()
                         , reservation.name
                         , reservation.phone
-                        , reservation.capacity))
+                        , reservation.capacity
+                        ,reservation.member
+                        ,reservation.reservationType
+                        ))
                 .from(reservation)
                 .join(reservation.member, member)
-                .where(member.id.eq(member_id), reservation.isCanceled.isFalse())
+                .where(reservation.member.id.eq(member_id), reservation.isCanceled.isFalse())
                 .fetch();
-
     }
 
     public static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
         Set<Object> seen = ConcurrentHashMap.newKeySet();
         return t -> seen.add(keyExtractor.apply(t));
     }
+
+//    public List<BookingInfo> findBookingHistory(String name, String phone){
+//        queryFactory = new JPAQueryFactory(entityManager);
+//
+//        return queryFactory
+//                .select(new QBookingInfo(
+//                        new QReservationInfo(
+//                             reservation.id,
+//                             reservation.name,
+//                                reservation.phone,
+//                                reservation.checkIn.stringValue(),
+//                                reservation.checkOut.stringValue(),
+//                                reservation.capacity,
+//                                reservation.member
+//                        ),
+//                        new QRoomInfo(
+//                                room.id,
+//                                room.roomType,
+//                                room.viewType,
+//                                room.price,
+//                                room.capacity
+//                        )
+//                ))
+//
+//
+//    }
+
 
 
 }

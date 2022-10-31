@@ -1,9 +1,7 @@
 package com.trip.hotel_gabriella.user.service.reservation;
 
 import com.trip.hotel_gabriella.admin.service.room.RoomManageService;
-import com.trip.hotel_gabriella.common.domain.Reservation;
-import com.trip.hotel_gabriella.common.domain.Room;
-import com.trip.hotel_gabriella.common.domain.ViewType;
+import com.trip.hotel_gabriella.common.domain.*;
 import com.trip.hotel_gabriella.common.exception.customException.BookingConditionsNotMatchException;
 import com.trip.hotel_gabriella.common.model.BookingInfo;
 import com.trip.hotel_gabriella.common.model.ReservationInfo;
@@ -12,14 +10,19 @@ import com.trip.hotel_gabriella.common.model.RoomReservationInfo;
 import com.trip.hotel_gabriella.user.model.reservation.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
 @RequiredArgsConstructor
 @Getter
 @Transactional(readOnly = true)
+@Slf4j
 public class BookingServiceImpl implements BookingService {
 
     private final ReserveService reserveService;
@@ -92,4 +95,32 @@ public class BookingServiceImpl implements BookingService {
         reserveService.cancelReservation(reservation_Id);
 
     }
+
+    @Override
+    public List<BookingInfo> BookSearchHistory(ReservationReadRequest reservationReadRequest) {
+        List<BookingInfo> bookingInfos = new ArrayList<>();
+        List<RoomReservationInfo> roomReservationInfos = new ArrayList<>();
+
+        List<ReservationInfo> reservationInfos
+                = reserveService.readReservationByType(reservationReadRequest,ReservationType.BookReservation);
+        //이름 전화번호 타입(방 예약)으로 조회한 리스트
+
+        for(ReservationInfo reservationInfo : reservationInfos){
+           roomReservationInfos.add(
+                   roomReserveService.readReservedRoom(reservationInfo.getId()));
+        }
+        //위의 리스트에서 얻은 주문 번호로 방아이디를 얻음
+
+        for(RoomReservationInfo roomReservationInfo : roomReservationInfos){
+            ReservationInfo reservationInfo
+                    = reserveService.readReservation(roomReservationInfo.getReservation_id());
+            RoomInfo roomInfo
+                    = roomManageService.readRoom(roomReservationInfo.getRoom_id());
+
+            bookingInfos.add(new BookingInfo(reservationInfo,roomInfo));
+        }
+
+        return bookingInfos;
+    }
+
 }
