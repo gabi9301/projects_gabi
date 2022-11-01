@@ -114,14 +114,8 @@ compileQuerydsl {
 
 //querydsl 끝
 
-bootJar {
-    enabled = false
-}
-
-jar {
-    enabled = true
-}
-
+apply plugin: 'application'
+mainClassName = 'com.trip.hotel_gabriella.HotelGabriellaApplication'
 
 
 //--------여기서부터 Jacoco 설정 시작----------------------------------------
