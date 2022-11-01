@@ -9,20 +9,20 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class WebConfig implements WebMvcConfigurer {
 
-    private final JwtInterceptor jwtInterceptor;
-
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
-        WebMvcConfigurer.super.addResourceHandlers(registry);
-    }
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(jwtInterceptor).addPathPatterns("/member/*").addPathPatterns("/admin/*");
-        WebMvcConfigurer.super.addInterceptors(registry);
-    }
+//    private final JwtInterceptor jwtInterceptor;
+//
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
+//        WebMvcConfigurer.super.addResourceHandlers(registry);
+//    }
+//
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(jwtInterceptor).addPathPatterns("/member/*").addPathPatterns("/admin/*");
+//        WebMvcConfigurer.super.addInterceptors(registry);
+//    }
 }
