@@ -1,0 +1,6 @@
+[submodule "src/main/resources/config"]
+	path = src/main/resources/config
+	url = https://github.com/gabi9301/sub.git
+[submodule "hotel_gabriella_project/hotel_gabriella_back/src/main/resources/config"]
+	path = hotel_gabriella_project/hotel_gabriella_back/src/main/resources/config
+	url = https://github.com/gabi9301/sub.git
