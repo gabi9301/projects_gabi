@@ -114,7 +114,13 @@ compileQuerydsl {
 
 //querydsl 끝
 
+bootJar {
+    enabled = false
+}
 
+jar {
+    enabled = true
+}
 
 
 
