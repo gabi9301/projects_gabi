@@ -53,6 +53,7 @@ const NavBar = (props) => {
 
   return (
     <div className={classes.container}>
+      <Link to="/reservationCheck"><button>예약 조회</button></Link>
       {loginCtx.isLoggedIn ? (
         <Fragment>
           <div className={classes.icon}>

@@ -7,11 +7,14 @@ import window_icon from "../../../assets/image/window_icon.png";
 import detail_arrow from "../../../assets/image/detail_arrow.png";
 import { Fragment } from "react/cjs/react.production.min";
 import ResultItemDetail from "./ResultItemDetail";
+import BookDetail from "../../ReserveRoom/BookDetail";
+import ReserveBox from "../../ReserveRoom/ReserveBox";
 
 const ResultItem = (props) => {
   const searchCtx = useContext(SearchContext);
 
   const [detailShown, setDetailShown] = useState(false);
+  const [bookDetailShown, setBookDetailShown] = useState(false);
 
   const showDetailHandler = () =>{
     setDetailShown(true);
@@ -19,6 +22,14 @@ const ResultItem = (props) => {
 
   const hideDetailHandler = () => {
     setDetailShown(false);
+  }
+
+  const showBookDetailHandler = () =>{
+    setBookDetailShown(true);
+  }
+
+  const hideBookDetailHandler = () => {
+    setBookDetailShown(false);
   }
 
   return (
@@ -60,13 +71,16 @@ const ResultItem = (props) => {
                 <span className={classes.price_span}>
                   1박 기준 / <img src={won_icon} alt="won_image" />
                 </span>
-                <span className={classes.price_span}>{props.price}</span>
+                <span className={classes.price_span}>{props.price + " " + props.roomId}</span>
+                
               </div>
             </div>
           </div>
         </div>
         <div className={classes.button_inner_container}>
-          <button className={classes.reserve_button}>예약하기</button>
+          <button className={classes.reserve_button} onClick={showBookDetailHandler}>예약하기</button>
+          {bookDetailShown && (<ReserveBox 
+          onClose ={hideBookDetailHandler} searchData={props.searchData} roomId={props.roomId} viewType={props.viewType} roomType={props.roomType} />)}
         </div>
       </div>
       <div className={classes.item_detail_container}>

@@ -1,7 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import classes from "./MyPage.module.css";
+import ProfileBox from "./ProfileBox";
 
 const MyPage = () => {
+
+  const [mypageInfo,setMypageInfo] = useState(null);
   useEffect(() => {
     const authState = sessionStorage.getItem("authState");
 
@@ -10,13 +13,9 @@ const MyPage = () => {
     }
   }, []);
 
-  const mypageInfo = {
-    account: "",
-  };
+  
   async function mypageHandler() {
     const authState = JSON.parse(sessionStorage.getItem("authState"));
-
-    console.log(authState.authorization);
 
     if (authState !== null) {
       const requestOptions = {
@@ -34,17 +33,21 @@ const MyPage = () => {
           .then((response) =>
             response.status === 200 ? response.json() : null
           )
-          .then((result) => {
-            console.log(result);
+          .then((result) => {            
+            setMypageInfo(result);
           });
-        //.then((result) =>  console.log(result.account));
       } catch (error) {
         console.log(error);
       }
     }
   }
 
-  return <div id="mypageTest">{mypageInfo.account}</div>;
+  return (mypageInfo !== null && <div id="mypageContainer">
+
+    <ProfileBox mypageInfo={mypageInfo}></ProfileBox>
+
+
+  </div>);
 };
 
 export default MyPage;

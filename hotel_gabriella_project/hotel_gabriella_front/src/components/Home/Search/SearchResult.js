@@ -84,13 +84,16 @@ const SearchResult = ({ location }) => {
     // <li key={item.id}>{item.roomType}</li>
 
     <ResultItem
+
       key={item.id}
+      roomId={item.id}
       roomType={item.roomType}
       viewType={item.viewType}
       capacity={item.capacity}
       price={item.price}
       imgSource={imgSrcSelector(item.roomType)}
       slideSource={slideSourceSelector(item.roomType)}
+      searchData={searchData}
     />
   ));
 
