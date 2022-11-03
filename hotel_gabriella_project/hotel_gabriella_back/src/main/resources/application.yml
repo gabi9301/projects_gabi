@@ -1,0 +1,39 @@
+spring:
+  profiles:
+    default: prod
+
+  #    http:
+#      encoding:
+#        charset : 'UTF-8'
+#        force : true
+
+#  thymeleaf:
+#    prefix: classpath:/templates/  여기를 주석으로 바꿔도 상관없는 이유는 저게 디폴트라서고
+#    suffix: .html                  경로 적을 때 / 빼고 html 이름만 적어두면 됨.   ex)<a href="register">
+
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        #        show-sql: true
+        format_sql: true
+    open-in-view: false
+    database: mysql
+
+
+
+hotel:
+  time:
+    defaultCheckInHour: 1400
+    defaultCheckOutHour: 1100
+
+logging:
+  level:
+    org.springframework:
+      security: trace
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace
+    com.trip.hotel_gabriella: debug
+

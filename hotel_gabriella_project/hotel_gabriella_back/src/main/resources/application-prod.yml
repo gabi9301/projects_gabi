@@ -1,0 +1,22 @@
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+  datasource:
+    url: jdbc:mysql://139.150.65.169:3306/hotel_gabriella?serverTimezone=UTC&characterEncoding=UTF-8&useSSL=false
+    username: gabi
+    password: gabi9393
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jwt:
+    expire:
+      accessTokenValidMilliSeconds: 600000  #60 x 10 x 1000 : 10분
+      refreshTokenValidMilliSeconds: 604800000 #60 x 60 x 24 x 7 x 1000 : 1주
+
+  redis:
+    host: 139.150.65.169 #기본 값
+    port: 6379  #기본 값
+    password: gabi9393
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
