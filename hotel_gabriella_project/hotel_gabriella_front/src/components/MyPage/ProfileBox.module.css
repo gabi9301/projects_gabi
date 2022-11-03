@@ -1,0 +1,15 @@
+
+.profile_container {
+    display: block;
+    background-color: green;
+    height: 45rem;
+    width:20rem;
+}
+
+.profile_photo {
+    height:15rem;
+    width:20rem;
+    background-color: pink;
+    display: block;
+    z-index:5
+}
