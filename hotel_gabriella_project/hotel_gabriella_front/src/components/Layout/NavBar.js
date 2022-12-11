@@ -6,6 +6,7 @@ import LogoutIcon from "../../assets/image/logout_icon.png";
 import JoinIcon from "../../assets/image/join_icon.png";
 import LoginContext from "../../store/login-context";
 import MypageIcon from "../../assets/image/mypage_icon.png";
+import ReadReservation from "../../assets/image/read_reservation.png";
 
 const NavBar = (props) => {
   const loginCtx = useContext(LoginContext);
@@ -30,7 +31,7 @@ const NavBar = (props) => {
       };
 
       try {
-        fetch("/logout", requestOptions); //여기서 이미 리다이렉트 일어남, 이걸 막아야함       
+        fetch("http://139.150.65.169:8080/logout", requestOptions); //여기서 이미 리다이렉트 일어남, 이걸 막아야함       
 
         //.then((result) =>  console.log(result.account));
       } catch (error) {
@@ -53,7 +54,11 @@ const NavBar = (props) => {
 
   return (
     <div className={classes.container}>
-      <Link to="/reservationCheck"><button>예약 조회</button></Link>
+      <div className={classes.icon}>
+      <Link to="/reservationCheck">
+        <img src={ReadReservation} alt="readReservation"/>
+        </Link>
+        </div>
       {loginCtx.isLoggedIn ? (
         <Fragment>
           <div className={classes.icon}>

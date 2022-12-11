@@ -8,6 +8,7 @@ import com.trip.hotel_gabriella.common.model.ReservationInfo;
 import com.trip.hotel_gabriella.common.model.RoomInfo;
 import com.trip.hotel_gabriella.common.model.RoomReservationInfo;
 import com.trip.hotel_gabriella.user.model.reservation.*;
+import com.trip.hotel_gabriella.user.repository.CustomQueryDslRepository;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -31,9 +33,22 @@ public class BookingServiceImpl implements BookingService {
 
     private final RoomManageService roomManageService;
 
+    private final CustomQueryDslRepository customQueryDslRepository;
+
 
     @Transactional
     public BookingResponse bookReservation(BookingCommand bookingCommand) {
+        List<RoomReservationInfo> roomReservationInfos
+                = roomReserveService.readReservation(bookingCommand.getRoomId());
+
+        for (RoomReservationInfo roomReservationInfo : roomReservationInfos) {
+            Long reservation_id = roomReservationInfo.getReservation_id();
+            ReservationInfo reservationInfo = reserveService.readReservation(reservation_id);
+            Optional<ReservationInfo> checkTimeAvailable = customQueryDslRepository.findCheckTimeAvailable(reservationInfo.getCheckIn(), reservationInfo.getCheckOut());
+            if(!checkTimeAvailable.isEmpty()){
+                throw new BookingConditionsNotMatchException();
+            }
+        }
 
         RoomInfo roomInfo = roomManageService.readRoom(bookingCommand.getRoomId());
 
@@ -97,7 +112,7 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public List<BookingInfo> BookSearchHistory(ReservationReadRequest reservationReadRequest) {
+    public List<BookingInfo> bookSearchHistory(ReservationReadRequest reservationReadRequest) {
         List<BookingInfo> bookingInfos = new ArrayList<>();
         List<RoomReservationInfo> roomReservationInfos = new ArrayList<>();
 

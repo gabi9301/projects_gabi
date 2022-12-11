@@ -30,7 +30,7 @@ const SearchResult = ({ location }) => {
     };
 
     try {
-      fetch("/searchRoom", requestOptions)
+      fetch("http://139.150.65.169:8080/searchRoom", requestOptions)
         .then((response) => (response.status === 200 ? response.json() : null))
         .then((result) => {
           setResultArr(result.suitableRooms);

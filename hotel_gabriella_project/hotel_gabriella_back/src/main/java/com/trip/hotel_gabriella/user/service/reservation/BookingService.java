@@ -16,12 +16,6 @@ public interface BookingService {
 
     void bookCancel(Long reservation_Id);
 
-    List<BookingInfo> BookSearchHistory(ReservationReadRequest reservationReadRequest);
-
-
-
-
-
-
+    List<BookingInfo> bookSearchHistory(ReservationReadRequest reservationReadRequest);
 
 }

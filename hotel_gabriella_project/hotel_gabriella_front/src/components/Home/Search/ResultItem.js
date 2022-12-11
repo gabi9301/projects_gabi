@@ -71,7 +71,7 @@ const ResultItem = (props) => {
                 <span className={classes.price_span}>
                   1박 기준 / <img src={won_icon} alt="won_image" />
                 </span>
-                <span className={classes.price_span}>{props.price + " " + props.roomId}</span>
+                <span className={classes.price_span}>{props.price}</span>
                 
               </div>
             </div>

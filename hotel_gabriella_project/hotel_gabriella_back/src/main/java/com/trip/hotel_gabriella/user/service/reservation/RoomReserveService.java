@@ -13,7 +13,7 @@ public interface RoomReserveService {
 
     RoomReservationInfo readReservedRoom(Long reservation_id);
 
-
+    List<RoomReservationInfo> readReservation(Long room_id);
 
 
 

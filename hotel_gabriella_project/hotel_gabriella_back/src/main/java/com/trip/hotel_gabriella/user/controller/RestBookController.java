@@ -30,7 +30,7 @@ public class RestBookController {
 
     @PostMapping("/searchReservationHistory")
     public ResponseEntity<List<BookingInfo>> bookHistory(@RequestBody @Valid ReservationReadRequest reservationReadRequest){
-        List<BookingInfo> bookingInfos = bookingService.BookSearchHistory(reservationReadRequest);
+        List<BookingInfo> bookingInfos = bookingService.bookSearchHistory(reservationReadRequest);
         return new ResponseEntity<>(bookingInfos, HttpStatus.OK);
     }
 

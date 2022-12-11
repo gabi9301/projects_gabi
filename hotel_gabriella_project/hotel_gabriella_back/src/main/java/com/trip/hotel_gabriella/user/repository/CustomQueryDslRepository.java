@@ -11,7 +11,9 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
@@ -67,8 +69,8 @@ public class CustomQueryDslRepository {
 
         return queryFactory
                 .select(new QReservationInfo(reservation.id
-                        , reservation.checkIn.stringValue()
-                        , reservation.checkOut.stringValue()
+                        , reservation.checkIn
+                        , reservation.checkOut
                         , reservation.name
                         , reservation.phone
                         , reservation.capacity
@@ -84,6 +86,26 @@ public class CustomQueryDslRepository {
     public static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
         Set<Object> seen = ConcurrentHashMap.newKeySet();
         return t -> seen.add(keyExtractor.apply(t));
+    }
+
+    public Optional<ReservationInfo> findCheckTimeAvailable(LocalDateTime checkIn, LocalDateTime checkOut){
+        queryFactory = new JPAQueryFactory(entityManager);
+
+        return queryFactory
+                .select(new QReservationInfo(reservation.id
+                        , reservation.checkIn
+                        , reservation.checkOut
+                        , reservation.name
+                        , reservation.phone
+                        , reservation.capacity
+                        ,reservation.member
+                        ,reservation.reservationType
+                ))
+                .from(reservation)
+                .where(reservation.checkIn.between(checkIn,checkOut).or(reservation.checkOut.between(checkIn,checkOut)))
+                .fetch()
+                .stream()
+                .findAny();
     }
 
 //    public List<BookingInfo> findBookingHistory(String name, String phone){

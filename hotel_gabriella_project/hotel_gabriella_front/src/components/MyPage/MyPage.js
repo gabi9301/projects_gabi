@@ -29,7 +29,7 @@ const MyPage = () => {
       };
 
       try {
-        fetch("/user/myPage", requestOptions)
+        fetch("http://139.150.65.169:8080/user/myPage", requestOptions)
           .then((response) =>
             response.status === 200 ? response.json() : null
           )

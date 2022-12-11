@@ -99,7 +99,7 @@ public class BookingServiceTest {
                 .name("Yujin")
                         .phone("01093920423").build();
 
-        List<BookingInfo> bookingInfos = bookingService.BookSearchHistory(reservationReadRequest);
+        List<BookingInfo> bookingInfos = bookingService.bookSearchHistory(reservationReadRequest);
 
         for(BookingInfo bookingInfo : bookingInfos){
             log.debug("-----------------------!!!-booking viewType = {}", bookingInfo.getRoomInfo().getViewType());

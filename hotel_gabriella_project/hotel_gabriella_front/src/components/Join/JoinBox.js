@@ -95,7 +95,7 @@ const JoinBox = () => {
     };
 
     try {
-      fetch("/checkUniqueAccount", requestOptions)
+      fetch("http://139.150.65.169:8080/checkUniqueAccount", requestOptions)
         .then((response) => (response.status === 200 ? response.json() : null))
         .then((result) => {
           result
@@ -205,7 +205,7 @@ const JoinBox = () => {
     };
 
     try {
-      fetch("/joinMember", requestOptions).then((response) => {
+      fetch("http://139.150.65.169:8080/joinMember", requestOptions).then((response) => {
         if (response.status === 201) {
           alert("회원가입이 완료되었습니다.");
           history.push("/login");

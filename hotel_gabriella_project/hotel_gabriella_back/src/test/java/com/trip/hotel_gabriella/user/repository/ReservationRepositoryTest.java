@@ -66,11 +66,10 @@ class ReservationRepositoryTest {
         //then
 
         assertThat(findReservation.size()).isEqualTo(2);
-
-
+    }
+    @Test
+    public void findByIdTest(){
 
     }
-
-
 
 }

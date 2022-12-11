@@ -4,6 +4,7 @@ import com.trip.hotel_gabriella.admin.repository.RoomRepository;
 import com.trip.hotel_gabriella.common.domain.Reservation;
 import com.trip.hotel_gabriella.common.domain.ReservationRoom;
 import com.trip.hotel_gabriella.common.domain.Room;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import static org.assertj.core.api.Assertions.*;
@@ -19,6 +21,7 @@ import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
+@Slf4j
 class ReservationRoomRepositoryTest {
 
     @Autowired
@@ -79,6 +82,16 @@ class ReservationRoomRepositoryTest {
         //then
         assertThat(reservationRoom).isEqualTo(findReservationRoom);
         assertThat(findReservationRoom.getRoom().getNo()).isEqualTo(301);
+
+    }
+
+    @Test
+    public void findByRoomId() {
+        List<ReservationRoom> byRoomId = reservationRoomRepository.findByRoomId(1L);
+        for(ReservationRoom each : byRoomId){
+            log.info("result = {}", each.getReservation().getCheckIn());
+        }
+
 
     }
 

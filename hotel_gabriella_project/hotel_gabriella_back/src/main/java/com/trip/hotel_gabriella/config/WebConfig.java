@@ -3,10 +3,7 @@ package com.trip.hotel_gabriella.config;
 import com.trip.hotel_gabriella.common.security.JwtInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 
 @Configuration
 //@RequiredArgsConstructor
@@ -25,4 +22,11 @@ public class WebConfig implements WebMvcConfigurer {
 //        registry.addInterceptor(jwtInterceptor).addPathPatterns("/member/*").addPathPatterns("/admin/*");
 //        WebMvcConfigurer.super.addInterceptors(registry);
 //    }
+
+    @Override
+    public void addCorsMappings(CorsRegistry corsRegistry){
+        corsRegistry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowedMethods("GET","POST");
+    }
 }

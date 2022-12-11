@@ -1,0 +1,40 @@
+
+.read_reservation_container {
+    width: 30rem;
+    height: 15rem;
+    margin: 2rem auto;
+    border-width: 2px;
+    border-color: #eee;
+    border-style: solid;
+    border-radius: 1rem;
+    
+    
+}
+
+.read_reservation_inner_container {
+    height: 8rem;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.reserver_container, .phone_container {
+    /* height: 1rem; */
+    padding-top: 2.7rem;
+    padding-left: 6rem;
+
+}
+
+.read_reservation_button {
+    margin-top: 2.5rem;
+    margin-left: 12rem;
+    height: 3rem;
+    width:6rem;
+    background-color: black;
+    color: white;
+}
+
+.reserver_input , .phone_input{
+    width: 12rem;
+    height: 1.5rem;
+}
+

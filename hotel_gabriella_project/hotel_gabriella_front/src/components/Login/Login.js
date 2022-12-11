@@ -29,7 +29,7 @@ const Login = (props) => {
     };
 
     try {
-      fetch("/login", requestOptions)
+      fetch("http://139.150.65.169:8080/login", requestOptions)
         .then((response) => (response.status === 201 ? response.json() : null))
         .then((result) => {
           const authState = {

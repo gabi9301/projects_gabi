@@ -56,11 +56,12 @@ public class AppConfig {
     @Bean
     public BookingService bookingService(ReservationRepository reservationRepository
             , ReservationRoomRepository reservationRoomRepository
-            , RoomManageService roomManageService) {
+            , RoomManageService roomManageService
+            ,CustomQueryDslRepository customQueryDslRepository) {
 
         return new BookingServiceImpl(reserveService(reservationRepository)
                 , roomReserveService(reservationRoomRepository)
-                , roomManageService);
+                , roomManageService, customQueryDslRepository);
     }
 
     @Bean

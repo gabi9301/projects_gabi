@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -41,6 +42,16 @@ public class RoomReserveServiceImpl implements RoomReserveService{
                .orElseThrow(NoSuchElementException::new);
         return new RoomReservationInfo().fromEntity(reservationRoom);
 
+    }
+
+    @Override
+    public List<RoomReservationInfo> readReservation(Long room_id) {
+        List<ReservationRoom> byRoomId = reservationRoomRepository.findByRoomId(room_id);
+        List<RoomReservationInfo> result = new ArrayList<>();
+        for (ReservationRoom reservationRoom : byRoomId) {
+            result.add(new RoomReservationInfo().fromEntity(reservationRoom));
+        }
+        return result;
     }
 
 
