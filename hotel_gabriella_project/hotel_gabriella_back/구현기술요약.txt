@@ -1,0 +1,10 @@
+
+Hotel_gabriella project
+
+해당 프로젝트의 전체적인 프레임은 Spring boot를 기반으로 구현되었습니다.
+데이터베이스는 mysql, 도메인 설계 및 관련기술로는 jpa가 사용되었으며
+spring security, jwt, redis를 활용하여 로그인 기능을 구현했습니다.
+프로그램 동작방식은 api 방식으로 ui를 담당하는 프론트 앱(react)과 완전히 분리된 형태를 구현,
+Gcloud 개인 서버에 배포된 상태입니다.
+
+자세한 코드는 깃허브를 참조해주시기 바랍니다.
